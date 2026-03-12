@@ -1,0 +1,298 @@
+@import "tailwindcss";
+@import "@vueform/multiselect/themes/default.css";
+/* ============================================================
+   SIDEBAR COMPONENT
+   ============================================================ */
+
+/* Sidebar shell */
+.sidebar {
+  @apply fixed top-0 left-0 bottom-0 z-50 flex flex-col overflow-hidden;
+  width: 260px;
+  background: #0f172a;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.3);
+  transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar--collapsed {
+  width: 72px;
+}
+
+/* Mobile: hide sidebar off-screen */
+@media (max-width: 819px) {
+  .sidebar {
+    @apply -translate-x-full;
+    width: 260px !important;
+  }
+  .sidebar--open {
+    @apply translate-x-0;
+  }
+}
+
+/* Brand area */
+.sidebar-brand {
+  @apply flex items-center justify-between gap-2 border-b border-white/[0.06];
+  min-height: 4rem;
+  padding: 1.25rem 1rem;
+}
+
+.sidebar-logo {
+  @apply flex items-center gap-2.5 overflow-hidden;
+}
+
+.sidebar-logo-icon {
+  @apply text-2xl shrink-0;
+}
+
+.sidebar-logo-text {
+  @apply text-lg font-bold text-white whitespace-nowrap tracking-wide;
+}
+
+
+
+/* Collapse / close buttons */
+.sidebar-collapse-btn,
+.sidebar-close-btn {
+  @apply shrink-0 w-8 h-8 flex items-center justify-center rounded-lg border-0 cursor-pointer
+         text-slate-400 text-lg ;
+  background: rgba(255 255 255 / 0.07);
+  transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-collapse-btn:hover,
+.sidebar-close-btn:hover {
+  @apply bg-indigo-500 text-white;
+}
+
+.sidebar-collapse-btn{
+  @apply hidden;
+}
+
+.sidebar-close-btn {
+  @apply md:hidden;
+}
+
+.sidebar-collapse-icon {
+  @apply inline-block leading-none text-xl;
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.sidebar-collapse-icon.rotate-180 {
+  @apply rotate-180;
+}
+
+/* Navigation */
+.sidebar-nav {
+  @apply flex-1 overflow-y-auto overflow-x-hidden px-2.5 py-4;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255 255 255 / 0.1) transparent;
+}
+
+.sidebar-menu {
+  @apply list-none m-0 p-0 flex flex-col gap-1;
+}
+
+/* Menu links */
+.sidebar-link {
+  @apply flex items-center gap-3 rounded-xl no-underline whitespace-nowrap relative overflow-hidden;
+  color: #cbd5e1;
+  padding: 0.65rem 0.875rem;
+  transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-link:hover {
+  @apply text-white;
+  background: rgba(99, 102, 241, 0.12);
+}
+
+.sidebar-link--active {
+  @apply text-white font-semibold;
+  background: rgba(99, 102, 241, 0.22);
+}
+
+.sidebar-link--active::before {
+  content: '';
+  @apply absolute left-0 w-[3px] rounded-r-sm bg-indigo-500;
+  top: 20%;
+  bottom: 20%;
+}
+
+.sidebar-link-icon {
+  @apply text-xl shrink-0 w-6 text-center;
+}
+
+.sidebar-link-label {
+  @apply text-sm flex-1;
+}
+
+.sidebar-active-dot {
+  @apply w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0;
+}
+
+/* Footer / user */
+.sidebar-footer {
+  @apply border-t border-white/[0.06];
+  padding: 0.875rem 0.625rem;
+}
+
+.sidebar-user {
+  @apply flex items-center gap-3 rounded-xl overflow-hidden;
+  padding: 0.625rem 0.875rem;
+  background: rgba(255 255 255 / 0.04);
+}
+
+.sidebar-avatar {
+  @apply w-9 h-9 rounded-full bg-indigo-500 text-white text-xs font-bold
+         flex items-center justify-center shrink-0;
+}
+
+.sidebar-user-info {
+  @apply overflow-hidden;
+}
+
+.sidebar-user-name {
+  @apply text-sm font-semibold text-white m-0 whitespace-nowrap;
+}
+
+.sidebar-user-role {
+  @apply text-xs m-0 whitespace-nowrap;
+  color: #cbd5e1;
+}
+
+/* Overlay */
+.sidebar-overlay {
+  @apply fixed inset-0 z-40 md:hidden;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(2px);
+}
+
+/* Transitions */
+.fade-enter-active,
+.fade-leave-active {
+  @apply transition-opacity duration-[250ms] ease-in-out;
+}
+.fade-enter-from,
+.fade-leave-to {
+  @apply opacity-0;
+}
+
+.slide-x-enter-active,
+.slide-x-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.slide-x-enter-from,
+.slide-x-leave-to {
+  @apply opacity-0 -translate-x-2;
+}
+
+/* Lightbox Transition */
+.lightbox-enter-active,
+.lightbox-leave-active {
+  transition: opacity 0.2s ease;
+}
+.lightbox-enter-active .relative,
+.lightbox-leave-active .relative {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.lightbox-enter-from,
+.lightbox-leave-to {
+  opacity: 0;
+}
+.lightbox-enter-from .relative,
+.lightbox-leave-to .relative {
+  transform: scale(0.92);
+  opacity: 0;
+}
+
+/* ============================================================
+   LAYOUT — DEFAULT
+   ============================================================ */
+
+.app-shell {
+  @apply flex min-h-screen bg-slate-100;
+}
+
+.app-main {
+  @apply flex flex-col flex-1 min-w-0;
+  transition: margin-left 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 820px) {
+  .app-main--expanded  { margin-left: 260px; }
+  .app-main--collapsed { margin-left: 72px;  }
+}
+
+@media (max-width: 819px) {
+  .app-main--expanded,
+  .app-main--collapsed { margin-left: 0; }
+}
+
+.app-topbar {
+  @apply sticky top-0 z-30 bg-white border-b border-slate-200 h-[3.75rem]
+         flex items-center px-5 gap-4;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.topbar-hamburger {
+  @apply w-9 h-9 flex flex-col items-center justify-center gap-[5px]
+         bg-transparent border-0 cursor-pointer p-1 rounded-lg
+         transition-colors duration-200 hover:bg-slate-100;
+}
+
+.hamburger-bar {
+  @apply block w-5 h-[2px] bg-slate-600 rounded-sm transition-transform duration-200;
+}
+
+.topbar-title {
+  @apply flex-1;
+}
+
+.topbar-page-title {
+  @apply text-base font-semibold text-slate-900;
+}
+
+.topbar-actions {
+  @apply flex items-center gap-3;
+}
+
+.topbar-avatar {
+  @apply w-9 h-9 rounded-full bg-indigo-500 text-white text-xs font-bold
+         flex items-center justify-center cursor-pointer;
+}
+
+.app-content {
+  @apply flex-1 p-6 overflow-y-auto;
+}
+
+/* Style 01_informationform */
+
+.card{
+  @apply bg-gray-50 rounded-lg border border-gray-300 shadow-md overflow-auto max-h-[calc(100vh-12rem)] 
+}
+
+.card-title{
+  @apply bg-gray-900 text-white p-4 text-lg font-semibold sticky top-0 z-15
+}
+
+.card-body{
+  @apply p-4 space-y-3
+}
+
+.card-footer{
+  @apply sticky bottom-0 z-10 flex justify-end p-5 bg-gray-100
+}
+
+.btn-save{
+  @apply flex items-center gap-2 bg-green-400 p-3 text-white rounded-lg hover:bg-white hover:text-green-500
+  transition-all duration-200 cursor-pointer
+}
+
+.btn-secondary{
+  @apply flex items-center gap-2 bg-gray-400 p-3 text-white rounded-lg hover:bg-white hover:text-gray-700
+  transition-all duration-200 cursor-pointer
+}
+
+textarea{
+  @apply border border-gray-300 rounded-sm px-2 py-2 focus:outline-none
+}
