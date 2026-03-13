@@ -377,17 +377,34 @@
       </div>
       <div class="grid grid-cols-1">
         <div class="flex flex-col gap-1">
-          <label for=""
-            >Problem: <span class="text-red-500 mr-2">*</span>
-            <span v-if="errors.prob" class="text-red-500">{{
-              errors.prob
-            }}</span>
-          </label>
+          <div class="flex items-center justify-between">
+            <label for=""
+              >Problem: <span class="text-red-500 mr-2">*</span>
+              <span v-if="errors.prob" class="text-red-500">{{
+                errors.prob
+              }}</span>
+            </label>
+            <button
+              type="button"
+              @click="toggleVoiceInput"
+              :class="[
+                'flex items-center gap-1 px-2 py-1 rounded-md text-sm font-medium transition-all duration-200',
+                isListening
+                  ? 'bg-red-500 text-white animate-pulse'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              ]"
+              :title="isListening ? 'กำลังฟัง... (คลิกเพื่อหยุด)' : 'พิมด้วยเสียง'"
+            >
+              <Mic2 :size="16" />
+              <span>{{ isListening ? 'กำลังฟัง...' : 'พิมด้วยเสียง' }}</span>
+            </button>
+          </div>
           <textarea
             v-model="inf.prob"
             class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
             :class="{ 'border-red-500': errors.prob }"
             @input="clearError('prob')"
+            rows="3"
           ></textarea>
         </div>
       </div>
@@ -522,6 +539,7 @@ import {
   Pencil,
   Trash,
   Image,
+  Mic2,
 } from "lucide-vue-next";
 import type { InformationTypesForm } from "~/types/informationTypesForm";
 import axios from "axios";
@@ -579,6 +597,59 @@ const wonSelect = ref<any>(null);
 const check_won = ref<any[]>([]);
 
 const isEditing = ref(false); // flag กันไม่ให้ watch ล้าง won ตอน edit
+
+// ---- Voice Input ----
+const isListening = ref(false);
+let recognition: any = null;
+
+const toggleVoiceInput = () => {
+  if (isListening.value) {
+    recognition?.stop();
+    isListening.value = false;
+    return;
+  }
+
+  const SpeechRecognition =
+    (window as any).SpeechRecognition ||
+    (window as any).webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    alert("เบราว์เซอร์ของคุณไม่รองรับการพิมด้วยเสียง\nกรุณาใช้ Chrome หรือ Edge");
+    return;
+  }
+
+  recognition = new SpeechRecognition();
+  recognition.lang = "th-TH";
+  recognition.interimResults = false; // รับเฉพาะผลลัพธ์สุดท้าย
+  recognition.maxAlternatives = 1;
+
+  recognition.onstart = () => {
+    isListening.value = true;
+  };
+
+  recognition.onresult = (event: any) => {
+    const transcript = event.results[0][0].transcript;
+    inf.value.prob = inf.value.prob
+      ? inf.value.prob + " " + transcript
+      : transcript;
+    clearError("prob");
+    // ปิดไมโครโฟนอัตโนมัติเมื่อได้ผลลัพธ์
+    recognition.stop();
+  };
+
+  recognition.onend = () => {
+    isListening.value = false;
+  };
+
+  recognition.onerror = (event: any) => {
+    console.error("Speech recognition error:", event.error);
+    isListening.value = false;
+  };
+
+  recognition.start();
+};
+// ---- End Voice Input ----
+
 
 const imagePreview = ref<string | null>(null);
 const previewImage = ref<string | null>(null);
