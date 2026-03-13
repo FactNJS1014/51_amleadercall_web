@@ -469,8 +469,12 @@ const submitForm = async () => {
     formData.append("empno", act.value.empno);
     formData.append("inf_hrec_id", inf_hrec_id.value);
 
-    if (act.value.image) {
+    if (act.value.image instanceof File) {
+      // กรณีเปลี่ยนรูปใหม่ → ส่งเป็น File object
       formData.append("image", act.value.image);
+    } else if (typeof act.value.image === "string" && act.value.image) {
+      // กรณีไม่เปลี่ยนรูป → ส่งชื่อไฟล์เดิม (string) ไปให้ API รู้ว่าใช้รูปเดิม
+      formData.append("existing_image", act.value.image);
     }
 
     // for (const [key, value] of formData.entries()) {

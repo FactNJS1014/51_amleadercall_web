@@ -513,7 +513,16 @@
 </template>
 
 <script setup lang="ts">
-import { Hash, Save, Plus, X, Send, Pencil, Trash, Image } from "lucide-vue-next";
+import {
+  Hash,
+  Save,
+  Plus,
+  X,
+  Send,
+  Pencil,
+  Trash,
+  Image,
+} from "lucide-vue-next";
 import type { InformationTypesForm } from "~/types/informationTypesForm";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -568,6 +577,8 @@ const options_won = ref<any[]>([]);
 const wonSelect = ref<any>(null);
 
 const check_won = ref<any[]>([]);
+
+const isEditing = ref(false); // flag กันไม่ให้ watch ล้าง won ตอน edit
 
 const imagePreview = ref<string | null>(null);
 const previewImage = ref<string | null>(null);
@@ -724,8 +735,12 @@ const submitForm = async (e?: Event) => {
     formData.append("start_time", inf.value.start_time);
 
     // append image file
-    if (inf.value.image) {
+    if (inf.value.image instanceof File) {
+      // กรณีเปลี่ยนรูปใหม่ → ส่งเป็น File object
       formData.append("image", inf.value.image);
+    } else if (typeof inf.value.image === "string" && inf.value.image) {
+      // กรณีไม่เปลี่ยนรูป → ส่งชื่อไฟล์เดิม (string) ไปให้ API รู้ว่าใช้รูปเดิม
+      formData.append("existing_image", inf.value.image);
     }
 
     if (id_hrec.value) {
@@ -806,22 +821,32 @@ const getCustomer = async () => {
   }
 };
 
-const getWorkOrder = async () => {
+const getWorkOrder = async (customer: string) => {
   try {
-    const response = await axios.get("http://127.0.0.1:8000/api/vwork");
-
-    won_lists.value = response.data;
+    const response = await axios.get(
+      `http://127.0.0.1:8000/api/vwork/${encodeURIComponent(customer)}`,
+    );
+    const data = response.data;
+    options_won.value = data.map((item: any) => ({
+      value: item.WON.trim(),
+      label: item.WON.trim(),
+    }));
   } catch (error) {
     console.error(error);
   }
 };
 
-const getCheckWorkOrder = async () => {
+const getCheckModelByWon = async (won: string) => {
   try {
-    const response = await axios.get("http://127.0.0.1:8000/api/vcheckmodel");
-
-    check_won.value = response.data;
-    // console.log(check_won.value);
+    const response = await axios.get(
+      `http://127.0.0.1:8000/api/vcheckmodel/${encodeURIComponent(won)}`,
+    );
+    const model = response.data;
+    if (model) {
+      inf.value.model_code = model.MDLCD?.trim() || "";
+      inf.value.model_name = model.MDLNM?.trim() || "";
+      inf.value.lots = parseInt(model.WONQT) || 0;
+    }
   } catch (error) {
     console.error(error);
   }
@@ -854,11 +879,12 @@ const UpdateCheck = async (id: string) => {
   }
 };
 
-const editForm = (item: any) => {
+const editForm = async (item: any) => {
+  isEditing.value = true;
+
   inf.value.employee_id = item.AMLDRINF_EMPHREC;
   inf.value.line = item.AMLDRINF_HREC_LINE;
-  inf.value.customer = item.AMLDRINF_HREC_CUS;
-  inf.value.won = item.AMLDRINF_HREC_WON;
+  inf.value.image = item.AMLDRINF_HREC_IMAGE ?? null;
   inf.value.model_code = item.AMLDRINF_HREC_MDLCD;
   inf.value.model_name = item.AMLDRINF_HREC_MDLNM;
   inf.value.lots = item.AMLDRINF_HREC_LOTS;
@@ -868,7 +894,7 @@ const editForm = (item: any) => {
   inf.value.locate = item.AMLDRINF_HREC_LOCATE;
   inf.value.machine = item.AMLDRINF_HREC_MACHINE;
   inf.value.qty_ng = item.AMLDRINF_HREC_QTYNG;
-  inf.value.image = item.AMLDRINF_HREC_IMAGE ?? null;
+  inf.value.customer = item.AMLDRINF_HREC_CUS;
 
   id_hrec.value = item.AMLDRINF_HREC_ID;
 
@@ -876,7 +902,14 @@ const editForm = (item: any) => {
     ? `http://127.0.0.1:8000/images_information/${item.AMLDRINF_HREC_IMAGE}`
     : null;
 
+  // เปิด modal ก่อนเลย ไม่ต้องรอ API
   isModalOpen.value = true;
+
+  // โหลด won options แบบ async ใน background
+  await getWorkOrder(item.AMLDRINF_HREC_CUS);
+  inf.value.won = item.AMLDRINF_HREC_WON;
+
+  isEditing.value = false;
 };
 
 const deleteForm = async (id: string) => {
@@ -938,23 +971,10 @@ watch(
   () => inf.value.customer,
   (val) => {
     if (!val) return;
-
-    const filter_won = won_lists.value.filter(
-      (row: any) => row.BGCD.trim() === val,
-    );
-
-    options_won.value = filter_won.map((item: any) => {
-      return {
-        value: item.WON.trim(),
-        label: item.WON.trim(),
-      };
-    });
-
-    nextTick(() => {
-      if (!val) {
-        wonSelect.value?.open();
-      }
-    });
+    if (isEditing.value) return; // ข้ามการล้าง won ตอน edit
+    options_won.value = [];
+    inf.value.won = "";
+    getWorkOrder(val);
   },
 );
 
@@ -962,24 +982,12 @@ watch(
   () => inf.value.won,
   (val) => {
     if (!val) return;
-
-    const model = check_won.value.find((row: any) => row.WON.trim() === val);
-    // console.log(model);
-
-    if (model) {
-      inf.value.model_code = model.MDLCD?.trim() || "";
-      inf.value.model_name = model.MDLNM?.trim() || "";
-      inf.value.lots = parseInt(model.WONQT) || 0;
-    }
+    getCheckModelByWon(val);
   },
 );
 
 onMounted(() => {
-  Promise.all([
-    getCustomer(),
-    getWorkOrder(),
-    getCheckWorkOrder(),
-    getRecordInfo(),
-  ]);
+  getCustomer();
+  getRecordInfo();
 });
 </script>
