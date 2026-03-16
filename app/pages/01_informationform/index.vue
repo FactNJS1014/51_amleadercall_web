@@ -366,19 +366,20 @@
     @close="isModalOpen = false"
   >
     <form class="space-y-3" @submit.prevent="submitForm">
-      <div class="space-x-2 flex items-center">
-        <Hash :size="17" class="text-blue-600" />
-        <label for="">Employee ID:</label>
-        <input
-          type="text"
-          v-model="inf.employee_id"
-          class="border border-gray-300 rounded-sm px-2 py-1 focus:outline-none"
-          :class="{ 'border-red-500': errors.employee_id }"
-          @input="clearError('employee_id')"
-        />
-        <span v-if="errors.employee_id" class="text-red-500">{{
-          errors.employee_id
-        }}</span>
+      <div class="grid md:grid-cols-3 grid-cols-2 gap-3">
+        <div class="flex items-center gap-1">
+          <label for="" class="text-sm w-[200px]">Employee ID:</label>
+          <input
+            type="text"
+            v-model="inf.employee_id"
+            class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none w-full"
+            :class="{ 'border-red-500': errors.employee_id }"
+            @input="clearError('employee_id')"
+          />
+          <span v-if="errors.employee_id" class="text-red-500">{{
+            errors.employee_id
+          }}</span>
+        </div>
       </div>
       <div class="grid md:grid-cols-3 grid-cols-2 gap-3">
         <div class="flex flex-col gap-1">

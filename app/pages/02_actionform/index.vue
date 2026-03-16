@@ -3,15 +3,14 @@
     <div class="card-title">
       <div class="flex gap-4 items-center">
         <span>⚡</span>
-        <div class="flex gap-3">
-          <span class="text-xl font-extrabold tracking-tight"
-            >รายการรอแจ้ง Action</span
-          >
-          <span
-            class="text-xs text-white/60 font-medium uppercase tracking-widest"
-            >Pending Action Records</span
-          >
-        </div>
+
+        <span class="text-xl font-extrabold tracking-tight"
+          >รายการรอแจ้ง Action</span
+        >
+        <span
+          class="text-xs text-white/60 font-medium uppercase tracking-widest"
+          >Pending Action Records</span
+        >
       </div>
     </div>
     <div class="card-body bg-slate-50/30 p-4">
@@ -179,7 +178,17 @@
                   class="text-[10px] uppercase tracking-widest font-black text-indigo-400"
                   >Type</label
                 >
-                <span class="font-extrabold text-indigo-600 uppercase">{{
+                <span
+                  v-if="item.AMLDRACT_HREC_EDITTYPE === 'close'"
+                  class="font-extrabold text-emerald-600 uppercase"
+                  >{{ item.AMLDRACT_HREC_EDITTYPE }}</span
+                >
+                <span
+                  v-else-if="item.AMLDRACT_HREC_EDITTYPE === 'open'"
+                  class="font-extrabold text-rose-600 uppercase"
+                  >{{ item.AMLDRACT_HREC_EDITTYPE }}</span
+                >
+                <span v-else class="font-extrabold text-amber-600 uppercase">{{
                   item.AMLDRACT_HREC_EDITTYPE
                 }}</span>
               </div>
@@ -190,6 +199,11 @@
                   v-if="item.AMLDRACT_HREC_EDITTYPE === 'close'"
                   class="text-emerald-500"
                 />
+                <CircleX
+                  v-else-if="item.AMLDRACT_HREC_EDITTYPE === 'open'"
+                  class="text-rose-500"
+                />
+
                 <AlertCircle v-else class="text-amber-500" />
               </div>
             </div>
@@ -297,14 +311,35 @@
                     class="text-[10px] uppercase tracking-widest font-black text-rose-400"
                     >Type</label
                   >
-                  <span class="font-extrabold text-rose-700 uppercase">{{
-                    item.AMLDRACT_HREC_EDITTYPE
-                  }}</span>
+                  <span
+                    v-if="item.AMLDRACT_HREC_EDITTYPE === 'close'"
+                    class="font-extrabold text-emerald-700 uppercase"
+                    >{{ item.AMLDRACT_HREC_EDITTYPE }}</span
+                  >
+                  <span
+                    v-else-if="item.AMLDRACT_HREC_EDITTYPE === 'open'"
+                    class="font-extrabold text-rose-700 uppercase"
+                    >{{ item.AMLDRACT_HREC_EDITTYPE }}</span
+                  >
+                  <span
+                    v-else
+                    class="font-extrabold text-amber-700 uppercase"
+                    >{{ item.AMLDRACT_HREC_EDITTYPE }}</span
+                  >
                 </div>
                 <div
                   class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm"
                 >
-                  <XCircle class="text-rose-500" />
+                  <CheckCircle2
+                    v-if="item.AMLDRACT_HREC_EDITTYPE === 'close'"
+                    class="text-emerald-500"
+                  />
+                  <CircleX
+                    v-else-if="item.AMLDRACT_HREC_EDITTYPE === 'open'"
+                    class="text-rose-500"
+                  />
+
+                  <AlertCircle v-else class="text-amber-500" />
                 </div>
               </div>
 
@@ -633,6 +668,7 @@ import {
   Maximize2,
   AlertTriangle,
   XCircle,
+  CircleX,
 } from "lucide-vue-next";
 import Modal from "~/components/UI/Modal.vue";
 import type { ActionTypesForm } from "~/types/actionTypesForm";
