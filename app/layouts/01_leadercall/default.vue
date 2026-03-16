@@ -2,7 +2,7 @@
 import Sidebar from "~/components/01_leadercall/sidebar.vue";
 import { useSidebar } from "~/composables/useSidebar";
 
-const { isCollapsed, toggleMobile } = useSidebar();
+const { isOpen, isCollapsed, toggleMobile } = useSidebar();
 </script>
 
 <template>
@@ -14,7 +14,11 @@ const { isCollapsed, toggleMobile } = useSidebar();
     <div
       :class="[
         'app-main',
-        isCollapsed ? 'app-main--collapsed' : 'app-main--expanded',
+        !isOpen
+          ? 'app-main--full'
+          : isCollapsed
+            ? 'app-main--collapsed'
+            : 'app-main--expanded',
       ]"
     >
       <!-- Top Navbar -->

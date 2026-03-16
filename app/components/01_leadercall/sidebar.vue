@@ -44,8 +44,8 @@ watch(
   <aside
     :class="[
       'sidebar',
+      !isOpen && 'sidebar--hidden',
       isCollapsed && 'sidebar--collapsed',
-      isOpen && 'sidebar--open',
     ]"
   >
     <!-- Brand -->

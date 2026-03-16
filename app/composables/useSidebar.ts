@@ -1,7 +1,7 @@
 // composables/useSidebar.ts
 // Global singleton state for sidebar open/collapsed across the layout
 
-const isOpen = ref(true)         // mobile drawer open
+const isOpen = ref(false)         // mobile drawer open
 const isCollapsed = ref(false)   // desktop collapsed (icon-only)
 
 export function useSidebar() {
