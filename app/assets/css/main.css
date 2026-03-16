@@ -130,79 +130,56 @@
   @apply w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0;
 }
 
-/* Footer / user */
-.sidebar-footer {
-  @apply border-t border-white/[0.06];
-  padding: 0.875rem 0.625rem;
+/* ============================================================
+   DESIGN SYSTEM TOKENS
+   ============================================================ */
+:root {
+  /* Colors - Modern Slate & Indigo Palette */
+  --primary: 224 71% 45%;
+  --primary-foreground: 210 40% 98%;
+  
+  --secondary: 215 25% 27%;
+  --secondary-foreground: 210 40% 98%;
+  
+  --accent: 262 83% 58%;
+  --accent-foreground: 210 40% 98%;
+  
+  --background: 210 40% 98%;
+  --foreground: 222 47% 11%;
+  
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 221 83% 53%;
+  
+  --success: 142 71% 45%;
+  --warning: 38 92% 50%;
+  --danger: 0 84% 60%;
+  --info: 199 89% 48%;
+
+  --radius: 1rem;
 }
 
-.sidebar-user {
-  @apply flex items-center gap-3 rounded-xl overflow-hidden;
-  padding: 0.625rem 0.875rem;
-  background: rgba(255 255 255 / 0.04);
+/* ============================================================
+   GLOBAL RESET & TYPOGRAPHY
+   ============================================================ */
+body {
+  @apply antialiased text-slate-900 bg-slate-50/50;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-.sidebar-avatar {
-  @apply w-9 h-9 rounded-full bg-indigo-500 text-white text-xs font-bold
-         flex items-center justify-center shrink-0;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
-
-.sidebar-user-info {
-  @apply overflow-hidden;
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
 }
-
-.sidebar-user-name {
-  @apply text-sm font-semibold text-white m-0 whitespace-nowrap;
-}
-
-.sidebar-user-role {
-  @apply text-xs m-0 whitespace-nowrap;
-  color: #cbd5e1;
-}
-
-/* Overlay */
-.sidebar-overlay {
-  @apply fixed inset-0 z-40 md:hidden;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(2px);
-}
-
-/* Transitions */
-.fade-enter-active,
-.fade-leave-active {
-  @apply transition-opacity duration-[250ms] ease-in-out;
-}
-.fade-enter-from,
-.fade-leave-to {
-  @apply opacity-0;
-}
-
-.slide-x-enter-active,
-.slide-x-leave-active {
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-.slide-x-enter-from,
-.slide-x-leave-to {
-  @apply opacity-0 -translate-x-2;
-}
-
-/* Lightbox Transition */
-.lightbox-enter-active,
-.lightbox-leave-active {
-  transition: opacity 0.2s ease;
-}
-.lightbox-enter-active .relative,
-.lightbox-leave-active .relative {
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-.lightbox-enter-from,
-.lightbox-leave-to {
-  opacity: 0;
-}
-.lightbox-enter-from .relative,
-.lightbox-leave-to .relative {
-  transform: scale(0.92);
-  opacity: 0;
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-200 rounded-full hover:bg-slate-300 transition-colors;
 }
 
 /* ============================================================
@@ -210,12 +187,12 @@
    ============================================================ */
 
 .app-shell {
-  @apply flex min-h-screen bg-slate-100;
+  @apply flex min-h-screen;
 }
 
 .app-main {
   @apply flex flex-col flex-1 min-w-0;
-  transition: margin-left 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @media (min-width: 820px) {
@@ -223,25 +200,20 @@
   .app-main--collapsed { margin-left: 72px;  }
 }
 
-@media (max-width: 819px) {
-  .app-main--expanded,
-  .app-main--collapsed { margin-left: 0; }
-}
-
 .app-topbar {
-  @apply sticky top-0 z-30 bg-white border-b border-slate-200 h-[3.75rem]
-         flex items-center px-5 gap-4;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  @apply sticky top-0 z-30 h-16 flex items-center px-6 gap-4
+         bg-white/80 backdrop-blur-md border-b border-slate-200/60;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
 }
 
 .topbar-hamburger {
-  @apply w-9 h-9 flex flex-col items-center justify-center gap-[5px]
-         bg-transparent border-0 cursor-pointer p-1 rounded-lg
-         transition-colors duration-200 hover:bg-slate-100;
+  @apply w-10 h-10 flex flex-col items-center justify-center gap-1.5
+         bg-slate-50 border-0 cursor-pointer rounded-xl
+         transition-all duration-200 hover:bg-slate-100 active:scale-95;
 }
 
 .hamburger-bar {
-  @apply block w-5 h-[2px] bg-slate-600 rounded-sm transition-transform duration-200;
+  @apply block w-5 h-0.5 bg-slate-600 rounded-full transition-all duration-300;
 }
 
 .topbar-title {
@@ -249,50 +221,127 @@
 }
 
 .topbar-page-title {
-  @apply text-base font-semibold text-slate-900;
-}
-
-.topbar-actions {
-  @apply flex items-center gap-3;
-}
-
-.topbar-avatar {
-  @apply w-9 h-9 rounded-full bg-indigo-500 text-white text-xs font-bold
-         flex items-center justify-center cursor-pointer;
+  @apply text-lg font-bold text-slate-900 tracking-tight capitalize;
 }
 
 .app-content {
-  @apply flex-1 p-6 overflow-y-auto;
+  @apply p-6 lg:p-8;
 }
 
-/* Style 01_informationform */
+/* ============================================================
+   COMPONENTS
+   ============================================================ */
 
-.card{
-  @apply bg-gray-50 rounded-lg border border-gray-300 shadow-md overflow-auto max-h-[calc(100vh-12rem)] 
+/* Glass Cards */
+.card {
+  @apply bg-white rounded-[2rem] border border-slate-200/60 shadow-xl shadow-slate-200/40 
+         overflow-hidden mb-6 transition-all duration-300;
 }
 
-.card-title{
-  @apply bg-gray-900 text-white p-4 text-lg font-semibold sticky top-0 z-15
+.card:hover {
+  @apply shadow-2xl shadow-slate-200/60 -translate-y-1;
 }
 
-.card-body{
-  @apply p-4 space-y-3
+.card-title {
+  @apply flex items-center gap-3 px-8 py-6 bg-slate-900 text-white border-b border-white/10;
 }
 
-.card-footer{
-  @apply sticky bottom-0 z-10 flex justify-end p-5 bg-gray-100
+.card-title span:first-child {
+  @apply w-10 h-10 flex items-center justify-center bg-white/10 rounded-2xl backdrop-blur-sm text-xl;
 }
 
-.btn-save{
-  @apply flex items-center gap-2 bg-green-400 p-3 text-white rounded-lg hover:bg-white hover:text-green-500
-  transition-all duration-200 cursor-pointer
+.card-body {
+  @apply p-8 space-y-6;
 }
 
-.btn-secondary{
-  @apply flex items-center gap-2 bg-gray-400 p-3 text-white rounded-lg hover:bg-white hover:text-gray-700
-  transition-all duration-200 cursor-pointer
+/* Tables - Modern Look */
+.table-container {
+  @apply relative overflow-hidden rounded-2xl border border-slate-200 bg-white;
 }
 
-textarea{
-  @apply border border-gray-300 rounded-sm px-2 py-2 focus:outline-none
+table {
+  @apply w-full border-collapse text-sm;
+}
+
+thead {
+  @apply bg-slate-50 text-slate-500 font-semibold uppercase tracking-wider;
+}
+
+th {
+  @apply px-6 py-4 border-b border-slate-200 text-center text-[14px];
+}
+
+td {
+  @apply px-6 py-4 border-b border-slate-100 transition-colors text-center;
+}
+
+tr:hover td {
+  @apply bg-slate-50/50;
+}
+
+/* Buttons - Premium Feel */
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3 
+         bg-indigo-600 text-white font-semibold rounded-2xl
+         transition-all duration-200 hover:bg-indigo-700 hover:shadow-lg 
+         hover:shadow-indigo-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3 
+         bg-slate-100 text-slate-700 font-semibold rounded-2xl
+         transition-all duration-200 hover:bg-slate-200 
+         active:scale-95 disabled:opacity-50;
+}
+
+.btn-save {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3 
+         bg-emerald-500 text-white font-semibold rounded-2xl
+         transition-all duration-200 hover:bg-emerald-600 hover:shadow-lg 
+         hover:shadow-emerald-100 active:scale-95;
+}
+
+/* Inputs & Forms */
+.form-group {
+  @apply flex flex-col gap-2;
+}
+
+label {
+  @apply text-sm font-semibold text-slate-700 ml-1;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="time"],
+select,
+textarea {
+  @apply w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl
+         transition-all duration-200 outline-none
+         focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500/40;
+}
+
+textarea {
+  @apply min-h-[100px] resize-none;
+}
+
+/* Status Badges */
+.badge {
+  @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider;
+}
+
+.badge-blue { @apply bg-blue-100 text-blue-700; }
+.badge-emerald { @apply bg-emerald-100 text-emerald-700; }
+.badge-rose { @apply bg-rose-100 text-rose-700; }
+.badge-amber { @apply bg-amber-100 text-amber-700; }
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }

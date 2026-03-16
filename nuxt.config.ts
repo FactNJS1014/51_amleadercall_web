@@ -10,7 +10,10 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       tailwindcss()
-    ]
+    ],
+    server: {
+      allowedHosts: true
+    }
   },
 
   routeRules: {
@@ -29,5 +32,26 @@ export default defineNuxtConfig({
      '/02_actionform/*': {
       appLayout: '01-leadercall-default',
     },
-  }
+    '/03_confirmform': {
+      appLayout: '01-leadercall-default',
+    },
+    '/03_confirmform/*': {
+      appLayout: '01-leadercall-default',
+    },
+  },
+  ssr: true,
+  app: {
+     head: {
+      title: '51_amleadercall',
+      meta: [
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        {
+          name: 'description',
+          content: '51_amleadercall',
+        },
+      ],
+    
+    }
+
+  },
 })

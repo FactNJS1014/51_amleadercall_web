@@ -1,62 +1,120 @@
 <template>
-  <div class="card" v-if="data_rec.length > 0">
-    <div class="w-full bg-white rounded-xl shadow p-4">
-      <div class="overflow-x-auto">
-        <div
-          class="max-h-[calc(100vh-12rem)] overflow-y-auto border border-gray-100"
-        >
-          <table class="min-w-auto w-full text-sm text-gray-700">
+  <div class="card mb-8 animate-fade-in" v-if="data_rec.length > 0">
+    <div class="card-title">
+      <div class="flex gap-4 items-center">
+        <span>⚡</span>
+        <div class="flex gap-3">
+          <span class="text-xl font-extrabold tracking-tight"
+            >รายการรอแจ้ง Action</span
+          >
+          <span
+            class="text-xs text-white/60 font-medium uppercase tracking-widest"
+            >Pending Action Records</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="card-body bg-slate-50/30 p-4">
+      <div
+        class="table-container shadow-sm overflow-hidden rounded-2xl border border-slate-200/60"
+      >
+        <div class="max-h-[calc(100vh-24rem)] overflow-y-auto">
+          <table class="w-full">
             <!-- HEADER -->
-            <thead
-              class="sticky top-0 bg-violet-700 text-white text-[14px] uppercase"
-            >
+            <thead class="sticky top-0 z-20">
               <tr class="text-center">
-                <th class="px-3 py-3 min-w-[200px]">Action</th>
-                <th class="px-3 py-3 min-w-[160px]">หมายเลขเอกสาร</th>
-                <th class="px-3 py-3 min-w-[70px]">Line</th>
-                <th class="px-3 py-3 min-w-[100px]">Customer</th>
-                <th class="px-3 py-3 min-w-[200px]">Work Order</th>
-                <th class="px-3 py-3 min-w-[200px]">Model Code</th>
-                <th class="px-3 py-3 min-w-[200px]">Model Name</th>
-                <th class="px-3 py-3 min-w-[100px]">Lot Size</th>
+                <th
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Action
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[160px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  หมายเลขเอกสาร
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[70px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Line
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Customer
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Work Order
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Model Code
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Model Name
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Lot Size
+                </th>
               </tr>
             </thead>
 
             <!-- BODY -->
-            <tbody class="divide-y">
+            <tbody class="divide-y divide-slate-100">
               <tr
                 v-for="item in data_rec"
                 :key="item.AMLDRINF_HREC_ID + '-' + item.AMLDRINF_HREC_LINE"
                 v-memo="[item]"
-                class="hover:bg-gray-50 transition text-center"
+                class="hover:bg-indigo-50/30 transition-colors text-center"
               >
                 <!-- ACTION -->
-                <td class="px-3 py-2">
+                <td class="px-6 py-4">
                   <div class="flex gap-2 justify-center">
                     <button
-                      class="flex items-center gap-1 bg-violet-500 hover:bg-violet-600 text-white px-3 py-1.5 rounded-lg text-sm transition cursor-pointer"
+                      class="btn-primary py-1.5 px-4 text-xs"
                       @click="chooseShowForm(item.AMLDRINF_HREC_ID)"
                     >
-                      <FileText class="w-4 h-4" />
-                      เปิดฟอร์ม
+                      <div class="flex items-center gap-2">
+                        <FileText class="w-4 h-4" />
+                        <span>เปิดฟอร์ม</span>
+                      </div>
                     </button>
                   </div>
                 </td>
 
-                <td class="px-3 py-2">
-                  <span
-                    class="bg-sky-200 text-sky-900 px-2 py-1 rounded text-[14px] font-medium"
-                  >
-                    {{ item.AMLDRINF_DOC_NUM }}
-                  </span>
+                <td class="px-6 py-4">
+                  <span class="font-bold text-slate-900">{{
+                    item.AMLDRINF_DOC_NUM
+                  }}</span>
                 </td>
 
-                <td class="px-3 py-2">{{ item.AMLDRINF_HREC_LINE }}</td>
-                <td class="px-3 py-2">{{ item.AMLDRINF_HREC_CUS }}</td>
-                <td class="px-3 py-2">{{ item.AMLDRINF_HREC_WON }}</td>
-                <td class="px-3 py-2">{{ item.AMLDRINF_HREC_MDLCD }}</td>
-                <td class="px-3 py-2">{{ item.AMLDRINF_HREC_MDLNM }}</td>
-                <td class="px-3 py-2">{{ item.AMLDRINF_HREC_LOTS }}</td>
+                <td class="px-6 py-4">
+                  <span class="badge badge-blue">{{
+                    item.AMLDRINF_HREC_LINE
+                  }}</span>
+                </td>
+                <td class="px-6 py-4 font-semibold text-slate-700">
+                  {{ item.AMLDRINF_HREC_CUS }}
+                </td>
+                <td class="px-6 py-4 font-mono text-xs opacity-60">
+                  {{ item.AMLDRINF_HREC_WON }}
+                </td>
+                <td class="px-6 py-4 text-slate-500">
+                  {{ item.AMLDRINF_HREC_MDLCD }}
+                </td>
+                <td class="px-6 py-4 text-slate-500 text-left">
+                  {{ item.AMLDRINF_HREC_MDLNM }}
+                </td>
+                <td class="px-6 py-4 font-medium">
+                  {{ item.AMLDRINF_HREC_LOTS }}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -65,6 +123,233 @@
     </div>
   </div>
 
+  <div class="card animate-fade-in" style="animation-delay: 0.2s">
+    <div class="card-title">
+      <div class="flex gap-4 items-center">
+        <span>✅</span>
+
+        <span class="text-xl font-extrabold tracking-tight"
+          >รายการที่แจ้ง Action แล้ว</span
+        >
+        <span
+          class="text-xs text-white/60 font-medium uppercase tracking-widest"
+          >Action Check List</span
+        >
+      </div>
+    </div>
+
+    <div class="card-body bg-slate-50/20 p-6 space-y-6">
+      <div
+        v-for="item in data_action"
+        :key="item.AMLDRACT_HREC_ID"
+        class="bg-white/70 backdrop-blur-sm border border-slate-200/60 rounded-[2rem] p-8 shadow-sm hover:shadow-xl transition-all duration-500 group"
+      >
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="space-y-4">
+            <div class="flex flex-col gap-2">
+              <label
+                class="text-[10px] uppercase tracking-widest font-black text-indigo-400"
+                >Root Cause</label
+              >
+              <p
+                class="text-slate-800 font-medium leading-relaxed bg-slate-50/80 p-4 rounded-3xl border border-slate-100"
+              >
+                {{ item.AMLDRACT_HREC_RTCAUSE }}
+              </p>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label
+                class="text-[10px] uppercase tracking-widest font-black text-indigo-400"
+                >Action Taken</label
+              >
+              <p
+                class="text-slate-800 font-medium leading-relaxed bg-slate-50/80 p-4 rounded-3xl border border-slate-100"
+              >
+                {{ item.AMLDRACT_HREC_ACTION }}
+              </p>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div
+              class="flex items-center justify-between bg-indigo-50/50 p-4 rounded-3xl border border-indigo-100/50"
+            >
+              <div class="flex flex-col">
+                <label
+                  class="text-[10px] uppercase tracking-widest font-black text-indigo-400"
+                  >Type</label
+                >
+                <span class="font-extrabold text-indigo-600 uppercase">{{
+                  item.AMLDRACT_HREC_EDITTYPE
+                }}</span>
+              </div>
+              <div
+                class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm"
+              >
+                <CheckCircle2
+                  v-if="item.AMLDRACT_HREC_EDITTYPE === 'close'"
+                  class="text-emerald-500"
+                />
+                <AlertCircle v-else class="text-amber-500" />
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <label
+                class="text-[10px] uppercase tracking-widest font-black text-indigo-400"
+                >Evidence</label
+              >
+              <div
+                class="relative group/img overflow-hidden rounded-[2rem] ring-4 ring-slate-50 shadow-inner"
+              >
+                <img
+                  :src="`http://127.0.0.1:8000/images_action/${item.AMLDRACT_HREC_IMAGE}`"
+                  class="w-full h-48 object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
+                  @click="
+                    previewImage = `http://127.0.0.1:8000/images_action/${item.AMLDRACT_HREC_IMAGE}`
+                  "
+                />
+                <div
+                  class="absolute inset-0 bg-black/20 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center pointer-events-none"
+                >
+                  <Maximize2 class="text-white" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-slate-100 flex justify-end gap-3">
+          <button
+            class="w-12 h-12 flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl transition-all duration-300 active:scale-90"
+            @click="editItems(item)"
+            title="แก้ไข"
+          >
+            <Pencil class="w-5 h-5" />
+          </button>
+          <button
+            class="btn-save px-8"
+            @click="checksubmit(item.AMLDRACT_HREC_ID)"
+          >
+            <Send class="w-5 h-5 mr-2" />
+            <span>ส่งตรวจสอบ</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- REJECTED SECTION -->
+      <div v-if="action_reject.length > 0" class="mt-12 space-y-6">
+        <div class="flex items-center gap-4 px-2">
+          <div
+            class="w-10 h-10 bg-rose-500 rounded-2xl flex items-center justify-center shadow-lg shadow-rose-200"
+          >
+            <AlertTriangle class="text-white w-5 h-5" />
+          </div>
+          <div class="flex flex-col">
+            <h3 class="text-xl font-black text-rose-600 tracking-tight">
+              Rejected Actions
+            </h3>
+            <p
+              class="text-xs text-rose-400 font-bold uppercase tracking-widest"
+            >
+              ข้อมูลที่ถูกส่งกลับมาให้แก้ไข
+            </p>
+          </div>
+        </div>
+
+        <div
+          v-for="item in action_reject"
+          :key="item.AMLDRACT_HREC_ID"
+          class="bg-rose-50/50 backdrop-blur-sm border-2 border-rose-100 border-dashed rounded-[2.5rem] p-8 shadow-sm hover:shadow-xl hover:bg-rose-50 transition-all duration-500"
+        >
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="space-y-4">
+              <div class="flex flex-col gap-2">
+                <label
+                  class="text-[10px] uppercase tracking-widest font-black text-rose-400"
+                  >Root Cause (Rejected)</label
+                >
+                <p
+                  class="text-rose-900 font-medium leading-relaxed bg-white/60 p-4 rounded-3xl border border-rose-100/50 italic"
+                >
+                  {{ item.AMLDRACT_HREC_RTCAUSE }}
+                </p>
+              </div>
+              <div class="flex flex-col gap-2">
+                <label
+                  class="text-[10px] uppercase tracking-widest font-black text-rose-400"
+                  >Action Taken</label
+                >
+                <p
+                  class="text-rose-900 font-medium leading-relaxed bg-white/60 p-4 rounded-3xl border border-rose-100/50"
+                >
+                  {{ item.AMLDRACT_HREC_ACTION }}
+                </p>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <div
+                class="flex items-center justify-between bg-rose-100/50 p-4 rounded-3xl border border-rose-200/30"
+              >
+                <div class="flex flex-col">
+                  <label
+                    class="text-[10px] uppercase tracking-widest font-black text-rose-400"
+                    >Type</label
+                  >
+                  <span class="font-extrabold text-rose-700 uppercase">{{
+                    item.AMLDRACT_HREC_EDITTYPE
+                  }}</span>
+                </div>
+                <div
+                  class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm"
+                >
+                  <XCircle class="text-rose-500" />
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-2">
+                <label
+                  class="text-[10px] uppercase tracking-widest font-black text-rose-400"
+                  >Evidence</label
+                >
+                <div
+                  class="relative group/img overflow-hidden rounded-[2rem] ring-4 ring-white shadow-md"
+                >
+                  <img
+                    :src="`http://127.0.0.1:8000/images_action/${item.AMLDRACT_HREC_IMAGE}`"
+                    class="w-full h-48 object-cover cursor-pointer saturate-50 hover:saturate-100 transition-all duration-700"
+                    @click="
+                      previewImage = `http://127.0.0.1:8000/images_action/${item.AMLDRACT_HREC_IMAGE}`
+                    "
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="mt-8 pt-6 border-t border-rose-100 flex justify-end gap-3"
+          >
+            <button
+              class="w-12 h-12 flex items-center justify-center bg-rose-500 hover:bg-rose-600 text-white rounded-2xl shadow-lg shadow-rose-200 transition-all duration-300 active:scale-90"
+              @click="editItems(item)"
+              title="แก้ไข"
+            >
+              <Pencil class="w-5 h-5" />
+            </button>
+            <button
+              class="btn-save bg-rose-600 hover:bg-rose-700 px-8"
+              @click="sendToUpdate(item.AMLDRACT_HREC_ID)"
+            >
+              <Send class="w-5 h-5 mr-2" />
+              <span>ส่งข้อมูลอีกครั้ง</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Modal Form -->
   <Modal
     :is-open="showModal"
@@ -187,19 +472,33 @@
             <label
               class="bg-sky-500 hover:bg-sky-600 text-white px-3 py-1.5 rounded-lg text-sm transition text-center cursor-pointer flex items-center gap-2 justify-center"
             >
-              <Image />
-              เปลี่ยนรูป
-              <input type="file" class="hidden" @change="handleImageUpload" />
+              <Camera :size="16" />
+              ถ่ายรูป / เปลี่ยนรูป
+              <input
+                type="file"
+                class="hidden"
+                accept="image/*"
+                capture="environment"
+                @change="handleImageUpload"
+              />
             </label>
           </div>
 
           <!-- กรณีเพิ่มใหม่ หรือเลือกรูปใหม่ตอนแก้ไข -->
-          <input
+          <label
             v-else
-            type="file"
-            @change="handleImageUpload"
-            class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
-          />
+            class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center"
+          >
+            <Camera :size="20" />
+            <span>ถ่ายรูป / เลือกรูปภาพ</span>
+            <input
+              type="file"
+              class="hidden"
+              accept="image/*"
+              capture="environment"
+              @change="handleImageUpload"
+            />
+          </label>
         </div>
         <div class="flex flex-col gap-1 col-span-2 items-center">
           <img
@@ -231,83 +530,6 @@
     </template>
   </Modal>
 
-  <!-- Show List Action Record -->
-  <div class="card mt-3">
-    <div class="card-title">
-      <div class="flex gap-3 items-center">
-        <span class="text-[22px] bg-sky-500 p-1 rounded-lg">📃</span>
-        <span>รายการตรวจสอบข้อมูลก่อนส่งอนุมัติ</span>
-      </div>
-    </div>
-
-    <div class="p-3 space-y-3">
-      <div
-        v-for="item in data_action"
-        :key="item.AMLDRACT_HREC_ID"
-        class="card p-3"
-      >
-        <div
-          class="max-h-[calc(100vh-12rem)] overflow-y-auto border border-gray-100"
-        >
-          <table class="min-w-auto w-full text-sm text-gray-700">
-            <!-- HEADER -->
-            <thead
-              class="sticky top-0 bg-violet-700 text-white text-[14px] uppercase"
-            >
-              <tr class="text-center">
-                <th class="px-3 py-3 min-w-[200px]">ประเภทการ Action</th>
-                <th class="px-3 py-3 min-w-[400px]">Root Cause</th>
-                <th class="px-3 py-3 min-w-[400px]">Action</th>
-                <th class="px-3 py-3 min-w-[100px]">Image</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                v-for="item in data_action"
-                :key="item.AMLDRACT_HREC_ID"
-                class="hover:bg-gray-50 transition text-center"
-              >
-                <td class="px-3 py-2">
-                  <span
-                    class="bg-blue-200 text-blue-900 px-2 py-1 rounded-md font-semibold text-[16px]"
-                    >{{ item.AMLDRACT_HREC_EDITTYPE }}</span
-                  >
-                </td>
-                <td class="px-3 py-2">{{ item.AMLDRACT_HREC_RTCAUSE }}</td>
-                <td class="px-3 py-2">{{ item.AMLDRACT_HREC_ACTION }}</td>
-                <td class="px-3 py-2">
-                  <img
-                    :src="`http://127.0.0.1:8000/images_action/${item.AMLDRACT_HREC_IMAGE}`"
-                    class="w-12 h-12 object-cover rounded cursor-pointer hover:opacity-80 transition ring-1 ring-gray-200"
-                    @click="
-                      previewImage = `http://127.0.0.1:8000/images_action/${item.AMLDRACT_HREC_IMAGE}`
-                    "
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <hr class="border-gray-200 my-3" />
-        <div class="flex justify-end gap-3">
-          <button
-            class="bg-amber-400 hover:bg-amber-500 text-black px-4 py-2 rounded-lg flex items-center gap-2 cursor-pointer"
-            @click="editItems(item)"
-          >
-            <Pencil :size="17" />
-            แก้ไข
-          </button>
-          <button
-            class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 cursor-pointer"
-            @click="checksubmit(item.AMLDRACT_HREC_ID)"
-          >
-            <Send :size="17" />
-            ยืนยัน
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
   <Teleport to="body">
     <Transition name="lightbox">
       <div
@@ -338,7 +560,20 @@
 import dayjs from "dayjs";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { FileText, X, Save, Pencil, Send, Image } from "lucide-vue-next";
+import {
+  FileText,
+  X,
+  Save,
+  Pencil,
+  Send,
+  Image,
+  Mic2,
+  CheckCircle2,
+  AlertCircle,
+  Maximize2,
+  AlertTriangle,
+  XCircle,
+} from "lucide-vue-next";
 import Modal from "~/components/UI/Modal.vue";
 import type { ActionTypesForm } from "~/types/actionTypesForm";
 
@@ -435,7 +670,13 @@ const handleImageUpload = (event: Event) => {
   if (!file) return;
 
   // เช็คประเภทไฟล์
-  const validImageTypes = ["image/jpeg", "image/png", "image/jpg"];
+  const validImageTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/jpg",
+    "image/gif",
+    "image/webp",
+  ];
 
   if (!validImageTypes.includes(file.type)) {
     alert("กรุณาเลือกไฟล์รูปภาพเท่านั้น");
@@ -443,8 +684,12 @@ const handleImageUpload = (event: Event) => {
     return;
   }
 
-  act.value.image = file;
-  imagePreview.value = URL.createObjectURL(file);
+  // สร้างชื่อไฟล์สุ่ม .jpg
+  const randomName = `${Math.random().toString(36).substring(2, 9)}.jpg`;
+  const renamedFile = new File([file], randomName, { type: "image/jpeg" });
+
+  act.value.image = renamedFile;
+  imagePreview.value = URL.createObjectURL(renamedFile);
 };
 
 /**
@@ -491,6 +736,9 @@ const submitForm = async () => {
       if (res.data.status === "success") {
         clearForm();
         getActionData();
+        if (action_reject.value.length > 0) {
+          showActionReject();
+        }
         showModal.value = false;
         console.log(res.data);
       }
@@ -502,9 +750,12 @@ const submitForm = async () => {
       if (res.data.status === "success") {
         clearForm();
         getActionData();
+        getData();
+
         showModal.value = false;
         console.log(res.data);
       }
+      edit_id.value = "";
     }
   } catch (error) {
     console.log(error);
@@ -515,6 +766,112 @@ const submitForm = async () => {
       confirmButtonText: "OK",
     });
   }
+};
+
+/**
+ * TODO: Voice to input
+ */
+const isListening_root_cause = ref(false);
+const isListening_action = ref(false);
+let recognition_root_cause: any = null;
+let recognition_action: any = null;
+
+const toggleVoiceInput_root_cause = () => {
+  if (isListening_root_cause.value) {
+    recognition_root_cause?.stop();
+    isListening_root_cause.value = false;
+    return;
+  }
+
+  const SpeechRecognition =
+    (window as any).SpeechRecognition ||
+    (window as any).webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    alert(
+      "เบราว์เซอร์ของคุณไม่รองรับการพิมด้วยเสียง\nกรุณาใช้ Chrome หรือ Edge",
+    );
+    return;
+  }
+
+  recognition_root_cause = new SpeechRecognition();
+  recognition_root_cause.lang = "th-TH";
+  recognition_root_cause.interimResults = false; // รับเฉพาะผลลัพธ์สุดท้าย
+  recognition_root_cause.maxAlternatives = 1;
+
+  recognition_root_cause.onstart = () => {
+    isListening_root_cause.value = true;
+  };
+
+  recognition_root_cause.onresult = (event: any) => {
+    const transcript = event.results[0][0].transcript;
+    act.value.root_cause = act.value.root_cause
+      ? act.value.root_cause + " " + transcript
+      : transcript;
+    clearError("root_cause");
+    // ปิดไมโครโฟนอัตโนมัติเมื่อได้ผลลัพธ์
+    recognition_root_cause.stop();
+  };
+
+  recognition_root_cause.onend = () => {
+    isListening_root_cause.value = false;
+  };
+
+  recognition_root_cause.onerror = (event: any) => {
+    console.error("Speech recognition error:", event.error);
+    isListening_root_cause.value = false;
+  };
+
+  recognition_root_cause.start();
+};
+
+const toggleVoiceInput_action = () => {
+  if (isListening_action.value) {
+    recognition_action?.stop();
+    isListening_action.value = false;
+    return;
+  }
+
+  const SpeechRecognition =
+    (window as any).SpeechRecognition ||
+    (window as any).webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    alert(
+      "เบราว์เซอร์ของคุณไม่รองรับการพิมด้วยเสียง\nกรุณาใช้ Chrome หรือ Edge",
+    );
+    return;
+  }
+
+  recognition_action = new SpeechRecognition();
+  recognition_action.lang = "th-TH";
+  recognition_action.interimResults = false; // รับเฉพาะผลลัพธ์สุดท้าย
+  recognition_action.maxAlternatives = 1;
+
+  recognition_action.onstart = () => {
+    isListening_action.value = true;
+  };
+
+  recognition_action.onresult = (event: any) => {
+    const transcript = event.results[0][0].transcript;
+    act.value.action = act.value.action
+      ? act.value.action + " " + transcript
+      : transcript;
+    clearError("action");
+    // ปิดไมโครโฟนอัตโนมัติเมื่อได้ผลลัพธ์
+    recognition_action.stop();
+  };
+
+  recognition_action.onend = () => {
+    isListening_action.value = false;
+  };
+
+  recognition_action.onerror = (event: any) => {
+    console.error("Speech recognition error:", event.error);
+    isListening_action.value = false;
+  };
+
+  recognition_action.start();
 };
 
 /**
@@ -553,6 +910,22 @@ const getActionData = async () => {
 };
 
 /**
+ * TODO: function show data action reject
+ */
+
+const action_reject = ref<any>([]);
+const showActionReject = async () => {
+  try {
+    const response = await axios.get(
+      "http://127.0.0.1:8000/api/action/record/reject/",
+    );
+    action_reject.value = response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+/**
  * TODO: function check submit
  */
 const checksubmit = async (id: string) => {
@@ -587,8 +960,26 @@ const editItems = (item: any) => {
   showModal.value = true;
 };
 
+/**
+ * TODO: Update After edit from reject
+ */
+const sendToUpdate = async (id: string) => {
+  try {
+    const response = await axios.put(
+      "http://127.0.0.1:8000/api/update/reject-action/" + id,
+    );
+    if (response.data.status === "success") {
+      showActionReject();
+    }
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 onMounted(() => {
   getData();
   getActionData();
+  showActionReject();
 });
 </script>

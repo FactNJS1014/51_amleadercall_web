@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { useSidebar } from "~/composables/useSidebar";
-import { ChevronLeft, Home, BarChart2, BookPlus } from "lucide-vue-next";
+import {
+  ChevronLeft,
+  Home,
+  BarChart2,
+  BookPlus,
+  ClipboardList,
+} from "lucide-vue-next";
 import type { Component } from "vue";
 
 const { isOpen, isCollapsed, closeMobile, toggleDesktop } = useSidebar();
@@ -16,6 +22,7 @@ const menuItems: MenuItem[] = [
   { label: "Dashboard", icon: Home, to: "/" },
   { label: "Information Form", icon: BookPlus, to: "/01_informationform" },
   { label: "Action Form", icon: BookPlus, to: "/02_actionform" },
+  { label: "Confirm Lists", icon: ClipboardList, to: "/03_confirmform" },
 ];
 
 const isActive = (item: MenuItem) =>
@@ -90,18 +97,5 @@ watch(
         </li>
       </ul>
     </nav>
-
-    <!-- Footer -->
-    <div class="sidebar-footer">
-      <div class="sidebar-user">
-        <div class="sidebar-avatar">AM</div>
-        <Transition name="slide-x">
-          <div v-if="!isCollapsed" class="sidebar-user-info">
-            <p class="sidebar-user-name">Admin User</p>
-            <p class="sidebar-user-role">Leader Call</p>
-          </div>
-        </Transition>
-      </div>
-    </div>
   </aside>
 </template>

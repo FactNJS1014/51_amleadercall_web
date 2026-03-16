@@ -1,118 +1,328 @@
 <template>
-  <div class="mb-3">
+  <div class="mb-8 animate-fade-in">
     <button
       @click="openModal()"
       type="button"
-      class="px-5 py-2.5 bg-sky-600 hover:bg-sky-700 rounded-xl font-medium text-white transition-all shadow-lg active:scale-95"
+      class="btn-primary shadow-2xl shadow-indigo-200/50 scale-105 hover:scale-110 active:scale-95"
     >
-      <div class="flex items-center gap-2">
-        <Plus :size="17" />
-        <span>เพิ่มข้อมูล</span>
+      <div class="flex items-center gap-3">
+        <div class="bg-white/20 p-1.5 rounded-lg backdrop-blur-md">
+          <Plus :size="20" />
+        </div>
+        <span class="text-lg tracking-tight">เพิ่มรายการใหม่</span>
       </div>
     </button>
   </div>
-  <div class="card">
+  <div class="card animate-fade-in" style="animation-delay: 0.1s">
     <div class="card-title">
-      <div class="flex gap-3 items-center">
-        <span class="text-[22px] bg-sky-500 p-1 rounded-lg">📃</span>
-        <span>รายการตรวจสอบข้อมูลก่อนส่งให้ไปยังฟอร์มถัดไป</span>
+      <div class="flex gap-4 items-center space-x-4">
+        <span>📃</span>
+
+        <span class="text-xl font-extrabold tracking-tight"
+          >รายการ Leader Call</span
+        >
+        <span
+          class="text-xs text-white/60 font-medium uppercase tracking-widest"
+          >Information Checking</span
+        >
       </div>
     </div>
-    <div class="w-full bg-white rounded-xl shadow p-4">
-      <div class="overflow-x-auto">
-        <div
-          class="max-h-[calc(100vh-12rem)] overflow-y-auto border border-gray-100"
-        >
-          <table class="min-w-auto w-full text-sm text-gray-700">
-            <!-- HEADER -->
-            <thead
-              class="sticky top-0 bg-sky-500 text-white text-[14px] uppercase"
-            >
-              <tr class="text-center">
-                <th class="px-3 py-3 min-w-[200px]">Action</th>
-                <th class="px-3 py-3 min-w-[160px]">หมายเลขเอกสาร</th>
-                <th class="px-3 py-3 min-w-[120px]">ผู้บันทึก</th>
-                <th class="px-3 py-3 min-w-[140px]">เวลาบันทึกล่าสุด</th>
-                <th class="px-3 py-3 min-w-[70px]">Line</th>
-                <th class="px-3 py-3 min-w-[100px]">Customer</th>
-                <th class="px-3 py-3 min-w-[200px]">Work Order</th>
-                <th class="px-3 py-3 min-w-[200px]">Model Code</th>
-                <th class="px-3 py-3 min-w-[200px]">Model Name</th>
-                <th class="px-3 py-3 min-w-[100px]">Lot Size</th>
-                <th class="px-3 py-3 min-w-[90px]">Process</th>
-                <th class="px-3 py-3 min-w-[130px]">Cause Type</th>
-                <th class="px-3 py-3 min-w-[180px]">Problem</th>
-                <th class="px-3 py-3 min-w-[100px]">Location</th>
-                <th class="px-3 py-3 min-w-[100px]">Machine</th>
-                <th class="px-3 py-3 min-w-[140px]">จำนวนงานเสีย</th>
-                <th class="px-3 py-3 min-w-[90px]">รูปภาพ</th>
+    <div class="card-body bg-slate-50/30">
+      <div class="table-container shadow-sm">
+        <div class="max-h-[calc(100vh-24rem)] overflow-y-auto">
+          <table class="w-full">
+            <thead>
+              <tr>
+                <th
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
+                  Action
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
+                  หมายเลขเอกสาร
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
+                  ผู้บันทึก
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
+                  เวลาบันทึกล่าสุด
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
+                  Line
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
+                  Customer
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
+                  Work Order
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
+                  Model Code
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
+                  Model Name
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[160px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Lot Size
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[90px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Process
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[130px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Cause Type
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[280px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Problem
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Location
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Machine
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[170px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  จำนวนงานเสีย
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  รูปภาพ
+                </th>
               </tr>
             </thead>
 
             <!-- BODY -->
-            <tbody class="divide-y">
+            <tbody class="divide-y divide-slate-100">
               <tr
                 v-for="item in data_rec"
                 :key="item.AMLDRINF_HREC_ID"
-                class="hover:bg-gray-50 transition text-center"
+                class="hover:bg-indigo-50/30 transition-colors text-center"
               >
                 <!-- ACTION -->
-                <td class="px-3 py-2">
-                  <div class="flex gap-2">
+                <td class="px-6 py-4">
+                  <div class="flex gap-2 justify-center">
                     <button
-                      class="flex items-center gap-1 bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-sm transition"
+                      class="w-10 h-10 flex items-center justify-center bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl transition-all hover:shadow-lg hover:shadow-emerald-200 active:scale-90"
                       @click="UpdateCheck(item.AMLDRINF_HREC_ID)"
+                      title="ยืนยัน"
                     >
                       <Send class="w-4 h-4" />
-                      ยืนยัน
                     </button>
 
                     <button
-                      class="flex items-center gap-1 bg-amber-400 hover:bg-amber-500 text-black px-3 py-1.5 rounded-lg text-sm transition"
+                      class="w-10 h-10 flex items-center justify-center bg-amber-400 hover:bg-amber-500 text-black rounded-xl transition-all hover:shadow-lg hover:shadow-amber-200 active:scale-90"
                       @click="editForm(item)"
+                      title="แก้ไข"
                     >
                       <Pencil class="w-4 h-4" />
-                      แก้ไข
                     </button>
 
                     <button
-                      class="flex items-center gap-1 bg-rose-500 hover:bg-rose-600 text-white px-3 py-1.5 rounded-lg text-sm transition"
+                      class="w-10 h-10 flex items-center justify-center bg-rose-500 hover:bg-rose-600 text-white rounded-xl transition-all hover:shadow-lg hover:shadow-rose-100 active:scale-90"
                       @click="deleteForm(item.AMLDRINF_HREC_ID)"
+                      title="ลบ"
                     >
                       <Trash class="w-4 h-4" />
-                      ลบ
                     </button>
                   </div>
                 </td>
 
-                <td class="px-3 py-2">{{ item.AMLDRINF_DOC_NUM }}</td>
-                <td class="px-3 py-2">{{ item.AMLDRINF_EMPHREC }}</td>
-                <td class="px-3 py-2">
+                <td class="px-6 py-4 font-bold text-slate-900 leading-none">
+                  {{ item.AMLDRINF_DOC_NUM }}
+                </td>
+                <td class="px-6 py-4">{{ item.AMLDRINF_EMPHREC }}</td>
+                <td class="px-6 py-4">
                   {{ dayjs(item.AMLDRINF_HREC_LSTDT).format("HH:mm") }}
                 </td>
-                <td class="px-3 py-2">{{ item.AMLDRINF_HREC_LINE }}</td>
-                <td class="px-3 py-2">{{ item.AMLDRINF_HREC_CUS }}</td>
-                <td class="px-3 py-2">{{ item.AMLDRINF_HREC_WON }}</td>
-                <td class="px-3 py-2">{{ item.AMLDRINF_HREC_MDLCD }}</td>
-                <td class="px-3 py-2">{{ item.AMLDRINF_HREC_MDLNM }}</td>
-                <td class="px-3 py-2">{{ item.AMLDRINF_HREC_LOTS }}</td>
-                <td class="px-3 py-2">{{ item.AMLDRINF_HREC_PROCS }}</td>
-                <td class="px-3 py-2">{{ item.AMLDRINF_HREC_CSTYPE }}</td>
-                <td class="px-3 py-2">{{ item.AMLDRINF_HREC_PROB }}</td>
-                <td class="px-3 py-2">{{ item.AMLDRINF_HREC_LOCATE }}</td>
-                <td class="px-3 py-2">{{ item.AMLDRINF_HREC_MACHINE }}</td>
-                <td class="px-3 py-2">{{ item.AMLDRINF_HREC_QTYNG }}</td>
-                <td class="px-3 py-2">
+                <td class="px-6 py-4">
+                  <span class="badge badge-blue">{{
+                    item.AMLDRINF_HREC_LINE
+                  }}</span>
+                </td>
+                <td class="px-6 py-4 font-semibold text-slate-700">
+                  {{ item.AMLDRINF_HREC_CUS }}
+                </td>
+                <td class="px-6 py-4 font-mono text-[15px]">
+                  {{ item.AMLDRINF_HREC_WON }}
+                </td>
+                <td class="px-6 py-4">{{ item.AMLDRINF_HREC_MDLCD }}</td>
+                <td class="px-6 py-4">
+                  {{ item.AMLDRINF_HREC_MDLNM }}
+                </td>
+                <td class="px-6 py-4 font-medium">
+                  {{ item.AMLDRINF_HREC_LOTS }}
+                </td>
+                <td class="px-6 py-4">
+                  <span class="badge badge-emerald">{{
+                    item.AMLDRINF_HREC_PROCS
+                  }}</span>
+                </td>
+                <td class="px-6 py-4">
+                  <span class="font-bold text-indigo-600 uppercase text-sm">{{
+                    item.AMLDRINF_HREC_CSTYPE
+                  }}</span>
+                </td>
+                <td class="px-6 py-4 min-w-[200px] text-sm">
+                  {{ item.AMLDRINF_HREC_PROB }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ item.AMLDRINF_HREC_LOCATE }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ item.AMLDRINF_HREC_MACHINE }}
+                </td>
+                <td class="px-6 py-4 font-black text-rose-600 text-base">
+                  {{ item.AMLDRINF_HREC_QTYNG }}
+                </td>
+                <td class="px-6 py-4 flex items-center justify-center">
                   <template v-if="item.AMLDRINF_HREC_IMAGE">
                     <img
                       :src="`http://127.0.0.1:8000/images_information/${item.AMLDRINF_HREC_IMAGE}`"
-                      class="w-12 h-12 object-cover rounded cursor-pointer hover:opacity-80 transition ring-1 ring-gray-200"
+                      class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-slate-200"
                       @click="
                         previewImage = `http://127.0.0.1:8000/images_information/${item.AMLDRINF_HREC_IMAGE}`
                       "
                     />
                   </template>
-                  <span v-else class="text-gray-400 text-xs">-</span>
+                  <span v-else class="text-slate-300 font-bold">-</span>
+                </td>
+              </tr>
+            </tbody>
+
+            <!-- BODY REJECT (STD = 4) -->
+            <tbody
+              v-if="data_reject.length > 0"
+              class="divide-y divide-rose-100 relative"
+            >
+              <!-- Section label row -->
+              <tr class="bg-rose-50/80 backdrop-blur-sm sticky left-0 z-10">
+                <td
+                  colspan="17"
+                  class="px-8 py-4 text-rose-700 font-extrabold text-sm uppercase tracking-tight text-left flex items-center gap-2"
+                >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"
+                  ></span>
+                  รายการที่ถูก Reject (ส่งกลับมาแก้ไข)
+                </td>
+              </tr>
+              <tr
+                v-for="item in data_reject"
+                :key="item.AMLDRINF_HREC_ID"
+                class="bg-rose-50/30 hover:bg-rose-50 transition-colors text-center"
+              >
+                <!-- ACTION -->
+                <td class="px-6 py-4">
+                  <div class="flex gap-2 justify-center">
+                    <button
+                      class="w-10 h-10 flex items-center justify-center bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl transition-all hover:shadow-lg hover:shadow-emerald-200 active:scale-90"
+                      @click="UpdateRejectInfo(item.AMLDRINF_HREC_ID)"
+                      title="ยืนยัน"
+                    >
+                      <Send class="w-4 h-4" />
+                    </button>
+                    <button
+                      class="w-10 h-10 flex items-center justify-center bg-amber-400 hover:bg-amber-500 text-black rounded-xl transition-all hover:shadow-lg hover:shadow-amber-200 active:scale-90"
+                      @click="editForm(item)"
+                      title="แก้ไข"
+                    >
+                      <Pencil class="w-4 h-4" />
+                    </button>
+
+                    <button
+                      class="w-10 h-10 flex items-center justify-center bg-rose-500 hover:bg-rose-600 text-white rounded-xl transition-all hover:shadow-lg hover:shadow-rose-100 active:scale-90"
+                      @click="deleteForm(item.AMLDRINF_HREC_ID)"
+                      title="ลบ"
+                    >
+                      <Trash class="w-4 h-4" />
+                    </button>
+                  </div>
+                </td>
+
+                <td class="px-6 py-4 font-bold text-rose-900 leading-none">
+                  {{ item.AMLDRINF_DOC_NUM }}
+                </td>
+                <td class="px-6 py-4">{{ item.AMLDRINF_EMPHREC }}</td>
+                <td class="px-6 py-4 text-rose-800">
+                  {{ dayjs(item.AMLDRINF_HREC_LSTDT).format("HH:mm") }}
+                </td>
+                <td class="px-6 py-4">
+                  <span class="badge badge-rose">{{
+                    item.AMLDRINF_HREC_LINE
+                  }}</span>
+                </td>
+                <td class="px-6 py-4 text-rose-900 font-semibold">
+                  {{ item.AMLDRINF_HREC_CUS }}
+                </td>
+                <td class="px-6 py-4 font-mono text-xs opacity-60">
+                  {{ item.AMLDRINF_HREC_WON }}
+                </td>
+                <td class="px-6 py-4">{{ item.AMLDRINF_HREC_MDLCD }}</td>
+                <td class="px-6 py-4 text-rose-800/80">
+                  {{ item.AMLDRINF_HREC_MDLNM }}
+                </td>
+                <td class="px-6 py-4">{{ item.AMLDRINF_HREC_LOTS }}</td>
+                <td class="px-6 py-4">
+                  <span class="badge badge-rose">{{
+                    item.AMLDRINF_HREC_PROCS
+                  }}</span>
+                </td>
+                <td class="px-6 py-4">
+                  <span class="font-bold text-rose-600 uppercase text-xs">{{
+                    item.AMLDRINF_HREC_CSTYPE
+                  }}</span>
+                </td>
+                <td
+                  class="px-6 py-4 italic text-rose-800/60 text-xs leading-relaxed text-left"
+                >
+                  {{ item.AMLDRINF_HREC_PROB }}
+                </td>
+                <td class="px-6 py-4">{{ item.AMLDRINF_HREC_LOCATE }}</td>
+                <td class="px-6 py-4">{{ item.AMLDRINF_HREC_MACHINE }}</td>
+                <td class="px-6 py-4 font-black text-rose-900">
+                  {{ item.AMLDRINF_QTYNG }}
+                </td>
+                <td class="px-6 py-4 flex items-center justify-center">
+                  <template v-if="item.AMLDRINF_HREC_IMAGE">
+                    <img
+                      :src="`http://127.0.0.1:8000/images_information/${item.AMLDRINF_HREC_IMAGE}`"
+                      class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-rose-200"
+                      @click="
+                        previewImage = `http://127.0.0.1:8000/images_information/${item.AMLDRINF_HREC_IMAGE}`
+                      "
+                    />
+                  </template>
+                  <span v-else class="text-rose-200 font-bold">-</span>
                 </td>
               </tr>
             </tbody>
@@ -391,12 +601,14 @@
                 'flex items-center gap-1 px-2 py-1 rounded-md text-sm font-medium transition-all duration-200',
                 isListening
                   ? 'bg-red-500 text-white animate-pulse'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
               ]"
-              :title="isListening ? 'กำลังฟัง... (คลิกเพื่อหยุด)' : 'พิมด้วยเสียง'"
+              :title="
+                isListening ? 'กำลังฟัง... (คลิกเพื่อหยุด)' : 'พิมด้วยเสียง'
+              "
             >
               <Mic2 :size="16" />
-              <span>{{ isListening ? 'กำลังฟัง...' : 'พิมด้วยเสียง' }}</span>
+              <span>{{ isListening ? "กำลังฟัง..." : "พิมด้วยเสียง" }}</span>
             </button>
           </div>
           <textarea
@@ -491,19 +703,33 @@
             <label
               class="bg-sky-500 hover:bg-sky-600 text-white px-3 py-1.5 rounded-lg text-sm transition text-center cursor-pointer flex items-center gap-2 justify-center"
             >
-              <Image />
-              เปลี่ยนรูป
-              <input type="file" class="hidden" @change="handleImageUpload" />
+              <Camera :size="16" />
+              ถ่ายรูป / เปลี่ยนรูป
+              <input
+                type="file"
+                class="hidden"
+                accept="image/*"
+                capture="environment"
+                @change="handleImageUpload"
+              />
             </label>
           </div>
 
           <!-- กรณีเพิ่มใหม่ หรือเลือกรูปใหม่ตอนแก้ไข -->
-          <input
+          <label
             v-else
-            type="file"
-            @change="handleImageUpload"
-            class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
-          />
+            class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center"
+          >
+            <Camera :size="20" />
+            <span>ถ่ายรูป / เลือกรูปภาพ</span>
+            <input
+              type="file"
+              class="hidden"
+              accept="image/*"
+              capture="environment"
+              @change="handleImageUpload"
+            />
+          </label>
         </div>
         <div class="flex flex-col gap-1 col-span-2 items-center">
           <img
@@ -538,7 +764,7 @@ import {
   Send,
   Pencil,
   Trash,
-  Image,
+  Camera,
   Mic2,
 } from "lucide-vue-next";
 import type { InformationTypesForm } from "~/types/informationTypesForm";
@@ -590,11 +816,8 @@ const errors = reactive({
 const customers_list = ref<any[]>([]);
 const options_cus = ref<any[]>([]);
 
-const won_lists = ref<any[]>([]);
 const options_won = ref<any[]>([]);
-const wonSelect = ref<any>(null);
-
-const check_won = ref<any[]>([]);
+const data_reject = ref<any[]>([]);
 
 const isEditing = ref(false); // flag กันไม่ให้ watch ล้าง won ตอน edit
 
@@ -614,7 +837,9 @@ const toggleVoiceInput = () => {
     (window as any).webkitSpeechRecognition;
 
   if (!SpeechRecognition) {
-    alert("เบราว์เซอร์ของคุณไม่รองรับการพิมด้วยเสียง\nกรุณาใช้ Chrome หรือ Edge");
+    alert(
+      "เบราว์เซอร์ของคุณไม่รองรับการพิมด้วยเสียง\nกรุณาใช้ Chrome หรือ Edge",
+    );
     return;
   }
 
@@ -649,7 +874,6 @@ const toggleVoiceInput = () => {
   recognition.start();
 };
 // ---- End Voice Input ----
-
 
 const imagePreview = ref<string | null>(null);
 const previewImage = ref<string | null>(null);
@@ -826,6 +1050,9 @@ const submitForm = async (e?: Event) => {
       if (res.data.status === "success") {
         getRecordInfo();
         resetForm();
+        if (data_reject.value.length > 0) {
+          getReject();
+        }
         isModalOpen.value = false;
       }
     } else {
@@ -838,6 +1065,7 @@ const submitForm = async (e?: Event) => {
         resetForm();
         isModalOpen.value = false;
       }
+      id_hrec.value = "";
     }
   } catch (error) {
     Swal.fire({
@@ -950,6 +1178,34 @@ const UpdateCheck = async (id: string) => {
   }
 };
 
+const UpdateRejectInfo = async (id: string) => {
+  try {
+    console.log(id);
+    const response = await axios.put(
+      "http://127.0.0.1:8000/api/update/reject-info/" + id,
+    );
+    if (response.data.status === "success") {
+      getReject();
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const getReject = async () => {
+  try {
+    const { data } = await axios.get(
+      "http://127.0.0.1:8000/api/info/record/reject",
+    );
+
+    data_reject.value = data;
+
+    console.log("Reject:", data_reject.value);
+  } catch (error) {
+    console.error("Error getReject:", error);
+  }
+};
+
 const editForm = async (item: any) => {
   isEditing.value = true;
 
@@ -1026,7 +1282,13 @@ const handleImageUpload = (event: Event) => {
   if (!file) return;
 
   // เช็คประเภทไฟล์
-  const validImageTypes = ["image/jpeg", "image/png", "image/jpg"];
+  const validImageTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/jpg",
+    "image/gif",
+    "image/webp",
+  ];
 
   if (!validImageTypes.includes(file.type)) {
     alert("กรุณาเลือกไฟล์รูปภาพเท่านั้น");
@@ -1034,8 +1296,12 @@ const handleImageUpload = (event: Event) => {
     return;
   }
 
-  inf.value.image = file;
-  imagePreview.value = URL.createObjectURL(file);
+  // สร้างชื่อไฟล์สุ่ม .jpg
+  const randomName = `${Math.random().toString(36).substring(2, 9)}.jpg`;
+  const renamedFile = new File([file], randomName, { type: "image/jpeg" });
+
+  inf.value.image = renamedFile;
+  imagePreview.value = URL.createObjectURL(renamedFile);
 };
 
 watch(
@@ -1060,5 +1326,6 @@ watch(
 onMounted(() => {
   getCustomer();
   getRecordInfo();
+  getReject();
 });
 </script>
