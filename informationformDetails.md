@@ -21,7 +21,7 @@ AMLDRINF_HREC_STD
 - 0 คือ แสดงข้อมูลเพื่อตรวจสอบ
 - 1 คือ แสดงข้อมูลในหน้า action form
 - 2 คือ การลบข้อมูล
-- 3 คือ สถานะการบันทึกข้อมูลในหน้า action form
+- 3 คือ สถานะการบันทึกข้อมูลในหน้า action form (complete in information form)
 - 4 คือ สถานะถูก Reject
 
 ##### AM_LDR_ACTIONHREC_TBL
