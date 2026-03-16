@@ -19,7 +19,7 @@
         <span>📃</span>
 
         <span class="text-xl font-extrabold tracking-tight"
-          >รายการ Leader Call</span
+          >รายการ Information Checking</span
         >
         <span
           class="text-xs text-white/60 font-medium uppercase tracking-widest"

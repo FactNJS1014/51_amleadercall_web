@@ -360,7 +360,7 @@
   >
     <form class="space-y-2" @submit.prevent="submitForm">
       <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-        <div class="flex flex-col gap-2">
+        <!-- <div class="flex flex-col gap-2">
           <label for="Root Cause"
             >Root Cause: <span class="text-red-500 mr-2">*</span>
             <span v-if="errors.root_cause" class="text-red-500">{{
@@ -373,20 +373,80 @@
             @input="clearError('root_cause')"
           >
           </textarea>
+        </div> -->
+        <div class="flex flex-col gap-1">
+          <div class="flex items-center justify-between">
+            <label for=""
+              >Root Cause: <span class="text-red-500 mr-2">*</span>
+              <span v-if="errors.root_cause" class="text-red-500">{{
+                errors.root_cause
+              }}</span>
+            </label>
+            <button
+              type="button"
+              @click="toggleVoiceInput_root_cause"
+              :class="[
+                'flex items-center gap-1 px-2 py-1 rounded-md text-sm font-medium transition-all duration-200',
+                isListening_root_cause
+                  ? 'bg-red-500 text-white animate-pulse'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
+              ]"
+              :title="
+                isListening_root_cause
+                  ? 'กำลังฟัง... (คลิกเพื่อหยุด)'
+                  : 'พิมด้วยเสียง'
+              "
+            >
+              <Mic2 :size="16" />
+              <span>{{
+                isListening_root_cause ? "กำลังฟัง..." : "พิมด้วยเสียง"
+              }}</span>
+            </button>
+          </div>
+          <textarea
+            v-model="act.root_cause"
+            class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
+            :class="{ 'border-red-500': errors.root_cause }"
+            @input="clearError('root_cause')"
+            rows="3"
+          ></textarea>
         </div>
-        <div class="flex flex-col gap-2">
-          <label for="Action"
-            >Action: <span class="text-red-500 mr-2">*</span>
-            <span v-if="errors.action" class="text-red-500">{{
-              errors.action
-            }}</span>
-          </label>
+        <div class="flex flex-col gap-1">
+          <div class="flex items-center justify-between">
+            <label for=""
+              >Action: <span class="text-red-500 mr-2">*</span>
+              <span v-if="errors.action" class="text-red-500">{{
+                errors.action
+              }}</span>
+            </label>
+            <button
+              type="button"
+              @click="toggleVoiceInput_action"
+              :class="[
+                'flex items-center gap-1 px-2 py-1 rounded-md text-sm font-medium transition-all duration-200',
+                isListening_action
+                  ? 'bg-red-500 text-white animate-pulse'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
+              ]"
+              :title="
+                isListening_action
+                  ? 'กำลังฟัง... (คลิกเพื่อหยุด)'
+                  : 'พิมด้วยเสียง'
+              "
+            >
+              <Mic2 :size="16" />
+              <span>{{
+                isListening_action ? "กำลังฟัง..." : "พิมด้วยเสียง"
+              }}</span>
+            </button>
+          </div>
           <textarea
             v-model="act.action"
+            class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
             :class="{ 'border-red-500': errors.action }"
             @input="clearError('action')"
-          >
-          </textarea>
+            rows="3"
+          ></textarea>
         </div>
         <div class="flex flex-col gap-2">
           <label for="employee">Action By: </label>
@@ -685,7 +745,7 @@ const handleImageUpload = (event: Event) => {
   }
 
   // สร้างชื่อไฟล์สุ่ม .jpg
-  const randomName = `${Math.random().toString(36).substring(2, 9)}.jpg`;
+  const randomName = `IMG-${Date.now()}-${Math.random().toString(36).substring(2, 9)}.jpg`;
   const renamedFile = new File([file], randomName, { type: "image/jpeg" });
 
   act.value.image = renamedFile;
