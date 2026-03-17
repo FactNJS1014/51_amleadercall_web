@@ -491,9 +491,22 @@ const inf_id = ref<string>("");
 const act_id = ref<string>("");
 const start_time = ref<string>("");
 const result = ref<string>("");
-const employee_confirm = ref<string>("2524446");
+const employee_confirm = ref<string>("");
 
 const AMLDRCONF_HREC_ID = ref<string>("");
+
+const userSession = useCookie("user_session");
+
+watch(
+  () => userSession?.value?.empno,
+  (val) => {
+    if (val) {
+      employee_confirm.value = val;
+      console.log("employee_confirm.value:", employee_confirm.value);
+    }
+  },
+  { immediate: true },
+);
 
 /**
  * TODO: Get List Information and Action Record

@@ -3,6 +3,12 @@ import Sidebar from "~/components/01_leadercall/sidebar.vue";
 import { useSidebar } from "~/composables/useSidebar";
 
 const { isOpen, isCollapsed, toggleMobile } = useSidebar();
+
+const userSession = useCookie("user_session");
+
+const username = computed(() => {
+  return userSession?.value?.username;
+});
 </script>
 
 <template>
@@ -44,7 +50,7 @@ const { isOpen, isCollapsed, toggleMobile } = useSidebar();
         <!-- Right actions -->
         <div class="topbar-actions">
           <slot name="topbar-actions" />
-          <div class="topbar-avatar">AM</div>
+          <div class="topbar-avatar">{{ username }}</div>
         </div>
       </header>
 

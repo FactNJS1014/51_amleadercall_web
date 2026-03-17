@@ -132,27 +132,30 @@
                 <td class="px-6 py-4">
                   <div class="flex gap-2 justify-center">
                     <button
-                      class="w-10 h-10 flex items-center justify-center bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl transition-all hover:shadow-lg hover:shadow-emerald-200 active:scale-90"
+                      class="w-20 h-10 flex items-center justify-center bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl transition-all hover:shadow-lg hover:shadow-emerald-200 active:scale-90"
                       @click="UpdateCheck(item.AMLDRINF_HREC_ID)"
                       title="ยืนยัน"
                     >
                       <Send class="w-4 h-4" />
+                      <span class="ml-2">ยืนยัน</span>
                     </button>
 
                     <button
-                      class="w-10 h-10 flex items-center justify-center bg-amber-400 hover:bg-amber-500 text-black rounded-xl transition-all hover:shadow-lg hover:shadow-amber-200 active:scale-90"
+                      class="w-20 h-10 flex items-center justify-center bg-amber-400 hover:bg-amber-500 text-black rounded-xl transition-all hover:shadow-lg hover:shadow-amber-200 active:scale-90"
                       @click="editForm(item)"
                       title="แก้ไข"
                     >
                       <Pencil class="w-4 h-4" />
+                      <span class="ml-2">แก้ไข</span>
                     </button>
 
                     <button
-                      class="w-10 h-10 flex items-center justify-center bg-rose-500 hover:bg-rose-600 text-white rounded-xl transition-all hover:shadow-lg hover:shadow-rose-100 active:scale-90"
+                      class="w-20 h-10 flex items-center justify-center bg-rose-500 hover:bg-rose-600 text-white rounded-xl transition-all hover:shadow-lg hover:shadow-rose-100 active:scale-90"
                       @click="deleteForm(item.AMLDRINF_HREC_ID)"
                       title="ลบ"
                     >
                       <Trash class="w-4 h-4" />
+                      <span class="ml-2">ลบ</span>
                     </button>
                   </div>
                 </td>
@@ -250,6 +253,7 @@
                       title="ยืนยัน"
                     >
                       <Send class="w-4 h-4" />
+                      <span class="ml-2">ยืนยัน</span>
                     </button>
                     <button
                       class="w-10 h-10 flex items-center justify-center bg-amber-400 hover:bg-amber-500 text-black rounded-xl transition-all hover:shadow-lg hover:shadow-amber-200 active:scale-90"
@@ -257,6 +261,7 @@
                       title="แก้ไข"
                     >
                       <Pencil class="w-4 h-4" />
+                      <span class="ml-2">แก้ไข</span>
                     </button>
 
                     <button
@@ -265,6 +270,7 @@
                       title="ลบ"
                     >
                       <Trash class="w-4 h-4" />
+                      <span class="ml-2">ลบ</span>
                     </button>
                   </div>
                 </td>
@@ -373,12 +379,8 @@
             type="text"
             v-model="inf.employee_id"
             class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none w-full"
-            :class="{ 'border-red-500': errors.employee_id }"
-            @input="clearError('employee_id')"
+            readonly
           />
-          <span v-if="errors.employee_id" class="text-red-500">{{
-            errors.employee_id
-          }}</span>
         </div>
       </div>
       <div class="grid md:grid-cols-3 grid-cols-2 gap-3">
@@ -821,8 +823,19 @@ const options_won = ref<any[]>([]);
 const data_reject = ref<any[]>([]);
 
 const isEditing = ref(false); // flag กันไม่ให้ watch ล้าง won ตอน edit
+const userSession = useCookie("user_session");
+// console.log("userSession:", userSession?.value?.empno);
 
-// ---- Voice Input ----
+watch(
+  () => userSession?.value?.empno,
+  (val) => {
+    if (val) {
+      inf.value.employee_id = val;
+      console.log("inf.value.employee_id:", inf.value.employee_id);
+    }
+  },
+  { immediate: true },
+);
 const isListening = ref(false);
 let recognition: any = null;
 
@@ -945,11 +958,6 @@ const processes = ref([
 
 const validateForm = () => {
   let isValid = true;
-
-  if (!inf.value.employee_id) {
-    errors.employee_id = "Employee ID is required";
-    isValid = false;
-  }
 
   if (!inf.value.line) {
     errors.line = "Line is required";
@@ -1080,7 +1088,7 @@ const submitForm = async (e?: Event) => {
 
 const resetForm = () => {
   inf.value = {
-    employee_id: "",
+    employee_id: userSession.value?.empno || "",
     line: "",
     customer: "",
     won: "",
@@ -1270,7 +1278,11 @@ const deleteForm = async (id: string) => {
  * TODO: ให้แก้ให้ถูกต้อง
  */
 const clearError = (field: keyof typeof errors) => {
-  errors[field] = "";
+  const value = inf.value[field];
+
+  if (value && value !== "") {
+    errors[field] = "";
+  }
 };
 
 /**

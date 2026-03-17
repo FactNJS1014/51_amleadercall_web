@@ -489,6 +489,7 @@
             type="text"
             v-model="act.empno"
             class="border border-gray-200 focus:outline-none px-2 py-2 rounded-sm"
+            readonly
           />
         </div>
         <div class="flex flex-col col-span-2 gap-3">
@@ -699,6 +700,19 @@ const errors = reactive({
   action: "",
   editType: "",
 });
+
+const userSession = useCookie("user_session");
+
+watch(
+  () => userSession?.value?.empno,
+  (val) => {
+    if (val) {
+      act.value.empno = val;
+      console.log("act.value.empno:", act.value.empno);
+    }
+  },
+  { immediate: true },
+);
 
 /**
  * TODO: สร้างฟังก์ชันที่ใช้ในการเปิด Modal
@@ -979,7 +993,7 @@ const clearForm = () => {
     action: "",
     editType: "",
     image: null,
-    empno: "",
+    empno: userSession.value?.empno || "",
   };
   imagePreview.value = null;
 
