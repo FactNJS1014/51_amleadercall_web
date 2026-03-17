@@ -38,7 +38,7 @@ const menuItems: MenuItem[] = [
     label: "Confirm Lists",
     icon: ClipboardList,
     to: "/03_confirmform",
-    permission: [1, 8],
+    permission: [9, 8],
   },
 ];
 
