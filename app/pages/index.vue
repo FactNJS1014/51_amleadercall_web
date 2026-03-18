@@ -1,53 +1,67 @@
 <template>
-  <div class="flex flex-col xl:flex-row gap-4 h-full p-4">
-    <!-- Left column: Search Filter -->
-    <div class="w-full xl:w-1/4">
-      <div class="card h-full">
-        <div class="card-title">
-          <div class="flex items-center gap-2 justify-center">
-            <div
-              class="bg-linear-to-r from-blue-400 to-violet-500 p-2 text-white rounded-lg"
-            >
-              <Boxes :size="30" />
-            </div>
-            <h3 class="text-[22px] font-bold text-center">
-              Report Leader Call<br /><span class="text-sm">(SMT & AUTO)</span>
-            </h3>
-          </div>
+  <div class="p-4 lg:p-6 bg-slate-50 min-h-screen space-y-6">
+    <!-- Header -->
+    <div class="flex items-center gap-3 mb-2">
+      <div
+        class="bg-gradient-to-r from-blue-500 to-indigo-600 p-2.5 text-white rounded-xl shadow-lg shadow-blue-500/30"
+      >
+        <Boxes :size="28" />
+      </div>
+      <h2 class="text-2xl font-bold text-slate-800 tracking-tight">
+        Report Leader Call (SMT & AUTO)
+      </h2>
+    </div>
+
+    <!-- Top Cards Panel -->
+    <div class="flex gap-6 lg:flex-row flex-col">
+      <!-- Filter Card -->
+      <div
+        class="lg:w-[60%] w-full bg-white rounded-2xl shadow-sm border border-slate-200 flex flex-col overflow-hidden"
+      >
+        <div
+          class="px-5 py-4 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between"
+        >
+          <h3 class="font-bold text-slate-700 flex items-center gap-2">
+            <Search :size="18" class="text-indigo-500" /> Filter Options
+          </h3>
         </div>
-        <div class="card-body">
-          <div class="p-4 flex flex-col gap-4">
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4"
+          >
+            <!-- Start Date -->
             <div>
               <label
                 for="filter_startdate"
-                class="text-sm font-medium text-gray-700 px-3 py-1"
-                ><span class="mr-2">📅</span>Start Date</label
+                class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block"
+                >Start Date</label
               >
               <input
                 type="date"
                 id="filter_startdate"
                 v-model="filter_startdate"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2"
+                class="w-full rounded-lg border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3 py-2.5 bg-slate-50 hover:bg-white transition-colors"
               />
             </div>
+            <!-- End Date -->
             <div>
               <label
                 for="filter_enddate"
-                class="text-sm font-medium text-gray-700 px-3 py-1"
-                ><span class="mr-2">📅</span>End Date</label
+                class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block"
+                >End Date</label
               >
               <input
                 type="date"
                 id="filter_enddate"
                 v-model="filter_enddate"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2"
+                class="w-full rounded-lg border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3 py-2.5 bg-slate-50 hover:bg-white transition-colors"
               />
             </div>
+            <!-- Line -->
             <div>
               <label
                 for="filter_line"
-                class="text-sm font-medium text-gray-700 px-3 py-1 flex items-center"
-                ><span class="mr-2"><DatabaseSearch :size="16" /> </span
+                class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block"
                 >Line</label
               >
               <Multiselect
@@ -55,25 +69,15 @@
                 v-model="filter_line"
                 :options="fetch_line"
                 :searchable="false"
-                :create-option="false"
-                :preserve-search="true"
                 :clearable="true"
-                :show-no-options="false"
-                :show-no-results="false"
-                :close-on-select="false"
-                :hide-selected="false"
-                :multiple="false"
-                :max-height="200"
-                :loading="false"
-                :disabled="false"
-                class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-1"
+                class="mt-1 text-sm border-slate-200"
               />
             </div>
+            <!-- Customer -->
             <div>
               <label
                 for="filter_cus"
-                class="text-sm font-medium text-gray-700 px-3 py-1 flex items-center"
-                ><span class="mr-2"><DatabaseSearch :size="16" /> </span
+                class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block"
                 >Customer</label
               >
               <Multiselect
@@ -81,478 +85,524 @@
                 v-model="filter_cus"
                 :options="options_cus"
                 :searchable="true"
-                :create-option="false"
-                :preserve-search="true"
                 :clearable="true"
-                :show-no-options="false"
-                :show-no-results="false"
-                :close-on-select="false"
-                :hide-selected="false"
-                :multiple="false"
-                :max-height="200"
-                :loading="false"
-                :disabled="false"
-                class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-1"
+                class="mt-1 text-sm border-slate-200"
               />
             </div>
+          </div>
+          <!-- Action Buttons -->
+          <div
+            class="flex gap-3 justify-end mt-4 pt-4 border-t border-slate-100"
+          >
+            <button
+              @click="exportData()"
+              class="px-4 py-2.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 rounded-xl font-semibold text-sm transition-colors flex items-center gap-2"
+            >
+              <Download :size="18" /> Export
+            </button>
+            <button
+              @click="searchData()"
+              class="px-6 py-2.5 bg-indigo-600 text-white hover:bg-indigo-700 rounded-xl shadow-lg shadow-indigo-200 font-semibold text-sm transition-colors flex items-center gap-2"
+            >
+              <Search :size="18" /> ค้นหา
+            </button>
+          </div>
+        </div>
+      </div>
 
-            <div class="flex flex-col gap-3 mt-4">
-              <button
-                @click="searchData()"
-                class="btn-primary shadow-lg shadow-indigo-200/50 cursor-pointer w-full py-3 rounded-xl transition-all hover:scale-105 active:scale-95"
-              >
-                <div class="flex items-center justify-center gap-3">
-                  <Search :size="20" />
-                  <span class="text-lg font-bold tracking-tight">ค้นหา</span>
-                </div>
-              </button>
+      <!-- Stats Cards Wrapper -->
+      <div class="lg:w-[40%] w-full flex flex-col sm:flex-row gap-6">
+        <!-- Record Complete Card -->
+        <div
+          class="sm:w-1/2 w-full bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl shadow-xl shadow-emerald-500/20 text-white relative overflow-hidden flex flex-col justify-between p-6 hover:-translate-y-1 transition-transform duration-300"
+        >
+          <div
+            class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4"
+          >
+            <CircleCheck :size="120" stroke-width="1.5" />
+          </div>
+          <div class="relative z-10 flex items-center gap-3 mb-6">
+            <div class="bg-white/20 p-2.5 rounded-xl backdrop-blur-sm">
+              <CircleCheck :size="24" class="text-white" />
             </div>
+            <div>
+              <h3 class="font-bold text-emerald-50 leading-tight">Completed</h3>
+              <p class="text-emerald-100 text-xs font-medium">Total Records</p>
+            </div>
+          </div>
+          <div class="relative z-10 flex items-end gap-2">
+            <h3 class="text-5xl font-black tracking-tight">
+              {{ fetch_rec_all.length }}
+            </h3>
+          </div>
+        </div>
+
+        <!-- Pending Action Card -->
+        <div
+          class="sm:w-1/2 w-full bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl shadow-xl shadow-amber-500/20 text-white relative overflow-hidden flex flex-col justify-between p-6 hover:-translate-y-1 transition-transform duration-300"
+          @click="showPending = !showPending"
+          :class="showPending ? 'border-4 border-amber-500' : ''"
+        >
+          <div
+            class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4"
+          >
+            <ClipboardClock :size="120" stroke-width="1.5" />
+          </div>
+          <div class="relative z-10 flex items-center gap-3 mb-6">
+            <div class="bg-white/20 p-2.5 rounded-xl backdrop-blur-sm">
+              <ClipboardClock :size="24" class="text-white" />
+            </div>
+            <div>
+              <h3 class="font-bold text-amber-50 leading-tight">Pending</h3>
+              <p class="text-amber-100 text-xs font-medium">Actions Required</p>
+            </div>
+          </div>
+          <div class="relative z-10 flex items-end gap-2">
+            <h3 class="text-5xl font-black tracking-tight">
+              {{ fetch_no_action.length }}
+            </h3>
           </div>
         </div>
       </div>
     </div>
+    <div class="">
+      <div
+        class="table-container shadow-sm border border-slate-200 rounded-xl overflow-hidden bg-white"
+      >
+        <div
+          class="overflow-x-auto max-h-[calc(100vh-28rem)] overflow-y-auto w-full"
+        >
+          <table class="w-full">
+            <thead class="sticky top-0 z-10">
+              <tr>
+                <th
+                  class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
+                  rowspan="2"
+                >
+                  หมายเลขเอกสาร
+                </th>
+                <th
+                  colspan="16"
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
+                >
+                  Information
+                </th>
+                <th
+                  colspan="6"
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
+                >
+                  Action
+                </th>
+                <th
+                  colspan="5"
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
+                  Confirm
+                </th>
+              </tr>
+              <tr>
+                <th
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
+                  ผู้บันทึก
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
+                  เวลาบันทึก
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
+                  Line
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
+                  Customer
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
+                  Work Order
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
+                  Model Code
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
+                  Model Name
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Lot Size
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Process
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[190px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Cause Type
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Problem
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Location
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Machine
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  จำนวนงานเสีย
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Start Time
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200"
+                >
+                  รูปภาพ
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Root Cause
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Action
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Action Type
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Action By
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  รูปภาพ
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200"
+                >
+                  เวลาบันทึกล่าสุด
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Result
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  End Time
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Total Time
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Confirm By
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200"
+                >
+                  เวลาบันทึกล่าสุด
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr v-if="paginatedData.length === 0">
+                <td
+                  colspan="15"
+                  class="px-6 py-12 text-center text-slate-500 font-medium bg-white"
+                >
+                  <div class="flex flex-col items-center justify-center gap-3">
+                    <DatabaseSearch :size="48" class="text-slate-300" />
+                    <span class="text-lg">ไม่พบข้อมูล</span>
+                  </div>
+                </td>
+              </tr>
+              <tr
+                v-for="item in paginatedData"
+                :key="item.AMLDRINF_HREC_ID"
+                class="hover:bg-indigo-50/30 transition-colors text-center bg-white"
+              >
+                <td
+                  class="px-6 py-4 font-bold text-slate-900 whitespace-nowrap"
+                  v-if="item.AMLDRACT_HREC_EDITTYPE === 'close'"
+                >
+                  <span class="text-green-500">{{
+                    item.AMLDRINF_DOC_NUM
+                  }}</span>
+                </td>
+                <td
+                  class="px-6 py-4 font-bold text-slate-900 whitespace-nowrap"
+                  v-if="item.AMLDRACT_HREC_EDITTYPE === 'temporary'"
+                >
+                  <span class="text-amber-500">{{
+                    item.AMLDRINF_DOC_NUM
+                  }}</span>
+                </td>
+                <td
+                  class="px-6 py-4 font-bold text-slate-900 whitespace-nowrap"
+                  v-if="item.AMLDRACT_HREC_EDITTYPE === 'open'"
+                >
+                  <span class="text-red-500">{{ item.AMLDRINF_DOC_NUM }}</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{ findUser(item.AMLDRINF_EMPHREC) }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap"
+                  v-if="item.AMLDRINF_HREC_UPDATELSTDT === null"
+                >
+                  {{
+                    dayjs(item.AMLDRINF_HREC_LSTDT).format("DD/MM/YYYY HH:mm")
+                  }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap" v-else>
+                  {{
+                    dayjs(item.AMLDRINF_HREC_UPDATELSTDT).format(
+                      "DD/MM/YYYY HH:mm",
+                    )
+                  }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="badge badge-blue">{{
+                    item.AMLDRINF_HREC_LINE
+                  }}</span>
+                </td>
+                <td
+                  class="px-6 py-4 font-semibold text-slate-700 whitespace-nowrap"
+                >
+                  {{ item.AMLDRINF_HREC_CUS }}
+                </td>
+                <td class="px-6 py-4 font-mono text-[15px] whitespace-nowrap">
+                  {{ item.AMLDRINF_HREC_WON }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{ item.AMLDRINF_HREC_MDLCD }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{ item.AMLDRINF_HREC_MDLNM }}
+                </td>
+                <td class="px-6 py-4 font-medium whitespace-nowrap">
+                  {{ item.AMLDRINF_HREC_LOTS }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="badge badge-emerald">{{
+                    item.AMLDRINF_HREC_PROCS
+                  }}</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="font-bold text-indigo-600 uppercase text-sm">{{
+                    item.AMLDRINF_HREC_CSTYPE
+                  }}</span>
+                </td>
+                <td class="px-6 py-4 min-w-[200px] text-sm text-left">
+                  {{ item.AMLDRINF_HREC_PROB }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{ item.AMLDRINF_HREC_LOCATE }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{ item.AMLDRINF_HREC_MACHINE }}
+                </td>
+                <td
+                  class="px-6 py-4 font-black text-rose-600 text-base whitespace-nowrap"
+                >
+                  {{ item.AMLDRINF_HREC_QTYNG }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{ item.AMLDRINF_HREC_STARTTIME }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap flex items-center justify-center border-r border-slate-200"
+                >
+                  <template v-if="item.AMLDRINF_HREC_IMAGE">
+                    <img
+                      :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`"
+                      class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-rose-200"
+                      @click="
+                        previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`
+                      "
+                    />
+                  </template>
+                  <span v-else class="text-rose-200 font-bold">-</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{ item.AMLDRACT_HREC_RTCAUSE }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{ item.AMLDRACT_HREC_ACTION }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{ item.AMLDRACT_HREC_EDITTYPE }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{ findUser(item.AMLDRACT_HREC_ACTIONEMP) }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap flex items-center justify-center"
+                >
+                  <template v-if="item.AMLDRACT_HREC_IMAGE">
+                    <img
+                      :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`"
+                      class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-rose-200"
+                      @click="
+                        previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`
+                      "
+                    />
+                  </template>
+                  <span v-else class="text-rose-200 font-bold">-</span>
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap border-r border-slate-200"
+                  v-if="item.AMLDRACT_HREC_UPDATELSTDT === null"
+                >
+                  {{
+                    dayjs(item.AMLDRACT_HREC_LSTDT).format("DD/MM/YYYY HH:mm")
+                  }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap border-r border-slate-200"
+                  v-else
+                >
+                  {{
+                    dayjs(item.AMLDRACT_HREC_UPDATELSTDT).format(
+                      "DD/MM/YYYY HH:mm",
+                    )
+                  }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{ item.AMLDRCONF_HREC_RESULT }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{ item.AMLDRCONF_HREC_ENDTIME }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{ item.AMLDRCONF_HREC_TOTALTIME }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{ findUser(item.AMLDRCONF_HREC_EMPNO) }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{
+                    dayjs(item.AMLDRCONF_HREC_LSTDT).format("DD/MM/YYYY HH:mm")
+                  }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-    <!-- Right column: Table -->
-    <div class="w-full xl:w-3/4">
-      <div class="card h-full">
-        <div class="card-body p-4">
-          <div class="flex justify-end mt-4">
-            <button
-              @click="exportData()"
-              class="bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-200/50 cursor-pointer px-4 py-2 rounded-xl transition-all hover:scale-105 active:scale-95"
-            >
-              <div class="flex items-center justify-center gap-3">
-                <Download :size="20" />
-                <span class="text-lg font-bold tracking-tight">Export</span>
-              </div>
-            </button>
+        <!-- Pagination Control -->
+        <div
+          class="flex flex-col sm:flex-row items-center justify-between px-6 py-4 bg-slate-50 border-t border-slate-200"
+        >
+          <div class="text-sm text-slate-500 mb-4 sm:mb-0">
+            Showing
+            <span class="font-medium text-slate-900">{{
+              fetch_rec_all.length > 0 ? startIndex + 1 : 0
+            }}</span>
+            to
+            <span class="font-medium text-slate-900">{{
+              Math.min(endIndex, fetch_rec_all.length)
+            }}</span>
+            of
+            <span class="font-medium text-slate-900">{{
+              fetch_rec_all.length
+            }}</span>
+            entries
           </div>
-          <div
-            class="table-container shadow-sm border border-slate-200 rounded-xl overflow-hidden bg-white"
-          >
-            <div
-              class="overflow-x-auto max-h-[calc(100vh-14rem)] overflow-y-auto w-full"
+          <div class="flex items-center space-x-2">
+            <button
+              @click="prevPage"
+              :disabled="currentPage === 1"
+              class="px-3 py-1.5 border border-slate-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white text-sm font-medium text-slate-700 transition-colors bg-white shadow-sm"
             >
-              <table class="w-full">
-                <thead class="sticky top-0 z-10">
-                  <tr>
-                    <th
-                      class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
-                      rowspan="2"
-                    >
-                      หมายเลขเอกสาร
-                    </th>
-                    <th
-                      colspan="16"
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
-                    >
-                      Information
-                    </th>
-                    <th
-                      colspan="5"
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
-                    >
-                      Action
-                    </th>
-                    <th
-                      colspan="5"
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
-                      Confirm
-                    </th>
-                  </tr>
-                  <tr>
-                    <th
-                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
-                      ผู้บันทึก
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
-                      เวลาบันทึก
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
-                      Line
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
-                      Customer
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
-                      Work Order
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
-                      Model Code
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
-                      Model Name
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
-                      Lot Size
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
-                      Process
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[190px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
-                      Cause Type
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
-                      Problem
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
-                      Location
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
-                      Machine
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
-                      จำนวนงานเสีย
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
-                      Start Time
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200"
-                    >
-                      รูปภาพ
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
-                      Root Cause
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
-                      Action
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
-                      Action By
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
-                      รูปภาพ
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200"
-                    >
-                      เวลาบันทึกล่าสุด
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
-                      Result
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
-                      End Time
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
-                      Total Time
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
-                      Confirm By
-                    </th>
-                    <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200"
-                    >
-                      เวลาบันทึกล่าสุด
-                    </th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100">
-                  <tr v-if="paginatedData.length === 0">
-                    <td
-                      colspan="15"
-                      class="px-6 py-12 text-center text-slate-500 font-medium bg-white"
-                    >
-                      <div
-                        class="flex flex-col items-center justify-center gap-3"
-                      >
-                        <DatabaseSearch :size="48" class="text-slate-300" />
-                        <span class="text-lg">ไม่พบข้อมูล</span>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr
-                    v-for="item in paginatedData"
-                    :key="item.AMLDRINF_HREC_ID"
-                    class="hover:bg-indigo-50/30 transition-colors text-center bg-white"
-                  >
-                    <td
-                      class="px-6 py-4 font-bold text-slate-900 whitespace-nowrap"
-                    >
-                      {{ item.AMLDRINF_DOC_NUM }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      {{ findUser(item.AMLDRINF_EMPHREC) }}
-                    </td>
-                    <td
-                      class="px-6 py-4 whitespace-nowrap"
-                      v-if="item.AMLDRINF_HREC_UPDATELSTDT === null"
-                    >
-                      {{
-                        dayjs(item.AMLDRINF_HREC_LSTDT).format(
-                          "DD/MM/YYYY HH:mm",
-                        )
-                      }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap" v-else>
-                      {{
-                        dayjs(item.AMLDRINF_HREC_UPDATELSTDT).format(
-                          "DD/MM/YYYY HH:mm",
-                        )
-                      }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <span class="badge badge-blue">{{
-                        item.AMLDRINF_HREC_LINE
-                      }}</span>
-                    </td>
-                    <td
-                      class="px-6 py-4 font-semibold text-slate-700 whitespace-nowrap"
-                    >
-                      {{ item.AMLDRINF_HREC_CUS }}
-                    </td>
-                    <td
-                      class="px-6 py-4 font-mono text-[15px] whitespace-nowrap"
-                    >
-                      {{ item.AMLDRINF_HREC_WON }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      {{ item.AMLDRINF_HREC_MDLCD }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      {{ item.AMLDRINF_HREC_MDLNM }}
-                    </td>
-                    <td class="px-6 py-4 font-medium whitespace-nowrap">
-                      {{ item.AMLDRINF_HREC_LOTS }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <span class="badge badge-emerald">{{
-                        item.AMLDRINF_HREC_PROCS
-                      }}</span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <span
-                        class="font-bold text-indigo-600 uppercase text-sm"
-                        >{{ item.AMLDRINF_HREC_CSTYPE }}</span
-                      >
-                    </td>
-                    <td class="px-6 py-4 min-w-[200px] text-sm text-left">
-                      {{ item.AMLDRINF_HREC_PROB }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      {{ item.AMLDRINF_HREC_LOCATE }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      {{ item.AMLDRINF_HREC_MACHINE }}
-                    </td>
-                    <td
-                      class="px-6 py-4 font-black text-rose-600 text-base whitespace-nowrap"
-                    >
-                      {{ item.AMLDRINF_HREC_QTYNG }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      {{ item.AMLDRINF_HREC_STARTTIME }}
-                    </td>
-                    <td
-                      class="px-6 py-4 whitespace-nowrap flex items-center justify-center border-r border-slate-200"
-                    >
-                      <template v-if="item.AMLDRINF_HREC_IMAGE">
-                        <img
-                          :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`"
-                          class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-rose-200"
-                          @click="
-                            previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`
-                          "
-                        />
-                      </template>
-                      <span v-else class="text-rose-200 font-bold">-</span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      {{ item.AMLDRACT_HREC_RTCAUSE }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      {{ item.AMLDRACT_HREC_ACTION }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      {{ findUser(item.AMLDRACT_HREC_ACTIONEMP) }}
-                    </td>
-                    <td
-                      class="px-6 py-4 whitespace-nowrap flex items-center justify-center"
-                    >
-                      <template v-if="item.AMLDRACT_HREC_IMAGE">
-                        <img
-                          :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`"
-                          class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-rose-200"
-                          @click="
-                            previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`
-                          "
-                        />
-                      </template>
-                      <span v-else class="text-rose-200 font-bold">-</span>
-                    </td>
-                    <td
-                      class="px-6 py-4 whitespace-nowrap border-r border-slate-200"
-                      v-if="item.AMLDRACT_HREC_UPDATELSTDT === null"
-                    >
-                      {{
-                        dayjs(item.AMLDRACT_HREC_LSTDT).format(
-                          "DD/MM/YYYY HH:mm",
-                        )
-                      }}
-                    </td>
-                    <td
-                      class="px-6 py-4 whitespace-nowrap border-r border-slate-200"
-                      v-else
-                    >
-                      {{
-                        dayjs(item.AMLDRACT_HREC_UPDATELSTDT).format(
-                          "DD/MM/YYYY HH:mm",
-                        )
-                      }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      {{ item.AMLDRCONF_HREC_RESULT }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      {{ item.AMLDRCONF_HREC_ENDTIME }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      {{ item.AMLDRCONF_HREC_TOTALTIME }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      {{ findUser(item.AMLDRCONF_HREC_EMPNO) }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      {{
-                        dayjs(item.AMLDRCONF_HREC_LSTDT).format(
-                          "DD/MM/YYYY HH:mm",
-                        )
-                      }}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              Previous
+            </button>
+
+            <div class="hidden sm:flex space-x-1">
+              <template v-for="page in displayedPages" :key="page">
+                <span v-if="page === '...'" class="px-3 py-1.5 text-slate-500"
+                  >...</span
+                >
+                <button
+                  v-else
+                  @click="goToPage(page as number)"
+                  :class="[
+                    'px-3 py-1.5 border rounded-md text-sm font-medium transition-colors shadow-sm',
+                    currentPage === page
+                      ? 'bg-indigo-600 border-indigo-600 text-white hover:bg-indigo-700'
+                      : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-50',
+                  ]"
+                >
+                  {{ page }}
+                </button>
+              </template>
             </div>
 
-            <!-- Pagination Control -->
-            <div
-              class="flex flex-col sm:flex-row items-center justify-between px-6 py-4 bg-slate-50 border-t border-slate-200"
+            <button
+              @click="nextPage"
+              :disabled="currentPage === totalPages"
+              class="px-3 py-1.5 border border-slate-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white text-sm font-medium text-slate-700 transition-colors bg-white shadow-sm"
             >
-              <div class="text-sm text-slate-500 mb-4 sm:mb-0">
-                Showing
-                <span class="font-medium text-slate-900">{{
-                  fetch_rec_all.length > 0 ? startIndex + 1 : 0
-                }}</span>
-                to
-                <span class="font-medium text-slate-900">{{
-                  Math.min(endIndex, fetch_rec_all.length)
-                }}</span>
-                of
-                <span class="font-medium text-slate-900">{{
-                  fetch_rec_all.length
-                }}</span>
-                entries
-              </div>
-              <div class="flex items-center space-x-2">
-                <button
-                  @click="prevPage"
-                  :disabled="currentPage === 1"
-                  class="px-3 py-1.5 border border-slate-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white text-sm font-medium text-slate-700 transition-colors bg-white shadow-sm"
-                >
-                  Previous
-                </button>
+              Next
+            </button>
 
-                <div class="hidden sm:flex space-x-1">
-                  <template v-for="page in displayedPages" :key="page">
-                    <span
-                      v-if="page === '...'"
-                      class="px-3 py-1.5 text-slate-500"
-                      >...</span
-                    >
-                    <button
-                      v-else
-                      @click="goToPage(page as number)"
-                      :class="[
-                        'px-3 py-1.5 border rounded-md text-sm font-medium transition-colors shadow-sm',
-                        currentPage === page
-                          ? 'bg-indigo-600 border-indigo-600 text-white hover:bg-indigo-700'
-                          : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-50',
-                      ]"
-                    >
-                      {{ page }}
-                    </button>
-                  </template>
-                </div>
-
-                <button
-                  @click="nextPage"
-                  :disabled="currentPage === totalPages"
-                  class="px-3 py-1.5 border border-slate-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white text-sm font-medium text-slate-700 transition-colors bg-white shadow-sm"
-                >
-                  Next
-                </button>
-
-                <div
-                  class="ml-2 flex items-center gap-2 border-l border-slate-300 pl-4"
-                >
-                  <span class="text-sm text-slate-500 hidden md:inline"
-                    >Per page:</span
-                  >
-                  <select
-                    v-model="itemsPerPage"
-                    class="border border-slate-300 rounded-md text-sm px-2 py-1.5 focus:ring-indigo-500 focus:border-indigo-500 bg-white shadow-sm"
-                    @change="currentPage = 1"
-                  >
-                    <option :value="10">10</option>
-                    <option :value="20">20</option>
-                    <option :value="50">50</option>
-                    <option :value="100">100</option>
-                  </select>
-                </div>
-              </div>
+            <div
+              class="ml-2 flex items-center gap-2 border-l border-slate-300 pl-4"
+            >
+              <span class="text-sm text-slate-500 hidden md:inline"
+                >Per page:</span
+              >
+              <select
+                v-model="itemsPerPage"
+                class="border border-slate-300 rounded-md text-sm px-2 py-1.5 focus:ring-indigo-500 focus:border-indigo-500 bg-white shadow-sm"
+                @change="currentPage = 1"
+              >
+                <option :value="10">10</option>
+                <option :value="20">20</option>
+                <option :value="50">50</option>
+                <option :value="100">100</option>
+              </select>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
   <Teleport to="body">
     <Transition name="lightbox">
       <div
@@ -577,9 +627,203 @@
       </div>
     </Transition>
   </Teleport>
+  <Teleport to="body">
+    <Transition name="lightbox">
+      <div
+        v-if="showPending"
+        class="fixed inset-0 z-[999] flex items-center justify-center bg-black/70 backdrop-blur-sm"
+        @click.self="showPending = false"
+      >
+        <div
+          class="bg-white w-[90vw] max-h-[90vh] rounded-xl p-6 overflow-auto relative"
+        >
+          <div class="relative max-w-[90vw] max-h-[90vh]">
+            <!-- Close Button -->
+            <button
+              @click="showPending = false"
+              class="absolute -top-4 -right-4 w-9 h-9 flex items-center justify-center bg-white text-gray-700 rounded-full shadow-lg hover:bg-rose-500 hover:text-white transition z-10"
+            >
+              <X :size="18" />
+            </button>
+            <!-- Title -->
+            <h2 class="text-xl font-bold mb-4">Pending Actions</h2>
+
+            <div class="max-h-[calc(100vh-24rem)] overflow-y-auto">
+              <table class="w-full">
+                <thead>
+                  <tr>
+                    <th
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      หมายเลขเอกสาร
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      ผู้บันทึก
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      เวลาบันทึกล่าสุด
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      Line
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      Customer
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      Work Order
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      Model Code
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      Model Name
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[160px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Lot Size
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Process
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[130px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Cause Type
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[280px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Problem
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Location
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Machine
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[170px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      จำนวนงานเสีย
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      รูปภาพ
+                    </th>
+                  </tr>
+                </thead>
+
+                <!-- BODY -->
+                <tbody class="divide-y divide-slate-100">
+                  <tr
+                    v-for="item in fetch_no_action"
+                    :key="item.AMLDRINF_HREC_ID"
+                    class="hover:bg-indigo-50/30 transition-colors text-center"
+                  >
+                    <td class="px-6 py-4 font-bold text-slate-900 leading-none">
+                      {{ item.AMLDRINF_DOC_NUM }}
+                    </td>
+                    <td class="px-6 py-4">
+                      {{ findUser(item.AMLDRINF_EMPHREC) }}
+                    </td>
+                    <td class="px-6 py-4">
+                      {{ dayjs(item.AMLDRINF_HREC_LSTDT).format("HH:mm") }}
+                    </td>
+                    <td class="px-6 py-4">
+                      <span class="badge badge-blue">{{
+                        item.AMLDRINF_HREC_LINE
+                      }}</span>
+                    </td>
+                    <td class="px-6 py-4 font-semibold text-slate-700">
+                      {{ item.AMLDRINF_HREC_CUS }}
+                    </td>
+                    <td class="px-6 py-4 font-mono text-[15px]">
+                      {{ item.AMLDRINF_HREC_WON }}
+                    </td>
+                    <td class="px-6 py-4">{{ item.AMLDRINF_HREC_MDLCD }}</td>
+                    <td class="px-6 py-4">
+                      {{ item.AMLDRINF_HREC_MDLNM }}
+                    </td>
+                    <td class="px-6 py-4 font-medium">
+                      {{ item.AMLDRINF_HREC_LOTS }}
+                    </td>
+                    <td class="px-6 py-4">
+                      <span class="badge badge-emerald">{{
+                        item.AMLDRINF_HREC_PROCS
+                      }}</span>
+                    </td>
+                    <td class="px-6 py-4">
+                      <span
+                        class="font-bold text-indigo-600 uppercase text-sm"
+                        >{{ item.AMLDRINF_HREC_CSTYPE }}</span
+                      >
+                    </td>
+                    <td class="px-6 py-4 min-w-[200px] text-sm">
+                      {{ item.AMLDRINF_HREC_PROB }}
+                    </td>
+                    <td class="px-6 py-4">
+                      {{ item.AMLDRINF_HREC_LOCATE }}
+                    </td>
+                    <td class="px-6 py-4">
+                      {{ item.AMLDRINF_HREC_MACHINE }}
+                    </td>
+                    <td class="px-6 py-4 font-black text-rose-600 text-base">
+                      {{ item.AMLDRINF_HREC_QTYNG }}
+                    </td>
+                    <td class="px-6 py-4 flex items-center justify-center">
+                      <template v-if="item.AMLDRINF_HREC_IMAGE">
+                        <img
+                          :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`"
+                          class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-slate-200"
+                          @click="
+                            previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`
+                          "
+                        />
+                      </template>
+                      <span v-else class="text-slate-300 font-bold">-</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Transition>
+  </Teleport>
 </template>
 <script setup lang="ts">
-import { Boxes, DatabaseSearch, Search, Download, X } from "lucide-vue-next";
+import {
+  Boxes,
+  DatabaseSearch,
+  Search,
+  Download,
+  X,
+  CircleCheck,
+  ClipboardClock,
+} from "lucide-vue-next";
 import Multiselect from "@vueform/multiselect";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -590,6 +834,7 @@ import { saveAs } from "file-saver";
 /**
  * TODO: สร้างตัวแปรสำหรับเก็บข้อมูล
  */
+const showPending = ref(false);
 
 // Pagination variables
 const currentPage = ref(1);
@@ -990,6 +1235,7 @@ const getCustomer = async () => {
 
 const original_rec_all = ref<any>([]);
 const fetch_rec_all = ref<any>([]);
+const fetch_no_action = ref<any>([]);
 
 const get_rec_all = async () => {
   try {
@@ -997,8 +1243,9 @@ const get_rec_all = async () => {
       "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/all-record",
     );
 
-    original_rec_all.value = response.data;
-    fetch_rec_all.value = response.data;
+    original_rec_all.value = response.data.complete;
+    fetch_rec_all.value = response.data.complete;
+    fetch_no_action.value = response.data.no_action;
     console.log(fetch_rec_all.value);
   } catch (error) {
     console.error(error);

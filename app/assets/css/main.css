@@ -286,7 +286,7 @@ table {
 }
 
 thead {
-  @apply bg-slate-50 text-slate-500 font-semibold uppercase tracking-wider;
+  @apply bg-gray-50 text-slate-500 font-semibold uppercase tracking-wider;
 }
 
 th {

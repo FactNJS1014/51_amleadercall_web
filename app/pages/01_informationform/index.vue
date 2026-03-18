@@ -950,6 +950,9 @@ const processes = ref([
   { value: "CP", label: "CP" },
   { value: "RF1", label: "RF1" },
   { value: "RF2", label: "RF2" },
+  { value: "Label", label: "Label" },
+  { value: "Laser", label: "Laser" },
+  { value: "IC-ROM", label: "IC-ROM" },
 ]);
 
 /**
