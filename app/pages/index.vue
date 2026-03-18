@@ -1,536 +1,551 @@
 <template>
-  <div class="card">
-    <div class="card-title">
-      <div class="flex items-center gap-2 justify-center">
-        <div
-          class="bg-linear-to-r from-blue-400 to-violet-500 p-2 text-white rounded-lg"
-        >
-          <Boxes :size="30" />
+  <div class="flex flex-col xl:flex-row gap-4 h-full p-4">
+    <!-- Left column: Search Filter -->
+    <div class="w-full xl:w-1/4">
+      <div class="card h-full">
+        <div class="card-title">
+          <div class="flex items-center gap-2 justify-center">
+            <div
+              class="bg-linear-to-r from-blue-400 to-violet-500 p-2 text-white rounded-lg"
+            >
+              <Boxes :size="30" />
+            </div>
+            <h3 class="text-[22px] font-bold text-center">
+              Report Leader Call<br /><span class="text-sm">(SMT & AUTO)</span>
+            </h3>
+          </div>
         </div>
-        <h3 class="text-[22px] font-bold">Report Leader Call (SMT & AUTO)</h3>
+        <div class="card-body">
+          <div class="p-4 flex flex-col gap-4">
+            <div>
+              <label
+                for="filter_startdate"
+                class="text-sm font-medium text-gray-700 px-3 py-1"
+                ><span class="mr-2">📅</span>Start Date</label
+              >
+              <input
+                type="date"
+                id="filter_startdate"
+                v-model="filter_startdate"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2"
+              />
+            </div>
+            <div>
+              <label
+                for="filter_enddate"
+                class="text-sm font-medium text-gray-700 px-3 py-1"
+                ><span class="mr-2">📅</span>End Date</label
+              >
+              <input
+                type="date"
+                id="filter_enddate"
+                v-model="filter_enddate"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2"
+              />
+            </div>
+            <div>
+              <label
+                for="filter_line"
+                class="text-sm font-medium text-gray-700 px-3 py-1 flex items-center"
+                ><span class="mr-2"><DatabaseSearch :size="16" /> </span
+                >Line</label
+              >
+              <Multiselect
+                id="filter_line"
+                v-model="filter_line"
+                :options="fetch_line"
+                :searchable="false"
+                :create-option="false"
+                :preserve-search="true"
+                :clearable="true"
+                :show-no-options="false"
+                :show-no-results="false"
+                :close-on-select="false"
+                :hide-selected="false"
+                :multiple="false"
+                :max-height="200"
+                :loading="false"
+                :disabled="false"
+                class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-1"
+              />
+            </div>
+            <div>
+              <label
+                for="filter_cus"
+                class="text-sm font-medium text-gray-700 px-3 py-1 flex items-center"
+                ><span class="mr-2"><DatabaseSearch :size="16" /> </span
+                >Customer</label
+              >
+              <Multiselect
+                id="filter_cus"
+                v-model="filter_cus"
+                :options="options_cus"
+                :searchable="true"
+                :create-option="false"
+                :preserve-search="true"
+                :clearable="true"
+                :show-no-options="false"
+                :show-no-results="false"
+                :close-on-select="false"
+                :hide-selected="false"
+                :multiple="false"
+                :max-height="200"
+                :loading="false"
+                :disabled="false"
+                class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-1"
+              />
+            </div>
+
+            <div class="flex flex-col gap-3 mt-4">
+              <button
+                @click="searchData()"
+                class="btn-primary shadow-lg shadow-indigo-200/50 cursor-pointer w-full py-3 rounded-xl transition-all hover:scale-105 active:scale-95"
+              >
+                <div class="flex items-center justify-center gap-3">
+                  <Search :size="20" />
+                  <span class="text-lg font-bold tracking-tight">ค้นหา</span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="card-body">
-      <div class="p-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div>
-            <label
-              for="filter_startdate"
-              class="text-sm font-medium text-gray-700 px-3 py-1"
-              ><span class="mr-2">📅</span>Start Date</label
-            >
-            <input
-              type="date"
-              id="filter_startdate"
-              v-model="filter_startdate"
-              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-3"
-            />
-          </div>
-          <div>
-            <label
-              for="filter_enddate"
-              class="text-sm font-medium text-gray-700 px-3 py-1"
-              ><span class="mr-2">📅</span>End Date</label
-            >
-            <input
-              type="date"
-              id="filter_enddate"
-              v-model="filter_enddate"
-              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-3"
-            />
-          </div>
-          <div>
-            <label
-              for="filter_line"
-              class="text-sm font-medium text-gray-700 px-3 py-1 flex items-center"
-              ><span class="mr-2"><DatabaseSearch :size="16" /> </span
-              >Line</label
-            >
-            <Multiselect
-              id="filter_line"
-              v-model="filter_line"
-              :options="fetch_line"
-              :searchable="false"
-              :create-option="false"
-              :preserve-search="true"
-              :clearable="true"
-              :show-no-options="false"
-              :show-no-results="false"
-              :close-on-select="false"
-              :hide-selected="false"
-              :multiple="false"
-              :max-height="200"
-              :loading="false"
-              :disabled="false"
-              class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-1"
-            />
-          </div>
-          <div>
-            <label
-              for="filter_cus"
-              class="text-sm font-medium text-gray-700 px-3 py-1 flex items-center"
-              ><span class="mr-2"><DatabaseSearch :size="16" /> </span
-              >Customer</label
-            >
-            <Multiselect
-              id="filter_cus"
-              v-model="filter_cus"
-              :options="options_cus"
-              :searchable="true"
-              :create-option="false"
-              :preserve-search="true"
-              :clearable="true"
-              :show-no-options="false"
-              :show-no-results="false"
-              :close-on-select="false"
-              :hide-selected="false"
-              :multiple="false"
-              :max-height="200"
-              :loading="false"
-              :disabled="false"
-              class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-1"
-            />
-          </div>
-        </div>
-        <div class="flex justify-end mt-4">
-          <button
-            @click="searchData()"
-            class="btn-primary shadow-2xl shadow-indigo-200/50 scale-90 cursor-pointer"
-          >
-            <div class="flex items-center gap-3">
-              <div class="">
-                <Search :size="20" />
-              </div>
-              <span class="text-lg tracking-tight">ค้นหา</span>
-            </div>
-          </button>
-        </div>
-      </div>
-      <div class="flex justify-start mt-4">
-        <button
-          @click="exportData()"
-          class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg shadow-2xl shadow-green-200/50 scale-90 cursor-pointer"
-        >
-          <div class="flex items-center gap-3">
-            <div class="">
-              <Download :size="20" />
-            </div>
-            <span class="text-lg tracking-tight">Export</span>
-          </div>
-        </button>
-      </div>
 
-      <!-- Table & Pagination -->
-      <div class="mt-6">
-        <div
-          class="table-container shadow-sm border border-slate-200 rounded-xl overflow-hidden bg-white"
-        >
+    <!-- Right column: Table -->
+    <div class="w-full xl:w-3/4">
+      <div class="card h-full">
+        <div class="card-body p-4">
+          <div class="flex justify-end mt-4">
+            <button
+              @click="exportData()"
+              class="bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-200/50 cursor-pointer px-4 py-2 rounded-xl transition-all hover:scale-105 active:scale-95"
+            >
+              <div class="flex items-center justify-center gap-3">
+                <Download :size="20" />
+                <span class="text-lg font-bold tracking-tight">Export</span>
+              </div>
+            </button>
+          </div>
           <div
-            class="overflow-x-auto max-h-[calc(100vh-28rem)] overflow-y-auto w-full"
+            class="table-container shadow-sm border border-slate-200 rounded-xl overflow-hidden bg-white"
           >
-            <table class="w-full">
-              <thead class="sticky top-0 z-10">
-                <tr>
-                  <th
-                    class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
-                    rowspan="2"
-                  >
-                    หมายเลขเอกสาร
-                  </th>
-                  <th
-                    colspan="16"
-                    class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
-                  >
-                    Information
-                  </th>
-                  <th
-                    colspan="5"
-                    class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
-                  >
-                    Action
-                  </th>
-                  <th
-                    colspan="5"
-                    class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                  >
-                    Confirm
-                  </th>
-                </tr>
-                <tr>
-                  <th
-                    class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                  >
-                    ผู้บันทึก
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                  >
-                    เวลาบันทึก
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                  >
-                    Line
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                  >
-                    Customer
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                  >
-                    Work Order
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                  >
-                    Model Code
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                  >
-                    Model Name
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                  >
-                    Lot Size
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                  >
-                    Process
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[190px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                  >
-                    Cause Type
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                  >
-                    Problem
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                  >
-                    Location
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                  >
-                    Machine
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                  >
-                    จำนวนงานเสีย
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                  >
-                    Start Time
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200"
-                  >
-                    รูปภาพ
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                  >
-                    Root Cause
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                  >
-                    Action
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                  >
-                    Action By
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                  >
-                    รูปภาพ
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200"
-                  >
-                    เวลาบันทึกล่าสุด
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                  >
-                    Result
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                  >
-                    End Time
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                  >
-                    Total Time
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                  >
-                    Confirm By
-                  </th>
-                  <th
-                    class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200"
-                  >
-                    เวลาบันทึกล่าสุด
-                  </th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-100">
-                <tr v-if="paginatedData.length === 0">
-                  <td
-                    colspan="15"
-                    class="px-6 py-12 text-center text-slate-500 font-medium bg-white"
-                  >
-                    <div
-                      class="flex flex-col items-center justify-center gap-3"
+            <div
+              class="overflow-x-auto max-h-[calc(100vh-14rem)] overflow-y-auto w-full"
+            >
+              <table class="w-full">
+                <thead class="sticky top-0 z-10">
+                  <tr>
+                    <th
+                      class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
+                      rowspan="2"
                     >
-                      <DatabaseSearch :size="48" class="text-slate-300" />
-                      <span class="text-lg">ไม่พบข้อมูล</span>
-                    </div>
-                  </td>
-                </tr>
-                <tr
-                  v-for="item in paginatedData"
-                  :key="item.AMLDRINF_HREC_ID"
-                  class="hover:bg-indigo-50/30 transition-colors text-center bg-white"
-                >
-                  <td
-                    class="px-6 py-4 font-bold text-slate-900 whitespace-nowrap"
+                      หมายเลขเอกสาร
+                    </th>
+                    <th
+                      colspan="16"
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
+                    >
+                      Information
+                    </th>
+                    <th
+                      colspan="5"
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
+                    >
+                      Action
+                    </th>
+                    <th
+                      colspan="5"
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      Confirm
+                    </th>
+                  </tr>
+                  <tr>
+                    <th
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      ผู้บันทึก
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      เวลาบันทึก
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      Line
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      Customer
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      Work Order
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      Model Code
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      Model Name
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Lot Size
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Process
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[190px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Cause Type
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Problem
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Location
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Machine
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      จำนวนงานเสีย
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Start Time
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200"
+                    >
+                      รูปภาพ
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Root Cause
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Action
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Action By
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      รูปภาพ
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200"
+                    >
+                      เวลาบันทึกล่าสุด
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Result
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      End Time
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Total Time
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Confirm By
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200"
+                    >
+                      เวลาบันทึกล่าสุด
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr v-if="paginatedData.length === 0">
+                    <td
+                      colspan="15"
+                      class="px-6 py-12 text-center text-slate-500 font-medium bg-white"
+                    >
+                      <div
+                        class="flex flex-col items-center justify-center gap-3"
+                      >
+                        <DatabaseSearch :size="48" class="text-slate-300" />
+                        <span class="text-lg">ไม่พบข้อมูล</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr
+                    v-for="item in paginatedData"
+                    :key="item.AMLDRINF_HREC_ID"
+                    class="hover:bg-indigo-50/30 transition-colors text-center bg-white"
                   >
-                    {{ item.AMLDRINF_DOC_NUM }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    {{ findUser(item.AMLDRINF_EMPHREC) }}
-                  </td>
-                  <td
-                    class="px-6 py-4 whitespace-nowrap"
-                    v-if="item.AMLDRINF_HREC_UPDATELSTDT === null"
-                  >
-                    {{
-                      dayjs(item.AMLDRINF_HREC_LSTDT).format("DD/MM/YYYY HH:mm")
-                    }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap" v-else>
-                    {{
-                      dayjs(item.AMLDRINF_HREC_UPDATELSTDT).format(
-                        "DD/MM/YYYY HH:mm",
-                      )
-                    }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="badge badge-blue">{{
-                      item.AMLDRINF_HREC_LINE
-                    }}</span>
-                  </td>
-                  <td
-                    class="px-6 py-4 font-semibold text-slate-700 whitespace-nowrap"
-                  >
-                    {{ item.AMLDRINF_HREC_CUS }}
-                  </td>
-                  <td class="px-6 py-4 font-mono text-[15px] whitespace-nowrap">
-                    {{ item.AMLDRINF_HREC_WON }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    {{ item.AMLDRINF_HREC_MDLCD }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    {{ item.AMLDRINF_HREC_MDLNM }}
-                  </td>
-                  <td class="px-6 py-4 font-medium whitespace-nowrap">
-                    {{ item.AMLDRINF_HREC_LOTS }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="badge badge-emerald">{{
-                      item.AMLDRINF_HREC_PROCS
-                    }}</span>
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="font-bold text-indigo-600 uppercase text-sm">{{
-                      item.AMLDRINF_HREC_CSTYPE
-                    }}</span>
-                  </td>
-                  <td class="px-6 py-4 min-w-[200px] text-sm text-left">
-                    {{ item.AMLDRINF_HREC_PROB }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    {{ item.AMLDRINF_HREC_LOCATE }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    {{ item.AMLDRINF_HREC_MACHINE }}
-                  </td>
-                  <td
-                    class="px-6 py-4 font-black text-rose-600 text-base whitespace-nowrap"
-                  >
-                    {{ item.AMLDRINF_HREC_QTYNG }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    {{ item.AMLDRINF_HREC_STARTTIME }}
-                  </td>
-                  <td
-                    class="px-6 py-4 whitespace-nowrap flex items-center justify-center border-r border-slate-200"
-                  >
-                    <template v-if="item.AMLDRINF_HREC_IMAGE">
-                      <img
-                        :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`"
-                        class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-rose-200"
-                        @click="
-                          previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`
-                        "
-                      />
-                    </template>
-                    <span v-else class="text-rose-200 font-bold">-</span>
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    {{ item.AMLDRACT_HREC_RTCAUSE }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    {{ item.AMLDRACT_HREC_ACTION }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    {{ findUser(item.AMLDRACT_HREC_ACTIONEMP) }}
-                  </td>
-                  <td
-                    class="px-6 py-4 whitespace-nowrap flex items-center justify-center"
-                  >
-                    <template v-if="item.AMLDRACT_HREC_IMAGE">
-                      <img
-                        :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`"
-                        class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-rose-200"
-                        @click="
-                          previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`
-                        "
-                      />
-                    </template>
-                    <span v-else class="text-rose-200 font-bold">-</span>
-                  </td>
-                  <td
-                    class="px-6 py-4 whitespace-nowrap border-r border-slate-200"
-                    v-if="item.AMLDRACT_HREC_UPDATELSTDT === null"
-                  >
-                    {{
-                      dayjs(item.AMLDRACT_HREC_LSTDT).format("DD/MM/YYYY HH:mm")
-                    }}
-                  </td>
-                  <td
-                    class="px-6 py-4 whitespace-nowrap border-r border-slate-200"
-                    v-else
-                  >
-                    {{
-                      dayjs(item.AMLDRACT_HREC_UPDATELSTDT).format(
-                        "DD/MM/YYYY HH:mm",
-                      )
-                    }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    {{ item.AMLDRCONF_HREC_RESULT }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    {{ item.AMLDRCONF_HREC_ENDTIME }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    {{ item.AMLDRCONF_HREC_TOTALTIME }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    {{ findUser(item.AMLDRCONF_HREC_EMPNO) }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    {{
-                      dayjs(item.AMLDRCONF_HREC_LSTDT).format(
-                        "DD/MM/YYYY HH:mm",
-                      )
-                    }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <!-- Pagination Control -->
-          <div
-            class="flex flex-col sm:flex-row items-center justify-between px-6 py-4 bg-slate-50 border-t border-slate-200"
-          >
-            <div class="text-sm text-slate-500 mb-4 sm:mb-0">
-              Showing
-              <span class="font-medium text-slate-900">{{
-                fetch_rec_all.length > 0 ? startIndex + 1 : 0
-              }}</span>
-              to
-              <span class="font-medium text-slate-900">{{
-                Math.min(endIndex, fetch_rec_all.length)
-              }}</span>
-              of
-              <span class="font-medium text-slate-900">{{
-                fetch_rec_all.length
-              }}</span>
-              entries
+                    <td
+                      class="px-6 py-4 font-bold text-slate-900 whitespace-nowrap"
+                    >
+                      {{ item.AMLDRINF_DOC_NUM }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      {{ findUser(item.AMLDRINF_EMPHREC) }}
+                    </td>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap"
+                      v-if="item.AMLDRINF_HREC_UPDATELSTDT === null"
+                    >
+                      {{
+                        dayjs(item.AMLDRINF_HREC_LSTDT).format(
+                          "DD/MM/YYYY HH:mm",
+                        )
+                      }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap" v-else>
+                      {{
+                        dayjs(item.AMLDRINF_HREC_UPDATELSTDT).format(
+                          "DD/MM/YYYY HH:mm",
+                        )
+                      }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <span class="badge badge-blue">{{
+                        item.AMLDRINF_HREC_LINE
+                      }}</span>
+                    </td>
+                    <td
+                      class="px-6 py-4 font-semibold text-slate-700 whitespace-nowrap"
+                    >
+                      {{ item.AMLDRINF_HREC_CUS }}
+                    </td>
+                    <td
+                      class="px-6 py-4 font-mono text-[15px] whitespace-nowrap"
+                    >
+                      {{ item.AMLDRINF_HREC_WON }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      {{ item.AMLDRINF_HREC_MDLCD }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      {{ item.AMLDRINF_HREC_MDLNM }}
+                    </td>
+                    <td class="px-6 py-4 font-medium whitespace-nowrap">
+                      {{ item.AMLDRINF_HREC_LOTS }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <span class="badge badge-emerald">{{
+                        item.AMLDRINF_HREC_PROCS
+                      }}</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <span
+                        class="font-bold text-indigo-600 uppercase text-sm"
+                        >{{ item.AMLDRINF_HREC_CSTYPE }}</span
+                      >
+                    </td>
+                    <td class="px-6 py-4 min-w-[200px] text-sm text-left">
+                      {{ item.AMLDRINF_HREC_PROB }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      {{ item.AMLDRINF_HREC_LOCATE }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      {{ item.AMLDRINF_HREC_MACHINE }}
+                    </td>
+                    <td
+                      class="px-6 py-4 font-black text-rose-600 text-base whitespace-nowrap"
+                    >
+                      {{ item.AMLDRINF_HREC_QTYNG }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      {{ item.AMLDRINF_HREC_STARTTIME }}
+                    </td>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap flex items-center justify-center border-r border-slate-200"
+                    >
+                      <template v-if="item.AMLDRINF_HREC_IMAGE">
+                        <img
+                          :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`"
+                          class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-rose-200"
+                          @click="
+                            previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`
+                          "
+                        />
+                      </template>
+                      <span v-else class="text-rose-200 font-bold">-</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      {{ item.AMLDRACT_HREC_RTCAUSE }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      {{ item.AMLDRACT_HREC_ACTION }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      {{ findUser(item.AMLDRACT_HREC_ACTIONEMP) }}
+                    </td>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap flex items-center justify-center"
+                    >
+                      <template v-if="item.AMLDRACT_HREC_IMAGE">
+                        <img
+                          :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`"
+                          class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-rose-200"
+                          @click="
+                            previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`
+                          "
+                        />
+                      </template>
+                      <span v-else class="text-rose-200 font-bold">-</span>
+                    </td>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap border-r border-slate-200"
+                      v-if="item.AMLDRACT_HREC_UPDATELSTDT === null"
+                    >
+                      {{
+                        dayjs(item.AMLDRACT_HREC_LSTDT).format(
+                          "DD/MM/YYYY HH:mm",
+                        )
+                      }}
+                    </td>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap border-r border-slate-200"
+                      v-else
+                    >
+                      {{
+                        dayjs(item.AMLDRACT_HREC_UPDATELSTDT).format(
+                          "DD/MM/YYYY HH:mm",
+                        )
+                      }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      {{ item.AMLDRCONF_HREC_RESULT }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      {{ item.AMLDRCONF_HREC_ENDTIME }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      {{ item.AMLDRCONF_HREC_TOTALTIME }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      {{ findUser(item.AMLDRCONF_HREC_EMPNO) }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      {{
+                        dayjs(item.AMLDRCONF_HREC_LSTDT).format(
+                          "DD/MM/YYYY HH:mm",
+                        )
+                      }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="flex items-center space-x-2">
-              <button
-                @click="prevPage"
-                :disabled="currentPage === 1"
-                class="px-3 py-1.5 border border-slate-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white text-sm font-medium text-slate-700 transition-colors bg-white shadow-sm"
-              >
-                Previous
-              </button>
 
-              <div class="hidden sm:flex space-x-1">
-                <template v-for="page in displayedPages" :key="page">
-                  <span v-if="page === '...'" class="px-3 py-1.5 text-slate-500"
-                    >...</span
-                  >
-                  <button
-                    v-else
-                    @click="goToPage(page as number)"
-                    :class="[
-                      'px-3 py-1.5 border rounded-md text-sm font-medium transition-colors shadow-sm',
-                      currentPage === page
-                        ? 'bg-indigo-600 border-indigo-600 text-white hover:bg-indigo-700'
-                        : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-50',
-                    ]"
-                  >
-                    {{ page }}
-                  </button>
-                </template>
+            <!-- Pagination Control -->
+            <div
+              class="flex flex-col sm:flex-row items-center justify-between px-6 py-4 bg-slate-50 border-t border-slate-200"
+            >
+              <div class="text-sm text-slate-500 mb-4 sm:mb-0">
+                Showing
+                <span class="font-medium text-slate-900">{{
+                  fetch_rec_all.length > 0 ? startIndex + 1 : 0
+                }}</span>
+                to
+                <span class="font-medium text-slate-900">{{
+                  Math.min(endIndex, fetch_rec_all.length)
+                }}</span>
+                of
+                <span class="font-medium text-slate-900">{{
+                  fetch_rec_all.length
+                }}</span>
+                entries
               </div>
-
-              <button
-                @click="nextPage"
-                :disabled="currentPage === totalPages"
-                class="px-3 py-1.5 border border-slate-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white text-sm font-medium text-slate-700 transition-colors bg-white shadow-sm"
-              >
-                Next
-              </button>
-
-              <div
-                class="ml-2 flex items-center gap-2 border-l border-slate-300 pl-4"
-              >
-                <span class="text-sm text-slate-500 hidden md:inline"
-                  >Per page:</span
+              <div class="flex items-center space-x-2">
+                <button
+                  @click="prevPage"
+                  :disabled="currentPage === 1"
+                  class="px-3 py-1.5 border border-slate-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white text-sm font-medium text-slate-700 transition-colors bg-white shadow-sm"
                 >
-                <select
-                  v-model="itemsPerPage"
-                  class="border border-slate-300 rounded-md text-sm px-2 py-1.5 focus:ring-indigo-500 focus:border-indigo-500 bg-white shadow-sm"
-                  @change="currentPage = 1"
+                  Previous
+                </button>
+
+                <div class="hidden sm:flex space-x-1">
+                  <template v-for="page in displayedPages" :key="page">
+                    <span
+                      v-if="page === '...'"
+                      class="px-3 py-1.5 text-slate-500"
+                      >...</span
+                    >
+                    <button
+                      v-else
+                      @click="goToPage(page as number)"
+                      :class="[
+                        'px-3 py-1.5 border rounded-md text-sm font-medium transition-colors shadow-sm',
+                        currentPage === page
+                          ? 'bg-indigo-600 border-indigo-600 text-white hover:bg-indigo-700'
+                          : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-50',
+                      ]"
+                    >
+                      {{ page }}
+                    </button>
+                  </template>
+                </div>
+
+                <button
+                  @click="nextPage"
+                  :disabled="currentPage === totalPages"
+                  class="px-3 py-1.5 border border-slate-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white text-sm font-medium text-slate-700 transition-colors bg-white shadow-sm"
                 >
-                  <option :value="10">10</option>
-                  <option :value="20">20</option>
-                  <option :value="50">50</option>
-                  <option :value="100">100</option>
-                </select>
+                  Next
+                </button>
+
+                <div
+                  class="ml-2 flex items-center gap-2 border-l border-slate-300 pl-4"
+                >
+                  <span class="text-sm text-slate-500 hidden md:inline"
+                    >Per page:</span
+                  >
+                  <select
+                    v-model="itemsPerPage"
+                    class="border border-slate-300 rounded-md text-sm px-2 py-1.5 focus:ring-indigo-500 focus:border-indigo-500 bg-white shadow-sm"
+                    @change="currentPage = 1"
+                  >
+                    <option :value="10">10</option>
+                    <option :value="20">20</option>
+                    <option :value="50">50</option>
+                    <option :value="100">100</option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
