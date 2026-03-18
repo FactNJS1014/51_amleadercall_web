@@ -210,10 +210,10 @@
                 <td class="px-6 py-4 flex items-center justify-center">
                   <template v-if="item.AMLDRINF_HREC_IMAGE">
                     <img
-                      :src="`http://127.0.0.1:8000/images_information/${item.AMLDRINF_HREC_IMAGE}`"
+                      :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`"
                       class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-slate-200"
                       @click="
-                        previewImage = `http://127.0.0.1:8000/images_information/${item.AMLDRINF_HREC_IMAGE}`
+                        previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`
                       "
                     />
                   </template>
@@ -321,10 +321,10 @@
                 <td class="px-6 py-4 flex items-center justify-center">
                   <template v-if="item.AMLDRINF_HREC_IMAGE">
                     <img
-                      :src="`http://127.0.0.1:8000/images_information/${item.AMLDRINF_HREC_IMAGE}`"
+                      :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`"
                       class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-rose-200"
                       @click="
-                        previewImage = `http://127.0.0.1:8000/images_information/${item.AMLDRINF_HREC_IMAGE}`
+                        previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`
                       "
                     />
                   </template>
@@ -1051,7 +1051,7 @@ const submitForm = async (e?: Event) => {
       formData.append("id_hrec", id_hrec.value);
       formData.append("_method", "PUT"); // สำคัญ
       const res = await axios.post(
-        "http://127.0.0.1:8000/api/info/update",
+        "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/info/update",
         formData,
       );
       console.log(res.data);
@@ -1066,7 +1066,7 @@ const submitForm = async (e?: Event) => {
       }
     } else {
       const res = await axios.post(
-        "http://127.0.0.1:8000/api/info/insert",
+        "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/info/insert",
         formData,
       );
       if (res.data.status === "success") {
@@ -1114,7 +1114,9 @@ const resetForm = () => {
 
 const getCustomer = async () => {
   try {
-    const response = await axios.get("http://127.0.0.1:8000/api/vcus");
+    const response = await axios.get(
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/vcus",
+    );
 
     customers_list.value = response.data;
     options_cus.value = customers_list.value.map((item: any) => {
@@ -1132,7 +1134,7 @@ const getCustomer = async () => {
 const getWorkOrder = async (customer: string) => {
   try {
     const response = await axios.get(
-      `http://127.0.0.1:8000/api/vwork/${encodeURIComponent(customer)}`,
+      `http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/vwork/${encodeURIComponent(customer)}`,
     );
     const data = response.data;
     options_won.value = data.map((item: any) => ({
@@ -1147,7 +1149,7 @@ const getWorkOrder = async (customer: string) => {
 const getCheckModelByWon = async (won: string) => {
   try {
     const response = await axios.get(
-      `http://127.0.0.1:8000/api/vcheckmodel/${encodeURIComponent(won)}`,
+      `http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/vcheckmodel/${encodeURIComponent(won)}`,
     );
     const model = response.data;
     if (model) {
@@ -1163,7 +1165,7 @@ const getCheckModelByWon = async (won: string) => {
 const getRecordInfo = async () => {
   try {
     const response = await axios.get(
-      "http://127.0.0.1:8000/api/info/record/check",
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/info/record/check",
     );
 
     data_rec.value = response.data;
@@ -1177,7 +1179,8 @@ const UpdateCheck = async (id: string) => {
   // console.log(id);
   try {
     const response = await axios.put(
-      "http://127.0.0.1:8000/api/update/check/" + id,
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/update/check/" +
+        id,
     );
     if (response.data.status === "success") {
       getRecordInfo();
@@ -1191,7 +1194,8 @@ const UpdateRejectInfo = async (id: string) => {
   try {
     console.log(id);
     const response = await axios.put(
-      "http://127.0.0.1:8000/api/update/reject-info/" + id,
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/update/reject-info/" +
+        id,
     );
     if (response.data.status === "success") {
       getReject();
@@ -1204,7 +1208,7 @@ const UpdateRejectInfo = async (id: string) => {
 const getReject = async () => {
   try {
     const { data } = await axios.get(
-      "http://127.0.0.1:8000/api/info/record/reject",
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/info/record/reject",
     );
 
     data_reject.value = data;
@@ -1235,7 +1239,7 @@ const editForm = async (item: any) => {
   id_hrec.value = item.AMLDRINF_HREC_ID;
 
   imagePreview.value = item.AMLDRINF_HREC_IMAGE
-    ? `http://127.0.0.1:8000/images_information/${item.AMLDRINF_HREC_IMAGE}`
+    ? `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`
     : null;
 
   // เปิด modal ก่อนเลย ไม่ต้องรอ API
@@ -1261,7 +1265,8 @@ const deleteForm = async (id: string) => {
     });
     if (button.isConfirmed) {
       const response = await axios.delete(
-        "http://127.0.0.1:8000/api/info/delete/" + id,
+        "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/info/delete/" +
+          id,
       );
       if (response.data.status === "success") {
         getRecordInfo();
@@ -1323,7 +1328,9 @@ const handleImageUpload = (event: Event) => {
 const options_user = ref<any[]>([]);
 const getUsers = async () => {
   try {
-    const response = await axios.get("http://127.0.0.1:8000/api/users");
+    const response = await axios.get(
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/users",
+    );
     options_user.value = response.data;
   } catch (error) {
     console.error(error);

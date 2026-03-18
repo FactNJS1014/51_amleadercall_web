@@ -228,10 +228,10 @@
                 class="relative group/img overflow-hidden rounded-[2rem] ring-4 ring-slate-50 shadow-inner"
               >
                 <img
-                  :src="`http://127.0.0.1:8000/images_action/${item.AMLDRACT_HREC_IMAGE}`"
+                  :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`"
                   class="w-full h-48 object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
                   @click="
-                    previewImage = `http://127.0.0.1:8000/images_action/${item.AMLDRACT_HREC_IMAGE}`
+                    previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`
                   "
                 />
                 <div
@@ -363,10 +363,10 @@
                   class="relative group/img overflow-hidden rounded-[2rem] ring-4 ring-white shadow-md"
                 >
                   <img
-                    :src="`http://127.0.0.1:8000/images_action/${item.AMLDRACT_HREC_IMAGE}`"
+                    :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`"
                     class="w-full h-48 object-cover cursor-pointer saturate-50 hover:saturate-100 transition-all duration-700"
                     @click="
-                      previewImage = `http://127.0.0.1:8000/images_action/${item.AMLDRACT_HREC_IMAGE}`
+                      previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`
                     "
                   />
                 </div>
@@ -742,7 +742,9 @@ function chooseShowForm(id: string) {
 
 const getData = async () => {
   try {
-    const response = await $fetch("http://127.0.0.1:8000/api/info/record");
+    const response = await $fetch(
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/info/record",
+    );
     data_rec.value = response;
     // console.log(data_rec.value);
   } catch (error) {
@@ -851,7 +853,7 @@ const submitForm = async () => {
       formData.append("id", edit_id.value);
       formData.append("_method", "PUT");
       const res = await axios.post(
-        "http://127.0.0.1:8000/api/action/update",
+        "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/action/update",
         formData,
       );
       if (res.data.status === "success") {
@@ -865,7 +867,7 @@ const submitForm = async () => {
       }
     } else {
       const res = await axios.post(
-        "http://127.0.0.1:8000/api/action/insert",
+        "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/action/insert",
         formData,
       );
       if (res.data.status === "success") {
@@ -1019,7 +1021,7 @@ const clearForm = () => {
 const getActionData = async () => {
   try {
     const response = await axios.get(
-      "http://127.0.0.1:8000/api/action/record/check",
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/action/record/check",
     );
     // Handle both array response and object-wrapped response (e.g. { data: [...] })
     const result = response.data;
@@ -1038,7 +1040,7 @@ const action_reject = ref<any>([]);
 const showActionReject = async () => {
   try {
     const response = await axios.get(
-      "http://127.0.0.1:8000/api/action/record/reject/",
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/action/record/reject/",
     );
     action_reject.value = response.data;
   } catch (error) {
@@ -1053,7 +1055,8 @@ const checksubmit = async (id: string) => {
   try {
     // console.log(id);
     const response = await axios.put(
-      "http://127.0.0.1:8000/api/update/action-check/" + id,
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/update/action-check/" +
+        id,
     );
     if (response.data.status === "success") {
       getActionData();
@@ -1076,7 +1079,7 @@ const editItems = (item: any) => {
   act.value.image = item.AMLDRACT_HREC_IMAGE;
 
   imagePreview.value = item.AMLDRACT_HREC_IMAGE
-    ? `http://127.0.0.1:8000/images_action/${item.AMLDRACT_HREC_IMAGE}`
+    ? `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`
     : null;
   showModal.value = true;
 };
@@ -1087,7 +1090,8 @@ const editItems = (item: any) => {
 const sendToUpdate = async (id: string) => {
   try {
     const response = await axios.put(
-      "http://127.0.0.1:8000/api/update/reject-action/" + id,
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/update/reject-action/" +
+        id,
     );
     if (response.data.status === "success") {
       showActionReject();
@@ -1104,7 +1108,9 @@ const sendToUpdate = async (id: string) => {
 const options_user = ref<any>([]);
 const getUsers = async () => {
   try {
-    const response = await axios.get("http://127.0.0.1:8000/api/users");
+    const response = await axios.get(
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/users",
+    );
     options_user.value = response.data;
   } catch (error) {
     console.log(error);

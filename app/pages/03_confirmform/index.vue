@@ -182,10 +182,10 @@
                       </td>
                       <td class="px-6 py-4 flex items-center justify-center">
                         <img
-                          :src="`http://127.0.0.1:8000/images_information/${item.AMLDRINF_HREC_IMAGE}`"
+                          :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`"
                           class="w-12 h-12 object-cover rounded-2xl cursor-pointer hover:rotate-3 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-sm"
                           @click="
-                            previewImage = `http://127.0.0.1:8000/images_information/${item.AMLDRINF_HREC_IMAGE}`
+                            previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`
                           "
                         />
                       </td>
@@ -295,10 +295,10 @@
                 class="relative group/img overflow-hidden rounded-[2.5rem] ring-8 ring-slate-50 shadow-inner"
               >
                 <img
-                  :src="`http://127.0.0.1:8000/images_action/${item.AMLDRACT_HREC_IMAGE}`"
+                  :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`"
                   class="w-full h-44 object-cover cursor-pointer hover:scale-110 transition-transform duration-700"
                   @click="
-                    previewImage = `http://127.0.0.1:8000/images_action/${item.AMLDRACT_HREC_IMAGE}`
+                    previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`
                   "
                 />
                 <div
@@ -516,7 +516,7 @@ watch(
 const getListInfAct = async () => {
   try {
     const response = await axios.get(
-      "http://127.0.0.1:8000/api/confirm/record",
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/confirm/record",
     );
     data_inf_act.value = response.data.data;
   } catch (error) {
@@ -540,7 +540,7 @@ const sendBackToEdit = async (id: string) => {
 const submitForm = async () => {
   try {
     const response = await axios.put(
-      `http://127.0.0.1:8000/api/confirm/send-back-to-edit/${hrec_id.value}`,
+      `http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/confirm/send-back-to-edit/${hrec_id.value}`,
       {
         form_name: form_name.value,
       },
@@ -585,7 +585,7 @@ const showConfirmModal = (
 const confirmForm = async () => {
   try {
     const response = await axios.post(
-      `http://127.0.0.1:8000/api/confirm/insert`,
+      `http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/confirm/insert`,
       {
         inf_id: inf_id.value,
         act_id: act_id.value,
@@ -623,7 +623,9 @@ const confirmForm = async () => {
 const options_user = ref<any>([]);
 const getUsers = async () => {
   try {
-    const response = await axios.get("http://127.0.0.1:8000/api/users");
+    const response = await axios.get(
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/users",
+    );
     options_user.value = response.data;
   } catch (error) {
     console.log(error);

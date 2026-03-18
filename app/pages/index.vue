@@ -385,10 +385,10 @@
                   >
                     <template v-if="item.AMLDRINF_HREC_IMAGE">
                       <img
-                        :src="`http://127.0.0.1:8000/images_information/${item.AMLDRINF_HREC_IMAGE}`"
+                        :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`"
                         class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-rose-200"
                         @click="
-                          previewImage = `http://127.0.0.1:8000/images_information/${item.AMLDRINF_HREC_IMAGE}`
+                          previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`
                         "
                       />
                     </template>
@@ -408,10 +408,10 @@
                   >
                     <template v-if="item.AMLDRACT_HREC_IMAGE">
                       <img
-                        :src="`http://127.0.0.1:8000/images_action/${item.AMLDRACT_HREC_IMAGE}`"
+                        :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`"
                         class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-rose-200"
                         @click="
-                          previewImage = `http://127.0.0.1:8000/images_action/${item.AMLDRACT_HREC_IMAGE}`
+                          previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`
                         "
                       />
                     </template>
@@ -829,7 +829,7 @@ const exportData = async () => {
 
     // Handle Image 1 (Information) - Column Q (17)
     if (item.AMLDRINF_HREC_IMAGE) {
-      const url = `http://127.0.0.1:8000/images_information/${item.AMLDRINF_HREC_IMAGE}`;
+      const url = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`;
       const base64Str = await getBase64ImageFromUrl(url);
       if (base64Str) {
         const ext =
@@ -850,7 +850,7 @@ const exportData = async () => {
 
     // Handle Image 2 (Action) - Column U (21)
     if (item.AMLDRACT_HREC_IMAGE) {
-      const url = `http://127.0.0.1:8000/images_action/${item.AMLDRACT_HREC_IMAGE}`;
+      const url = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`;
       const base64Str = await getBase64ImageFromUrl(url);
       if (base64Str) {
         const ext =
@@ -956,7 +956,9 @@ const options_cus = ref<any>([]);
 
 const getCustomer = async () => {
   try {
-    const response = await axios.get("http://127.0.0.1:8000/api/vcus");
+    const response = await axios.get(
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/vcus",
+    );
 
     fetch_customer.value = response.data;
     options_cus.value = fetch_customer.value.map((item: any) => {
@@ -976,7 +978,9 @@ const fetch_rec_all = ref<any>([]);
 
 const get_rec_all = async () => {
   try {
-    const response = await axios.get("http://127.0.0.1:8000/api/all-record");
+    const response = await axios.get(
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/all-record",
+    );
 
     original_rec_all.value = response.data;
     fetch_rec_all.value = response.data;
@@ -992,7 +996,9 @@ const get_rec_all = async () => {
 const options_user = ref<any>([]);
 const getUsers = async () => {
   try {
-    const response = await axios.get("http://127.0.0.1:8000/api/users");
+    const response = await axios.get(
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/users",
+    );
     options_user.value = response.data;
   } catch (error) {
     console.log(error);
@@ -1000,7 +1006,9 @@ const getUsers = async () => {
 };
 
 const findUser = (empno: string) => {
-  const user = options_user.value.find((user) => user.VEMPLOYEE_ID === empno);
+  const user = options_user.value.find(
+    (user: any) => user.VEMPLOYEE_ID === empno,
+  );
   return user ? user.VEMPLOYEE_ENFNAME + " " + user.VEMPLOYEE_ENLNAME : "";
 };
 
