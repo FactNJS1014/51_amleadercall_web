@@ -50,6 +50,7 @@ export default defineNuxtConfig({
           content: '51_amleadercall',
         },
       ],
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/images/Leader Call AM.svg' }],
     
     }
 
