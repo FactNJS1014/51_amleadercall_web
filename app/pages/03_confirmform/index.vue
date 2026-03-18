@@ -135,7 +135,7 @@
                   <tbody class="divide-y divide-slate-100">
                     <tr class="text-center bg-white/50">
                       <td class="px-6 py-4 text-slate-700 font-medium">
-                        {{ item.AMLDRINF_EMPHREC }}
+                        {{ findUser(item.AMLDRINF_EMPHREC) }}
                       </td>
                       <td class="px-6 py-4">
                         <span class="badge badge-blue">{{
@@ -244,7 +244,9 @@
                     </p>
                   </div>
                   <div class="flex items-center gap-6 pt-2">
-                    <div class="flex flex-col text-center space-y-2">
+                    <div
+                      class="flex flex-col text-center space-y-2 border-r border-slate-200 pr-6"
+                    >
                       <label
                         class="text-[9px] uppercase font-black tracking-widest text-slate-400"
                         >Type</label
@@ -273,7 +275,7 @@
                         >Action By</label
                       >
                       <span class="font-bold text-slate-600 text-sm">{{
-                        item.AMLDRACT_HREC_ACTIONEMP || "-"
+                        findUser(item.AMLDRACT_HREC_ACTIONEMP) || "-"
                       }}</span>
                     </div>
                   </div>
@@ -616,6 +618,24 @@ const confirmForm = async () => {
 };
 
 /**
+ * TODO: Get Users
+ */
+const options_user = ref<any>([]);
+const getUsers = async () => {
+  try {
+    const response = await axios.get("http://127.0.0.1:8000/api/users");
+    options_user.value = response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const findUser = (empno: string) => {
+  const user = options_user.value.find((user) => user.VEMPLOYEE_ID === empno);
+  return user ? user.VEMPLOYEE_ENFNAME + " " + user.VEMPLOYEE_ENLNAME : "";
+};
+
+/**
  * TODO: clear form
  */
 const clearForm = () => {
@@ -623,6 +643,7 @@ const clearForm = () => {
 };
 
 onMounted(() => {
+  getUsers();
   getListInfAct();
 });
 </script>

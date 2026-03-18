@@ -314,7 +314,7 @@
                     {{ item.AMLDRINF_DOC_NUM }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap">
-                    {{ item.AMLDRINF_EMPHREC }}
+                    {{ findUser(item.AMLDRINF_EMPHREC) }}
                   </td>
                   <td
                     class="px-6 py-4 whitespace-nowrap"
@@ -401,7 +401,7 @@
                     {{ item.AMLDRACT_HREC_ACTION }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap">
-                    {{ item.AMLDRACT_HREC_ACTIONEMP }}
+                    {{ findUser(item.AMLDRACT_HREC_ACTIONEMP) }}
                   </td>
                   <td
                     class="px-6 py-4 whitespace-nowrap flex items-center justify-center"
@@ -445,7 +445,7 @@
                     {{ item.AMLDRCONF_HREC_TOTALTIME }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap">
-                    {{ item.AMLDRCONF_HREC_EMPNO }}
+                    {{ findUser(item.AMLDRCONF_HREC_EMPNO) }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap">
                     {{
@@ -792,7 +792,7 @@ const exportData = async () => {
 
     const rowData = [
       item.AMLDRINF_DOC_NUM || "-",
-      item.AMLDRINF_EMPHREC || "-",
+      findUser(item.AMLDRINF_EMPHREC) || "-",
       timeRec,
       item.AMLDRINF_HREC_LINE || "-",
       item.AMLDRINF_HREC_CUS || "-",
@@ -810,13 +810,13 @@ const exportData = async () => {
       "", // Q (17) - Information Image Placeholder
       item.AMLDRACT_HREC_RTCAUSE || "-", // 18
       item.AMLDRACT_HREC_ACTION || "-", // 19
-      item.AMLDRACT_HREC_ACTIONEMP || "-", // 20
+      findUser(item.AMLDRACT_HREC_ACTIONEMP) || "-", // 20
       "", // U (21) - Action Image Placeholder
       actionTime, // 22
       item.AMLDRCONF_HREC_RESULT || "-", // 23
       item.AMLDRCONF_HREC_ENDTIME || "-", // 24
       item.AMLDRCONF_HREC_TOTALTIME || "-", // 25
-      item.AMLDRCONF_HREC_EMPNO || "-", // 26
+      findUser(item.AMLDRCONF_HREC_EMPNO) || "-", // 26
       confirmTime, // 27
     ];
 
@@ -986,7 +986,26 @@ const get_rec_all = async () => {
   }
 };
 
+/**
+ * TODO: Get Users
+ */
+const options_user = ref<any>([]);
+const getUsers = async () => {
+  try {
+    const response = await axios.get("http://127.0.0.1:8000/api/users");
+    options_user.value = response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const findUser = (empno: string) => {
+  const user = options_user.value.find((user) => user.VEMPLOYEE_ID === empno);
+  return user ? user.VEMPLOYEE_ENFNAME + " " + user.VEMPLOYEE_ENLNAME : "";
+};
+
 onMounted(() => {
+  getUsers();
   getCustomer();
   get_rec_all();
 });

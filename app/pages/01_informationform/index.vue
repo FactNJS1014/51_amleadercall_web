@@ -163,7 +163,7 @@
                 <td class="px-6 py-4 font-bold text-slate-900 leading-none">
                   {{ item.AMLDRINF_DOC_NUM }}
                 </td>
-                <td class="px-6 py-4">{{ item.AMLDRINF_EMPHREC }}</td>
+                <td class="px-6 py-4">{{ findUser(item.AMLDRINF_EMPHREC) }}</td>
                 <td class="px-6 py-4">
                   {{ dayjs(item.AMLDRINF_HREC_LSTDT).format("HH:mm") }}
                 </td>
@@ -1317,6 +1317,24 @@ const handleImageUpload = (event: Event) => {
   imagePreview.value = URL.createObjectURL(renamedFile);
 };
 
+/**
+ * TODO: Get Users from api
+ */
+const options_user = ref<any[]>([]);
+const getUsers = async () => {
+  try {
+    const response = await axios.get("http://127.0.0.1:8000/api/users");
+    options_user.value = response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const findUser = (empno: string) => {
+  const user = options_user.value.find((user) => user.VEMPLOYEE_ID === empno);
+  return user ? user.VEMPLOYEE_ENFNAME + " " + user.VEMPLOYEE_ENLNAME : "";
+};
+
 watch(
   () => inf.value.customer,
   (val) => {
@@ -1337,6 +1355,7 @@ watch(
 );
 
 onMounted(() => {
+  getUsers();
   getCustomer();
   getRecordInfo();
   getReject();

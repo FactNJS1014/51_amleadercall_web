@@ -99,16 +99,16 @@
                     item.AMLDRINF_HREC_LINE
                   }}</span>
                 </td>
-                <td class="px-6 py-4 font-semibold text-slate-700">
+                <td class="px-6 py-4 font-semibold">
                   {{ item.AMLDRINF_HREC_CUS }}
                 </td>
-                <td class="px-6 py-4 font-mono text-xs opacity-60">
+                <td class="px-6 py-4 font-mono text-[15px]">
                   {{ item.AMLDRINF_HREC_WON }}
                 </td>
-                <td class="px-6 py-4 text-slate-500">
+                <td class="px-6 py-4">
                   {{ item.AMLDRINF_HREC_MDLCD }}
                 </td>
-                <td class="px-6 py-4 text-slate-500 text-left">
+                <td class="px-6 py-4">
                   {{ item.AMLDRINF_HREC_MDLNM }}
                 </td>
                 <td class="px-6 py-4 font-medium">
@@ -165,6 +165,17 @@
                 class="text-slate-800 font-medium leading-relaxed bg-slate-50/80 p-4 rounded-3xl border border-slate-100"
               >
                 {{ item.AMLDRACT_HREC_ACTION }}
+              </p>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label
+                class="text-[10px] uppercase tracking-widest font-black text-indigo-400"
+                >Action By</label
+              >
+              <p
+                class="text-slate-800 font-medium leading-relaxed bg-slate-50/80 p-4 rounded-3xl border border-slate-100"
+              >
+                {{ findUser(item.AMLDRACT_HREC_ACTIONEMP) }}
               </p>
             </div>
           </div>
@@ -1087,7 +1098,26 @@ const sendToUpdate = async (id: string) => {
   }
 };
 
+/**
+ * TODO: Get Users
+ */
+const options_user = ref<any>([]);
+const getUsers = async () => {
+  try {
+    const response = await axios.get("http://127.0.0.1:8000/api/users");
+    options_user.value = response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const findUser = (empno: string) => {
+  const user = options_user.value.find((user) => user.VEMPLOYEE_ID === empno);
+  return user ? user.VEMPLOYEE_ENFNAME + " " + user.VEMPLOYEE_ENLNAME : "";
+};
+
 onMounted(() => {
+  getUsers();
   getData();
   getActionData();
   showActionReject();
