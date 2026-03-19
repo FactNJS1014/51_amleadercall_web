@@ -278,7 +278,7 @@ body {
 
 /* Tables - Modern Look */
 .table-container {
-  @apply relative overflow-hidden  border border-slate-200 bg-white;
+  @apply relative overflow-hidden  border border-slate-200 ;
 }
 
 table {
