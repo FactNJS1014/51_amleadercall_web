@@ -8,9 +8,7 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [tailwindcss()],
-    server: {
-      allowedHosts: true,
-    },
+   
   },
 
   routeRules: {
