@@ -11,164 +11,190 @@
         Report Leader Call (SMT & AUTO)
       </h2>
     </div>
-
-    <!-- Top Cards Panel -->
-    <div class="flex gap-6 lg:flex-row flex-col">
-      <!-- Filter Card -->
+    <!-- Stats Cards Wrapper -->
+    <div class="w-full flex flex-col sm:flex-row gap-6">
+      <!-- Record Complete Card -->
       <div
-        class="lg:w-[60%] w-full bg-white rounded-2xl shadow-sm border border-slate-200 flex flex-col overflow-hidden"
+        class="sm:w-1/2 w-full h-1/2 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl shadow-xl shadow-emerald-500/20 text-white relative overflow-hidden flex flex-col justify-between p-6 hover:-translate-y-1 transition-transform duration-300"
       >
         <div
-          class="px-5 py-4 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between"
+          class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4"
         >
-          <h3 class="font-bold text-slate-700 flex items-center gap-2">
-            <Search :size="18" class="text-indigo-500" /> Filter Options
-          </h3>
+          <CircleCheck :size="120" stroke-width="1.5" />
         </div>
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4"
-          >
-            <!-- Start Date -->
-            <div>
-              <label
-                for="filter_startdate"
-                class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block"
-                >Start Date</label
-              >
-              <input
-                type="date"
-                id="filter_startdate"
-                v-model="filter_startdate"
-                class="w-full rounded-lg border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3 py-2.5 bg-slate-50 hover:bg-white transition-colors"
-              />
-            </div>
-            <!-- End Date -->
-            <div>
-              <label
-                for="filter_enddate"
-                class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block"
-                >End Date</label
-              >
-              <input
-                type="date"
-                id="filter_enddate"
-                v-model="filter_enddate"
-                class="w-full rounded-lg border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3 py-2.5 bg-slate-50 hover:bg-white transition-colors"
-              />
-            </div>
-            <!-- Line -->
-            <div>
-              <label
-                for="filter_line"
-                class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block"
-                >Line</label
-              >
-              <Multiselect
-                id="filter_line"
-                v-model="filter_line"
-                :options="fetch_line"
-                :searchable="false"
-                :clearable="true"
-                class="mt-1 text-sm border-slate-200"
-              />
-            </div>
-            <!-- Customer -->
-            <div>
-              <label
-                for="filter_cus"
-                class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block"
-                >Customer</label
-              >
-              <Multiselect
-                id="filter_cus"
-                v-model="filter_cus"
-                :options="options_cus"
-                :searchable="true"
-                :clearable="true"
-                class="mt-1 text-sm border-slate-200"
-              />
-            </div>
+        <div class="relative z-10 flex items-center gap-3 mb-6">
+          <div class="bg-white/20 p-2.5 rounded-xl backdrop-blur-sm">
+            <CircleCheck :size="24" class="text-white" />
           </div>
-          <!-- Action Buttons -->
-          <div
-            class="flex gap-3 justify-end mt-4 pt-4 border-t border-slate-100"
-          >
-            <button
-              @click="exportData()"
-              class="px-4 py-2.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 rounded-xl font-semibold text-sm transition-colors flex items-center gap-2"
-            >
-              <Download :size="18" /> Export
-            </button>
-            <button
-              @click="searchData()"
-              class="px-6 py-2.5 bg-indigo-600 text-white hover:bg-indigo-700 rounded-xl shadow-lg shadow-indigo-200 font-semibold text-sm transition-colors flex items-center gap-2"
-            >
-              <Search :size="18" /> ค้นหา
-            </button>
+          <div>
+            <h3 class="font-bold text-emerald-50 leading-tight">Completed</h3>
+            <p class="text-emerald-100 text-xs font-medium">Total Records</p>
           </div>
+        </div>
+        <div class="relative z-10 flex items-end gap-2">
+          <h3 class="text-5xl font-black tracking-tight">
+            {{ fetch_rec_all.length }}
+          </h3>
         </div>
       </div>
 
-      <!-- Stats Cards Wrapper -->
-      <div class="lg:w-[40%] w-full flex flex-col sm:flex-row gap-6">
-        <!-- Record Complete Card -->
+      <!-- Pending Action Card -->
+      <div
+        class="sm:w-1/2 w-full h-1/2 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl shadow-xl shadow-amber-500/20 text-white relative overflow-hidden flex flex-col justify-between p-6 hover:-translate-y-1 transition-transform duration-300"
+        @click="showPending = !showPending"
+        :class="showPending ? 'border-4 border-amber-500' : ''"
+      >
         <div
-          class="sm:w-1/2 w-full bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl shadow-xl shadow-emerald-500/20 text-white relative overflow-hidden flex flex-col justify-between p-6 hover:-translate-y-1 transition-transform duration-300"
+          class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4"
         >
-          <div
-            class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4"
-          >
-            <CircleCheck :size="120" stroke-width="1.5" />
+          <ClipboardClock :size="120" stroke-width="1.5" />
+        </div>
+        <div class="relative z-10 flex items-center gap-3 mb-6">
+          <div class="bg-white/20 p-2.5 rounded-xl backdrop-blur-sm">
+            <ClipboardClock :size="24" class="text-white" />
           </div>
-          <div class="relative z-10 flex items-center gap-3 mb-6">
-            <div class="bg-white/20 p-2.5 rounded-xl backdrop-blur-sm">
-              <CircleCheck :size="24" class="text-white" />
-            </div>
-            <div>
-              <h3 class="font-bold text-emerald-50 leading-tight">Completed</h3>
-              <p class="text-emerald-100 text-xs font-medium">Total Records</p>
-            </div>
-          </div>
-          <div class="relative z-10 flex items-end gap-2">
-            <h3 class="text-5xl font-black tracking-tight">
-              {{ fetch_rec_all.length }}
+          <div>
+            <h3 class="font-bold text-amber-50 leading-tight">
+              Actions Pending
             </h3>
+            <p class="text-amber-100 text-xs font-medium">Required</p>
           </div>
         </div>
-
-        <!-- Pending Action Card -->
+        <div class="relative z-10 flex items-end gap-2">
+          <h3 class="text-5xl font-black tracking-tight">
+            {{ fetch_no_action.length }}
+          </h3>
+        </div>
+      </div>
+      <!-- Pending Confirm Card -->
+      <div
+        class="sm:w-1/2 w-full h-1/2 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-2xl shadow-xl shadow-blue-500/20 text-white relative overflow-hidden flex flex-col justify-between p-6 hover:-translate-y-1 transition-transform duration-300"
+      >
         <div
-          class="sm:w-1/2 w-full bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl shadow-xl shadow-amber-500/20 text-white relative overflow-hidden flex flex-col justify-between p-6 hover:-translate-y-1 transition-transform duration-300"
-          @click="showPending = !showPending"
-          :class="showPending ? 'border-4 border-amber-500' : ''"
+          class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4"
         >
-          <div
-            class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4"
-          >
-            <ClipboardClock :size="120" stroke-width="1.5" />
+          <AlarmClockCheck :size="120" stroke-width="1.5" />
+        </div>
+        <div class="relative z-10 flex items-center gap-3 mb-6">
+          <div class="bg-white/20 p-2.5 rounded-xl backdrop-blur-sm">
+            <AlarmClockCheck :size="24" class="text-white" />
           </div>
-          <div class="relative z-10 flex items-center gap-3 mb-6">
-            <div class="bg-white/20 p-2.5 rounded-xl backdrop-blur-sm">
-              <ClipboardClock :size="24" class="text-white" />
-            </div>
-            <div>
-              <h3 class="font-bold text-amber-50 leading-tight">Pending</h3>
-              <p class="text-amber-100 text-xs font-medium">Actions Required</p>
-            </div>
-          </div>
-          <div class="relative z-10 flex items-end gap-2">
-            <h3 class="text-5xl font-black tracking-tight">
-              {{ fetch_no_action.length }}
+          <div>
+            <h3 class="font-bold text-amber-50 leading-tight">
+              Confirm Pending
             </h3>
+            <p class="text-amber-100 text-xs font-medium">Required</p>
           </div>
+        </div>
+        <div class="relative z-10 flex items-end gap-2">
+          <h3 class="text-5xl font-black tracking-tight">
+            {{ fetch_no_confirm.length }}
+          </h3>
         </div>
       </div>
     </div>
-    <div class="">
-      <div
-        class="table-container shadow-sm border border-slate-200 rounded-xl overflow-hidden bg-white"
-      >
+
+    <div
+      class="w-full bg-white rounded-2xl shadow-sm border border-slate-200 flex flex-col overflow-hidden p-4"
+    >
+      <!-- Top Cards Panel -->
+      <div class="flex gap-6 lg:flex-row flex-col">
+        <!-- Filter Card -->
+        <div class="w-full">
+          <div
+            class="px-5 py-4 border-b border-slate-100 bg-gray-500 flex items-center justify-between rounded-t-lg"
+          >
+            <h3 class="font-bold text-white flex items-center gap-2">
+              <Search :size="18" class="text-indigo-200" /> Filter Options
+            </h3>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4"
+            >
+              <!-- Start Date -->
+              <div class="w-full">
+                <label
+                  for="filter_startdate"
+                  class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block"
+                  >Start Date</label
+                >
+                <input
+                  type="date"
+                  id="filter_startdate"
+                  v-model="filter_startdate"
+                  class="w-full rounded-lg border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3 py-2.5 bg-slate-50 hover:bg-white transition-colors"
+                />
+              </div>
+              <!-- End Date -->
+              <div>
+                <label
+                  for="filter_enddate"
+                  class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block"
+                  >End Date</label
+                >
+                <input
+                  type="date"
+                  id="filter_enddate"
+                  v-model="filter_enddate"
+                  class="w-full rounded-lg border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3 py-2.5 bg-slate-50 hover:bg-white transition-colors"
+                />
+              </div>
+              <!-- Line -->
+              <div>
+                <label
+                  for="filter_line"
+                  class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block"
+                  >Line</label
+                >
+                <Multiselect
+                  id="filter_line"
+                  v-model="filter_line"
+                  :options="fetch_line"
+                  :searchable="false"
+                  :clearable="true"
+                  class="mt-1 text-sm border-slate-200"
+                />
+              </div>
+              <!-- Customer -->
+              <div>
+                <label
+                  for="filter_cus"
+                  class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block"
+                  >Customer</label
+                >
+                <Multiselect
+                  id="filter_cus"
+                  v-model="filter_cus"
+                  :options="options_cus"
+                  :searchable="true"
+                  :clearable="true"
+                  class="mt-1 text-sm border-slate-200"
+                />
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div
+              class="flex gap-3 justify-end mt-4 pt-4 border-t border-slate-100"
+            >
+              <button
+                @click="exportData()"
+                class="px-4 py-2.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 rounded-xl font-semibold text-sm transition-colors flex items-center gap-2"
+              >
+                <Download :size="18" /> Export
+              </button>
+              <button
+                @click="searchData()"
+                class="px-6 py-2.5 bg-indigo-600 text-white hover:bg-indigo-700 rounded-xl shadow-lg shadow-indigo-200 font-semibold text-sm transition-colors flex items-center gap-2"
+              >
+                <Search :size="18" /> ค้นหา
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-container shadow-sm border">
         <div
           class="overflow-x-auto max-h-[calc(100vh-28rem)] overflow-y-auto w-full"
         >
@@ -646,7 +672,10 @@
               <X :size="18" />
             </button>
             <!-- Title -->
-            <h2 class="text-xl font-bold mb-4">Pending Actions</h2>
+            <div class="flex items-center gap-2 mb-4">
+              <ClipboardClock :size="24" class="text-indigo-600" />
+              <h2 class="text-lg font-bold">Pending Actions</h2>
+            </div>
 
             <div class="max-h-[calc(100vh-24rem)] overflow-y-auto">
               <table class="w-full">
@@ -823,6 +852,7 @@ import {
   X,
   CircleCheck,
   ClipboardClock,
+  AlarmClockCheck,
 } from "lucide-vue-next";
 import Multiselect from "@vueform/multiselect";
 import axios from "axios";
@@ -1236,6 +1266,7 @@ const getCustomer = async () => {
 const original_rec_all = ref<any>([]);
 const fetch_rec_all = ref<any>([]);
 const fetch_no_action = ref<any>([]);
+const fetch_no_confirm = ref<any>([]);
 
 const get_rec_all = async () => {
   try {
@@ -1246,6 +1277,7 @@ const get_rec_all = async () => {
     original_rec_all.value = response.data.complete;
     fetch_rec_all.value = response.data.complete;
     fetch_no_action.value = response.data.no_action;
+    fetch_no_confirm.value = response.data.no_confirm;
     console.log(fetch_rec_all.value);
   } catch (error) {
     console.error(error);
