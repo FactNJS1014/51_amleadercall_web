@@ -53,6 +53,10 @@ export default defineNuxtConfig({
           href: "/images/Leader Call AM.svg",
         },
       ],
+      
     },
+    baseURL: "/51_amleadercall/51_amleadercall_F/",
+    buildAssetsDir: "_nuxt/", // โฟลเดอร์เก็บ assets
+    cdnURL: "", 
   },
 });
