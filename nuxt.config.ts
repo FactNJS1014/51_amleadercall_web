@@ -8,7 +8,6 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [tailwindcss()],
-   
   },
 
   routeRules: {
@@ -40,7 +39,7 @@ export default defineNuxtConfig({
   nitro: {
     preset: "static", // generate เป็น static file
   },
-  
+
   app: {
     head: {
       title: "51_amleadercall",
@@ -54,14 +53,13 @@ export default defineNuxtConfig({
       link: [
         {
           rel: "icon",
-          type: "image/x-icon",
-          href: "/images/Leader Call AM.svg",
+          type: "image/svg+xml",
+          href: "Leader Call AM.svg",
         },
       ],
-      
     },
     baseURL: "/51_amleadercall/51_amleadercall_F/",
     buildAssetsDir: "_nuxt/", // โฟลเดอร์เก็บ assets
-    cdnURL: "", 
+    cdnURL: "",
   },
 });
