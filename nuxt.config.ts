@@ -34,7 +34,10 @@ export default defineNuxtConfig({
       appLayout: "01-leadercall-default",
     },
   },
-  ssr: true,
+  ssr: false,
+  nitro: {
+    preset: "static", // generate เป็น static file
+  },
   
   app: {
     head: {
