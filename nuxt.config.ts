@@ -39,9 +39,7 @@ export default defineNuxtConfig({
     },
   },
   ssr: true,
-  nitro: {
-    preset: "static", // generate เป็น static file
-  },
+ 
   app: {
      head: {
       title: '51_amleadercall',
