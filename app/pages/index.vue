@@ -70,6 +70,8 @@
       <!-- Pending Confirm Card -->
       <div
         class="sm:w-1/2 w-full h-1/2 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-2xl shadow-xl shadow-blue-500/20 text-white relative overflow-hidden flex flex-col justify-between p-6 hover:-translate-y-1 transition-transform duration-300"
+        @click="showPendingConfirm = !showPendingConfirm"
+        :class="showPendingConfirm ? 'border-4 border-blue-500' : ''"
       >
         <div
           class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4"
@@ -843,6 +845,286 @@
       </div>
     </Transition>
   </Teleport>
+  <Teleport to="body">
+    <Transition name="lightbox">
+      <div
+        v-if="showPendingConfirm"
+        class="fixed inset-0 z-[999] flex items-center justify-center bg-black/70 backdrop-blur-sm"
+        @click.self="showPendingConfirm = false"
+      >
+        <div
+          class="bg-white w-[90vw] max-h-[90vh] rounded-xl p-6 overflow-auto relative"
+        >
+          <div class="relative max-w-[90vw] max-h-[90vh]">
+            <!-- Close Button -->
+            <button
+              @click="showPendingConfirm = false"
+              class="absolute -top-4 -right-4 w-9 h-9 flex items-center justify-center bg-white text-gray-700 rounded-full shadow-lg hover:bg-rose-500 hover:text-white transition z-10"
+            >
+              <X :size="18" />
+            </button>
+            <!-- Title -->
+            <div class="flex items-center gap-2 mb-4">
+              <ClipboardClock :size="24" class="text-indigo-600" />
+              <h2 class="text-lg font-bold">Pending Actions</h2>
+            </div>
+
+            <div class="max-h-[calc(100vh-24rem)] overflow-y-auto">
+              <table class="w-full">
+                <thead>
+                  <tr>
+                    <th
+                      class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
+                      rowspan="2"
+                    >
+                      หมายเลขเอกสาร
+                    </th>
+                    <th
+                      colspan="15"
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
+                    >
+                      Information
+                    </th>
+                    <th
+                      colspan="6"
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
+                    >
+                      Action
+                    </th>
+                  </tr>
+                  <tr>
+                    <th
+                      class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      ผู้บันทึก
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      เวลาบันทึกล่าสุด
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      Line
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      Customer
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      Work Order
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      Model Code
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      Model Name
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[160px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Lot Size
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Process
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[130px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Cause Type
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[280px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Problem
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Location
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Machine
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[170px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      จำนวนงานเสีย
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      รูปภาพ
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Root Cause
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Action
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Action Type
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      Action By
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                    >
+                      รูปภาพ
+                    </th>
+                    <th
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200"
+                    >
+                      เวลาบันทึกล่าสุด
+                    </th>
+                  </tr>
+                </thead>
+
+                <!-- BODY -->
+                <tbody class="divide-y divide-slate-100">
+                  <tr
+                    v-for="item in fetch_no_confirm"
+                    :key="item.AMLDRINF_HREC_ID"
+                    class="hover:bg-indigo-50/30 transition-colors text-center"
+                  >
+                    <td class="px-6 py-4 font-bold text-slate-900 leading-none">
+                      {{ item.AMLDRINF_DOC_NUM }}
+                    </td>
+                    <td class="px-6 py-4">
+                      {{ findUser(item.AMLDRINF_EMPHREC) }}
+                    </td>
+                    <td class="px-6 py-4">
+                      {{ dayjs(item.AMLDRINF_HREC_LSTDT).format("HH:mm") }}
+                    </td>
+                    <td class="px-6 py-4">
+                      <span class="badge badge-blue">{{
+                        item.AMLDRINF_HREC_LINE
+                      }}</span>
+                    </td>
+                    <td class="px-6 py-4 font-semibold text-slate-700">
+                      {{ item.AMLDRINF_HREC_CUS }}
+                    </td>
+                    <td class="px-6 py-4 font-mono text-[15px]">
+                      {{ item.AMLDRINF_HREC_WON }}
+                    </td>
+                    <td class="px-6 py-4">{{ item.AMLDRINF_HREC_MDLCD }}</td>
+                    <td class="px-6 py-4">
+                      {{ item.AMLDRINF_HREC_MDLNM }}
+                    </td>
+                    <td class="px-6 py-4 font-medium">
+                      {{ item.AMLDRINF_HREC_LOTS }}
+                    </td>
+                    <td class="px-6 py-4">
+                      <span class="badge badge-emerald">{{
+                        item.AMLDRINF_HREC_PROCS
+                      }}</span>
+                    </td>
+                    <td class="px-6 py-4">
+                      <span
+                        class="font-bold text-indigo-600 uppercase text-sm"
+                        >{{ item.AMLDRINF_HREC_CSTYPE }}</span
+                      >
+                    </td>
+                    <td class="px-6 py-4 min-w-[200px] text-sm">
+                      {{ item.AMLDRINF_HREC_PROB }}
+                    </td>
+                    <td class="px-6 py-4">
+                      {{ item.AMLDRINF_HREC_LOCATE }}
+                    </td>
+                    <td class="px-6 py-4">
+                      {{ item.AMLDRINF_HREC_MACHINE }}
+                    </td>
+                    <td class="px-6 py-4 font-black text-rose-600 text-base">
+                      {{ item.AMLDRINF_HREC_QTYNG }}
+                    </td>
+                    <td class="px-6 py-4 flex items-center justify-center">
+                      <template v-if="item.AMLDRINF_HREC_IMAGE">
+                        <img
+                          :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`"
+                          class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-slate-200"
+                          @click="
+                            previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`
+                          "
+                        />
+                      </template>
+                      <span v-else class="text-slate-300 font-bold">-</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      {{ item.AMLDRACT_HREC_RTCAUSE }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      {{ item.AMLDRACT_HREC_ACTION }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      {{ item.AMLDRACT_HREC_EDITTYPE }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      {{ findUser(item.AMLDRACT_HREC_ACTIONEMP) }}
+                    </td>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap flex items-center justify-center"
+                    >
+                      <template v-if="item.AMLDRACT_HREC_IMAGE">
+                        <img
+                          :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`"
+                          class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-rose-200"
+                          @click="
+                            previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`
+                          "
+                        />
+                      </template>
+                      <span v-else class="text-rose-200 font-bold">-</span>
+                    </td>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap border-r border-slate-200"
+                      v-if="item.AMLDRACT_HREC_UPDATELSTDT === null"
+                    >
+                      {{
+                        dayjs(item.AMLDRACT_HREC_LSTDT).format(
+                          "DD/MM/YYYY HH:mm",
+                        )
+                      }}
+                    </td>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap border-r border-slate-200"
+                      v-else
+                    >
+                      {{
+                        dayjs(item.AMLDRACT_HREC_UPDATELSTDT).format(
+                          "DD/MM/YYYY HH:mm",
+                        )
+                      }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Transition>
+  </Teleport>
 </template>
 <script setup lang="ts">
 import {
@@ -866,6 +1148,7 @@ import { saveAs } from "file-saver";
  * TODO: สร้างตัวแปรสำหรับเก็บข้อมูล
  */
 const showPending = ref(false);
+const showPendingConfirm = ref(false);
 const tableRef = ref<HTMLElement | null>(null);
 
 /**
