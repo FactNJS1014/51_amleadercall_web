@@ -14,6 +14,7 @@ export default defineNuxtConfig({
   routeRules: {
     "/": {
       appLayout: "01-leadercall-default",
+      isr: 100
     },
     "/01_informationform": {
       appLayout: "01-leadercall-default",
@@ -33,6 +34,7 @@ export default defineNuxtConfig({
     "/03_confirmform/*": {
       appLayout: "01-leadercall-default",
     },
+    
   },
   ssr: false,
   nitro: {
