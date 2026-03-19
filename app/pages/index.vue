@@ -16,6 +16,7 @@
       <!-- Record Complete Card -->
       <div
         class="sm:w-1/2 w-full h-1/2 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl shadow-xl shadow-emerald-500/20 text-white relative overflow-hidden flex flex-col justify-between p-6 hover:-translate-y-1 transition-transform duration-300"
+        @click="scrollToTable()"
       >
         <div
           class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4"
@@ -198,7 +199,7 @@
         <div
           class="overflow-x-auto max-h-[calc(100vh-28rem)] overflow-y-auto w-full"
         >
-          <table class="w-full">
+          <table class="w-full" ref="tableRef">
             <thead class="sticky top-0 z-10">
               <tr>
                 <th
@@ -865,6 +866,18 @@ import { saveAs } from "file-saver";
  * TODO: สร้างตัวแปรสำหรับเก็บข้อมูล
  */
 const showPending = ref(false);
+const tableRef = ref<HTMLElement | null>(null);
+
+/**
+ * TODO: Scrollable table
+ */
+
+const scrollToTable = () => {
+  tableRef.value?.scrollIntoView({
+    behavior: "smooth", // เลื่อนนุ่ม ๆ
+    block: "start", // ไปชิดด้านบน
+  });
+};
 
 // Pagination variables
 const currentPage = ref(1);
