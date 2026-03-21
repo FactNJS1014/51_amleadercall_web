@@ -177,23 +177,47 @@
               </div>
             </div>
 
-            <!-- Action Buttons -->
             <div
-              class="flex gap-3 justify-end mt-4 pt-4 border-t border-slate-100"
+              class="flex justify-between border-t border-slate-100 mt-4 pt-4"
             >
-              <button
-                @click="exportData()"
-                class="px-4 py-2.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 rounded-xl font-semibold text-sm transition-colors flex items-center gap-2"
-              >
-                <Download :size="18" /> Export
-              </button>
-              <button
-                @click="searchData()"
-                class="px-6 py-2.5 bg-indigo-600 text-white hover:bg-indigo-700 rounded-xl shadow-lg shadow-indigo-200 font-semibold text-sm transition-colors flex items-center gap-2"
-              >
-                <Search :size="18" /> ค้นหา
-              </button>
+              <div class="flex gap-2 items-center">
+                <div class="flex gap-2">
+                  <p class="text-rose-500 text-sm font-bold">สีแดง (open) =</p>
+                  <p class="text-rose-500 text-sm">ไม่สามารถแก้ไขได้</p>
+                </div>
+                <span class="hidden lg:block">,</span>
+                <div class="flex gap-2">
+                  <p class="text-amber-500 text-sm font-bold">
+                    สีเหลือง (temporary) =
+                  </p>
+                  <p class="text-amber-500 text-sm">แก้ไขได้ชั่วคราว</p>
+                </div>
+                <span class="hidden lg:block">,</span>
+                <div class="flex gap-2">
+                  <p class="text-emerald-500 text-sm font-bold">
+                    สีเขียว (close) =
+                  </p>
+                  <p class="text-emerald-500 text-sm">สามารถแก้ไขได้</p>
+                </div>
+              </div>
+
+              <div class="flex gap-3">
+                <button
+                  @click="exportData()"
+                  class="px-4 py-2.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 rounded-xl font-semibold text-sm transition-colors flex items-center gap-2"
+                >
+                  <Download :size="18" /> Export
+                </button>
+                <button
+                  @click="searchData()"
+                  class="px-6 py-2.5 bg-indigo-600 text-white hover:bg-indigo-700 rounded-xl shadow-lg shadow-indigo-200 font-semibold text-sm transition-colors flex items-center gap-2"
+                >
+                  <Search :size="18" /> ค้นหา
+                </button>
+              </div>
             </div>
+
+            <!-- Action Buttons -->
           </div>
         </div>
       </div>
