@@ -629,6 +629,7 @@
         <button
           class="bg-emerald-500 hover:bg-emerald-600 px-4 py-2 rounded-lg flex items-center gap-2 text-white"
           @click="submitForm"
+          :disabled="isSubmit"
         >
           <Save :size="17" />
           บันทึก
@@ -818,7 +819,13 @@ const handleImageUpload = (event: Event) => {
 /**
  * TODO: function save data
  */
+
+const isSubmit = ref(false);
+
 const submitForm = async () => {
+  if (isSubmit.value) return;
+
+  isSubmit.value = true;
   try {
     if (!valid()) {
       Swal.fire({
@@ -888,6 +895,8 @@ const submitForm = async () => {
       icon: "error",
       confirmButtonText: "OK",
     });
+  } finally {
+    isSubmit.value = false;
   }
 };
 

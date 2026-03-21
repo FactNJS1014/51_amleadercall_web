@@ -339,6 +339,7 @@
                 item.AMLDRINF_HREC_STARTTIME,
               )
             "
+            :disabled="isSubmit"
           >
             <Send
               class="w-5 h-5 mr-3 group-hover:translate-x-1 transition-transform"
@@ -537,7 +538,12 @@ const sendBackToEdit = async (id: string) => {
   showModal.value = true;
 };
 
+const isSubmit = ref(false);
+
 const submitForm = async () => {
+  if (isSubmit.value) return;
+
+  isSubmit.value = true;
   try {
     const response = await axios.put(
       `http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/confirm/send-back-to-edit/${hrec_id.value}`,
@@ -564,6 +570,8 @@ const submitForm = async () => {
       title: "Error",
       text: "Error fetching data",
     });
+  } finally {
+    isSubmit.value = false;
   }
 };
 

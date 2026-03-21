@@ -746,7 +746,7 @@
     </form>
     <!-- เนื้อหาในส่วน Footer (Optional Slot) -->
     <template #footer>
-      <button @click="submitForm" class="btn-save">
+      <button @click="submitForm" class="btn-save" :disabled="isSubmit">
         <Save />
         บันทึก
       </button>
@@ -1010,8 +1010,14 @@ const validateForm = () => {
   return isValid;
 };
 
+const isSubmit = ref(false);
+
 const submitForm = async (e?: Event) => {
   if (e) e.preventDefault();
+
+  if (isSubmit.value) return;
+
+  isSubmit.value = true;
 
   try {
     if (!validateForm()) {
@@ -1086,6 +1092,8 @@ const submitForm = async (e?: Event) => {
       icon: "error",
       confirmButtonText: "OK",
     });
+  } finally {
+    isSubmit.value = false;
   }
 };
 
