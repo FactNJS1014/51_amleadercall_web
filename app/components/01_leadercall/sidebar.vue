@@ -26,19 +26,19 @@ const menuItems: MenuItem[] = [
     label: "Information Form",
     icon: BookPlus,
     to: "/01_informationform",
-    permission: [1, 8],
+    permission: [1, 8, 9],
   },
   {
     label: "Action Form",
     icon: BookPlus,
     to: "/02_actionform",
-    permission: [1, 8],
+    permission: [1, 8, 9],
   },
   {
     label: "Confirm Lists",
     icon: ClipboardList,
     to: "/03_confirmform",
-    permission: [9, 8],
+    permission: [8, 9],
   },
 ];
 
