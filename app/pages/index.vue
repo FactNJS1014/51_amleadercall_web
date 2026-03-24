@@ -660,7 +660,7 @@
     <Transition name="lightbox">
       <div
         v-if="previewImage"
-        class="fixed inset-0 z-[999] flex items-center justify-center bg-black/70 backdrop-blur-sm"
+        class="fixed inset-0 z-[1200] flex items-center justify-center bg-black/70 backdrop-blur-sm"
         @click.self="previewImage = ''"
       >
         <div class="relative max-w-[90vw] max-h-[90vh]">
