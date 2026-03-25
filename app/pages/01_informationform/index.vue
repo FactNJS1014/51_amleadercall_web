@@ -688,7 +688,12 @@
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
         <div class="flex flex-col gap-2">
-          <label>Image:</label>
+          <label
+            >Image:
+            <span class="text-red-500 mr-2"
+              >* (บังคับต้องถ่ายรูปหรือเลือกรูปภาพ)</span
+            ></label
+          >
 
           <!-- กรณีแก้ไข: มีรูปเดิมอยู่แล้ว -->
           <div
