@@ -845,50 +845,62 @@ const isListening = ref(false);
 let recognition: any = null;
 
 const toggleVoiceInput = () => {
-  if (isListening.value) {
-    recognition?.stop();
-    isListening.value = false;
-    return;
-  }
-
   const SpeechRecognition =
     (window as any).SpeechRecognition ||
     (window as any).webkitSpeechRecognition;
 
   if (!SpeechRecognition) {
-    alert(
-      "เบราว์เซอร์ของคุณไม่รองรับการพิมด้วยเสียง\nกรุณาใช้ Chrome หรือ Edge",
-    );
+    alert("เบราว์เซอร์ไม่รองรับ");
     return;
   }
 
-  recognition = new SpeechRecognition();
-  recognition.lang = "th-TH";
-  recognition.interimResults = false; // รับเฉพาะผลลัพธ์สุดท้าย
-  recognition.maxAlternatives = 1;
+  // ✅ สร้างครั้งเดียว
+  if (!recognition) {
+    recognition = new SpeechRecognition();
 
-  recognition.onstart = () => {
-    isListening.value = true;
-  };
+    recognition.lang = "th-TH";
+    recognition.interimResults = false;
+    recognition.continuous = false; // สำคัญ
+    recognition.maxAlternatives = 1;
 
-  recognition.onresult = (event: any) => {
-    const transcript = event.results[0][0].transcript;
-    inf.value.prob = inf.value.prob
-      ? inf.value.prob + " " + transcript
-      : transcript;
-    clearError("prob");
-    // ปิดไมโครโฟนอัตโนมัติเมื่อได้ผลลัพธ์
+    recognition.onstart = () => {
+      isListening.value = true;
+    };
+
+    recognition.onresult = (event: any) => {
+      // ✅ ใช้ result ล่าสุดเท่านั้น
+      const lastIndex = event.results.length - 1;
+      const result = event.results[lastIndex];
+
+      if (!result.isFinal) return;
+
+      const transcript = result[0].transcript.trim();
+
+      // ✅ กันซ้ำ
+      if (!transcript) return;
+
+      inf.value.prob = inf.value.prob
+        ? inf.value.prob + " " + transcript
+        : transcript;
+
+      clearError("prob");
+    };
+
+    recognition.onend = () => {
+      isListening.value = false;
+    };
+
+    recognition.onerror = (event: any) => {
+      console.error("error:", event.error);
+      isListening.value = false;
+    };
+  }
+
+  // toggle
+  if (isListening.value) {
     recognition.stop();
-  };
-
-  recognition.onend = () => {
-    isListening.value = false;
-  };
-
-  recognition.onerror = (event: any) => {
-    console.error("Speech recognition error:", event.error);
-    isListening.value = false;
-  };
+    return;
+  }
 
   recognition.start();
 };
