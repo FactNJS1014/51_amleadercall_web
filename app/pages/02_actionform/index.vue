@@ -914,103 +914,126 @@ let recognition_root_cause: any = null;
 let recognition_action: any = null;
 
 const toggleVoiceInput_root_cause = () => {
-  if (isListening_root_cause.value) {
-    recognition_root_cause?.stop();
-    isListening_root_cause.value = false;
-    return;
-  }
-
   const SpeechRecognition =
     (window as any).SpeechRecognition ||
     (window as any).webkitSpeechRecognition;
 
   if (!SpeechRecognition) {
-    alert(
-      "เบราว์เซอร์ของคุณไม่รองรับการพิมด้วยเสียง\nกรุณาใช้ Chrome หรือ Edge",
-    );
+    alert("เบราว์เซอร์ไม่รองรับ");
     return;
   }
 
-  recognition_root_cause = new SpeechRecognition();
-  recognition_root_cause.lang = "th-TH";
-  recognition_root_cause.interimResults = false; // รับเฉพาะผลลัพธ์สุดท้าย
-  recognition_root_cause.maxAlternatives = 1;
+  // ✅ สร้างครั้งเดียว
+  if (!recognition_root_cause) {
+    recognition_root_cause = new SpeechRecognition();
 
-  recognition_root_cause.onstart = () => {
-    isListening_root_cause.value = true;
-  };
+    recognition_root_cause.lang = "th-TH";
+    recognition_root_cause.interimResults = false;
+    recognition_root_cause.continuous = false; // สำคัญ
+    recognition_root_cause.maxAlternatives = 1;
 
-  recognition_root_cause.onresult = (event: any) => {
-    const transcript = event.results[0][0].transcript;
-    act.value.root_cause = act.value.root_cause
-      ? act.value.root_cause + " " + transcript
-      : transcript;
-    clearError("root_cause");
-    // ปิดไมโครโฟนอัตโนมัติเมื่อได้ผลลัพธ์
+    recognition_root_cause.onstart = () => {
+      isListening_root_cause.value = true;
+    };
+
+    recognition_root_cause.onresult = (event: any) => {
+      // ✅ ใช้ result ล่าสุดเท่านั้น
+      const lastIndex = event.results.length - 1;
+      const result = event.results[lastIndex];
+
+      if (!result.isFinal) return;
+
+      const transcript = result[0].transcript.trim();
+
+      // ✅ กันซ้ำ
+      if (!transcript) return;
+
+      act.value.root_cause = act.value.root_cause
+        ? act.value.root_cause + " " + transcript
+        : transcript;
+
+      clearError("root_cause");
+    };
+
+    recognition_root_cause.onend = () => {
+      isListening_root_cause.value = false;
+    };
+
+    recognition_root_cause.onerror = (event: any) => {
+      console.error("error:", event.error);
+      isListening_root_cause.value = false;
+    };
+  }
+
+  // toggle
+  if (isListening_root_cause.value) {
     recognition_root_cause.stop();
-  };
-
-  recognition_root_cause.onend = () => {
-    isListening_root_cause.value = false;
-  };
-
-  recognition_root_cause.onerror = (event: any) => {
-    console.error("Speech recognition error:", event.error);
-    isListening_root_cause.value = false;
-  };
+    return;
+  }
 
   recognition_root_cause.start();
 };
 
 const toggleVoiceInput_action = () => {
-  if (isListening_action.value) {
-    recognition_action?.stop();
-    isListening_action.value = false;
-    return;
-  }
-
   const SpeechRecognition =
     (window as any).SpeechRecognition ||
     (window as any).webkitSpeechRecognition;
 
   if (!SpeechRecognition) {
-    alert(
-      "เบราว์เซอร์ของคุณไม่รองรับการพิมด้วยเสียง\nกรุณาใช้ Chrome หรือ Edge",
-    );
+    alert("เบราว์เซอร์ไม่รองรับ");
     return;
   }
 
-  recognition_action = new SpeechRecognition();
-  recognition_action.lang = "th-TH";
-  recognition_action.interimResults = false; // รับเฉพาะผลลัพธ์สุดท้าย
-  recognition_action.maxAlternatives = 1;
+  // ✅ สร้างครั้งเดียว
+  if (!recognition_action) {
+    recognition_action = new SpeechRecognition();
 
-  recognition_action.onstart = () => {
-    isListening_action.value = true;
-  };
+    recognition_action.lang = "th-TH";
+    recognition_action.interimResults = false;
+    recognition_action.continuous = false; // สำคัญ
+    recognition_action.maxAlternatives = 1;
 
-  recognition_action.onresult = (event: any) => {
-    const transcript = event.results[0][0].transcript;
-    act.value.action = act.value.action
-      ? act.value.action + " " + transcript
-      : transcript;
-    clearError("action");
-    // ปิดไมโครโฟนอัตโนมัติเมื่อได้ผลลัพธ์
+    recognition_action.onstart = () => {
+      isListening_action.value = true;
+    };
+
+    recognition_action.onresult = (event: any) => {
+      // ✅ ใช้ result ล่าสุดเท่านั้น
+      const lastIndex = event.results.length - 1;
+      const result = event.results[lastIndex];
+
+      if (!result.isFinal) return;
+
+      const transcript = result[0].transcript.trim();
+
+      // ✅ กันซ้ำ
+      if (!transcript) return;
+
+      act.value.action = act.value.action
+        ? act.value.action + " " + transcript
+        : transcript;
+
+      clearError("action");
+    };
+
+    recognition_action.onend = () => {
+      isListening_action.value = false;
+    };
+
+    recognition_action.onerror = (event: any) => {
+      console.error("error:", event.error);
+      isListening_action.value = false;
+    };
+  }
+
+  // toggle
+  if (isListening_action.value) {
     recognition_action.stop();
-  };
-
-  recognition_action.onend = () => {
-    isListening_action.value = false;
-  };
-
-  recognition_action.onerror = (event: any) => {
-    console.error("Speech recognition error:", event.error);
-    isListening_action.value = false;
-  };
+    return;
+  }
 
   recognition_action.start();
 };
-
 /**
  * TODO: clear form
  */
