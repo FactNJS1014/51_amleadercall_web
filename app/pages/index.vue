@@ -688,7 +688,7 @@
         @click.self="showPending = false"
       >
         <div
-          class="bg-white w-[90vw] max-h-[90vh] rounded-xl p-6 overflow-auto relative"
+          class="bg-white w-[90vw] max-h-[90vh] rounded-xl p-6 overflow-auto relative animate-fade-in space-y-4"
         >
           <div class="relative max-w-[90vw] max-h-[90vh]">
             <!-- Close Button -->
@@ -865,6 +865,11 @@
               </table>
             </div>
           </div>
+          <NuxtLink
+            to="/02_actionform"
+            class="bg-amber-500 px-3 py-2 rounded-lg text-white flex items-center gap-2 hover:bg-amber-600 transition-colors w-fit"
+            >Go to Action Form Page <ArrowBigRight class="w-5 h-5"
+          /></NuxtLink>
         </div>
       </div>
     </Transition>
@@ -877,7 +882,7 @@
         @click.self="showPendingConfirm = false"
       >
         <div
-          class="bg-white w-[90vw] max-h-[90vh] rounded-xl p-6 overflow-auto relative"
+          class="bg-white w-[90vw] max-h-[90vh] rounded-xl p-6 overflow-auto relative space-y-4 animate-fade-in"
         >
           <div class="relative max-w-[90vw] max-h-[90vh]">
             <!-- Close Button -->
@@ -1145,6 +1150,11 @@
               </table>
             </div>
           </div>
+          <NuxtLink
+            to="/03_confirmform"
+            class="bg-blue-500 px-3 py-2 rounded-lg text-white flex items-center gap-2 hover:bg-blue-600 transition-colors w-fit"
+            >Go to Confirm Lists Page <ArrowBigRight class="w-5 h-5"
+          /></NuxtLink>
         </div>
       </div>
     </Transition>
@@ -1160,6 +1170,7 @@ import {
   CircleCheck,
   ClipboardClock,
   AlarmClockCheck,
+  ArrowBigRight,
 } from "lucide-vue-next";
 import Multiselect from "@vueform/multiselect";
 import axios from "axios";
