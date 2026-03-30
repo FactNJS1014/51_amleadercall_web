@@ -164,8 +164,20 @@
                   {{ item.AMLDRINF_DOC_NUM }}
                 </td>
                 <td class="px-6 py-4">{{ findUser(item.AMLDRINF_EMPHREC) }}</td>
-                <td class="px-6 py-4">
-                  {{ dayjs(item.AMLDRINF_HREC_LSTDT).format("HH:mm") }}
+                <td
+                  class="px-6 py-4"
+                  v-if="item.AMLDRINF_HREC_UPDATELSTDT === null"
+                >
+                  {{
+                    dayjs(item.AMLDRINF_HREC_LSTDT).format("DD/MM/YYYY HH:mm")
+                  }}
+                </td>
+                <td class="px-6 py-4" v-else>
+                  {{
+                    dayjs(item.AMLDRINF_HREC_UPDATELSTDT).format(
+                      "DD/MM/YYYY HH:mm",
+                    )
+                  }}
                 </td>
                 <td class="px-6 py-4">
                   <span class="badge badge-blue">{{
