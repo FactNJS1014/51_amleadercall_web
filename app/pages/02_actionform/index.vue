@@ -33,12 +33,17 @@
                   หมายเลขเอกสาร
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[70px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                  class="px-6 py-4 min-w-[500px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  Problem
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[130px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
                 >
                   Line
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                  class="px-6 py-4 min-w-[130px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
                 >
                   Customer
                 </th>
@@ -58,7 +63,7 @@
                   Model Name
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
                 >
                   Lot Size
                 </th>
@@ -92,6 +97,9 @@
                   <span class="font-bold text-slate-900">{{
                     item.AMLDRINF_DOC_NUM
                   }}</span>
+                </td>
+                <td class="px-6 py-4 font-semibold">
+                  {{ item.AMLDRINF_HREC_PROB }}
                 </td>
 
                 <td class="px-6 py-4">
