@@ -704,6 +704,14 @@
               <h2 class="text-lg font-bold">Pending Actions</h2>
             </div>
 
+            <button
+              class="flex items-center gap-2 mb-4 bg-green-500 px-4 py-2 rounded-md hover:bg-green-600 transition-colors cursor-pointer"
+              @click="exportDataNoAction"
+            >
+              <Download :size="24" class="text-white" />
+              <h2 class="text-lg font-bold text-white">Export</h2>
+            </button>
+
             <div class="max-h-[calc(100vh-24rem)] overflow-y-auto">
               <table class="w-full">
                 <thead>
@@ -1206,6 +1214,7 @@ import Swal from "sweetalert2";
 import dayjs from "dayjs";
 import ExcelJS from "exceljs";
 import { saveAs } from "file-saver";
+import * as XLSX from "xlsx";
 
 /**
  * TODO: สร้างตัวแปรสำหรับเก็บข้อมูล
@@ -1663,6 +1672,69 @@ const findUser = (empno: string) => {
     (user: any) => user.VEMPLOYEE_ID === empno,
   );
   return user ? user.VEMPLOYEE_ENFNAME + " " + user.VEMPLOYEE_ENLNAME : "";
+};
+
+/**
+ * TODO: Export Data
+ */
+
+const exportDataNoAction = () => {
+  const workbook = new ExcelJS.Workbook();
+  const worksheet = workbook.addWorksheet("No Action");
+
+  // Add columns
+  worksheet.columns = [
+    { header: "หมายเลขเอกสาร", key: "no", width: 10 },
+    { header: "ชื่อผู้บันทึก", key: "empno", width: 10 },
+    { header: "วันที่บันทึก", key: "date", width: 10 },
+    { header: "Line", key: "line", width: 10 },
+    { header: "Customer", key: "customer", width: 10 },
+    { header: "Work Order", key: "work_order", width: 20 },
+    { header: "Model Code", key: "model_code", width: 20 },
+    { header: "Model Name", key: "model_name", width: 20 },
+    { header: "Lot Size", key: "lot_size", width: 10 },
+    { header: "Process", key: "process", width: 20 },
+    { header: "Cause", key: "cause", width: 20 },
+    { header: "Problem", key: "problem", width: 20 },
+    { header: "Image", key: "image", width: 20 },
+    { header: "Location", key: "location", width: 20 },
+    { header: "Machine", key: "machine", width: 20 },
+    { header: "Qty (NG)", key: "qty_ng", width: 10 },
+    { header: "Start Time", key: "start_time", width: 20 },
+  ];
+
+  // Add rows
+  fetch_no_action.value.forEach((item: any, index: number) => {
+    worksheet.addRow({
+      no: item.AMLDRINF_DOC_NUM,
+      empno: findUser(item.AMLDRINF_EMPHREC),
+      date: item.AMLDRINF_HREC_UPDATELSTDT
+        ? dayjs(item.AMLDRINF_HREC_UPDATELSTDT).format("YYYY-MM-DD")
+        : dayjs(item.AMLDRINF_HREC_LSTDT).format("YYYY-MM-DD"),
+      line: item.AMLDRINF_HREC_LINE,
+      customer: item.AMLDRINF_HREC_CUS,
+      work_order: item.AMLDRINF_HREC_WON,
+      model_code: item.AMLDRINF_HREC_MDLCD,
+      model_name: item.AMLDRINF_HREC_MDLNM,
+      lot_size: item.AMLDRINF_HREC_LOTS,
+      process: item.AMLDRINF_HREC_PROCS,
+      cause: item.AMLDRINF_HREC_CSTYPE,
+      problem: item.AMLDRINF_HREC_PROB,
+      image: item.AMLDRINF_HREC_IMAGE,
+      location: item.AMLDRINF_HREC_LOCATE,
+      machine: item.AMLDRINF_HREC_MACHINE,
+      qty_ng: item.AMLDRINF_HREC_QTYNG,
+      start_time: item.AMLDRINF_HREC_STARTTIME,
+    });
+  });
+
+  // Save workbook
+  workbook.xlsx.writeBuffer().then((buffer) => {
+    saveAs(
+      new Blob([buffer], { type: "application/octet-stream" }),
+      "no_action.xlsx",
+    );
+  });
 };
 
 onMounted(() => {

@@ -28,6 +28,11 @@
                   Action
                 </th>
                 <th
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
+                  ประเภทสาเหตุ
+                </th>
+                <th
                   class="px-6 py-4 min-w-[160px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
                 >
                   หมายเลขเอกสาร
@@ -91,6 +96,11 @@
                       </div>
                     </button>
                   </div>
+                </td>
+                <td class="px-6 py-4">
+                  <span class="font-bold text-slate-900">{{
+                    item.AMLDRINF_HREC_CSTYPE
+                  }}</span>
                 </td>
 
                 <td class="px-6 py-4">
