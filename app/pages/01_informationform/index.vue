@@ -700,57 +700,51 @@
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
         <div class="flex flex-col gap-2">
-          <label
-            >Image:
-            <span class="text-red-500 mr-2"
-              >* (บังคับต้องถ่ายรูปหรือเลือกรูปภาพ)</span
-            ></label
-          >
+          <label>
+            Image:
+            <span class="text-red-500 mr-2">
+              * (บังคับต้องถ่ายรูปหรือเลือกรูปภาพ)
+            </span>
+          </label>
 
-          <!-- กรณีแก้ไข: มีรูปเดิมอยู่แล้ว -->
-          <div
-            v-if="id_hrec && typeof inf.image === 'string' && inf.image"
-            class="flex flex-col gap-2"
-          >
-            <div
-              class="flex items-center gap-2 bg-sky-50 border border-sky-200 rounded-md px-3 py-2 text-sm text-sky-800"
-            >
-              <span>🖼️</span>
-              <span class="truncate max-w-[160px]" :title="String(inf.image)">{{
-                inf.image
-              }}</span>
-            </div>
-            <label
-              class="bg-sky-500 hover:bg-sky-600 text-white px-3 py-1.5 rounded-lg text-sm transition text-center cursor-pointer flex items-center gap-2 justify-center"
-            >
-              <Camera :size="16" />
-              ถ่ายรูป / เปลี่ยนรูป
-              <input
-                type="file"
-                class="hidden"
-                accept="image/*"
-                capture="environment"
-                @change="handleImageUpload"
-              />
-            </label>
-          </div>
-
-          <!-- กรณีเพิ่มใหม่ หรือเลือกรูปใหม่ตอนแก้ไข -->
-          <label
-            v-else
+          <!-- ปุ่มเปิดกล้อง -->
+          <button
+            v-if="!isCameraOpen"
+            @click="startCamera"
             class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center"
           >
             <Camera :size="20" />
-            <span>ถ่ายรูป / เลือกรูปภาพ</span>
-            <input
-              type="file"
-              class="hidden"
-              accept="image/*"
-              capture="environment"
-              @change="handleImageUpload"
-            />
-          </label>
+            <span>เปิดกล้องถ่ายรูป</span>
+          </button>
+
+          <!-- กล้อง -->
+          <div v-if="isCameraOpen" class="flex flex-col gap-2">
+            <video
+              ref="video"
+              autoplay
+              playsinline
+              class="w-full rounded-md border"
+            ></video>
+
+            <div class="flex gap-2 justify-center">
+              <button
+                @click="stopCamera"
+                class="bg-gray-500 text-white px-4 py-2 rounded"
+              >
+                ยกเลิก
+              </button>
+
+              <button
+                @click="takePhoto"
+                class="bg-blue-600 text-white px-4 py-2 rounded"
+              >
+                ถ่ายรูป
+              </button>
+            </div>
+          </div>
         </div>
+
+        <!-- Preview -->
         <div class="flex flex-col gap-1 col-span-2 items-center">
           <img
             v-if="imagePreview"
@@ -758,6 +752,23 @@
             alt="image"
             class="max-w-full max-h-[300px] object-contain"
           />
+
+          <!-- ปุ่มหลังถ่าย -->
+          <div v-if="imagePreview" class="flex gap-2 mt-2">
+            <button
+              @click="retake"
+              class="bg-red-500 text-white px-4 py-2 rounded"
+            >
+              ถ่ายใหม่
+            </button>
+
+            <button
+              @click="confirmImage"
+              class="bg-green-600 text-white px-4 py-2 rounded"
+            >
+              ใช้รูปนี้
+            </button>
+          </div>
         </div>
       </div>
     </form>
@@ -1333,33 +1344,92 @@ const clearError = (field: keyof typeof errors) => {
 /**
  * TODO: ฟังก์ชันสำหรับจัดการรูปภาพ
  */
-const handleImageUpload = (event: Event) => {
-  const target = event.target as HTMLInputElement;
-  const file = target.files?.[0];
+// const handleImageUpload = (event: Event) => {
+//   const target = event.target as HTMLInputElement;
+//   const file = target.files?.[0];
 
-  if (!file) return;
+//   if (!file) return;
 
-  // เช็คประเภทไฟล์
-  const validImageTypes = [
-    "image/jpeg",
-    "image/png",
-    "image/jpg",
-    "image/gif",
-    "image/webp",
-  ];
+//   // เช็คประเภทไฟล์
+//   const validImageTypes = [
+//     "image/jpeg",
+//     "image/png",
+//     "image/jpg",
+//     "image/gif",
+//     "image/webp",
+//   ];
 
-  if (!validImageTypes.includes(file.type)) {
-    alert("กรุณาเลือกไฟล์รูปภาพเท่านั้น");
-    target.value = "";
-    return;
+//   if (!validImageTypes.includes(file.type)) {
+//     alert("กรุณาเลือกไฟล์รูปภาพเท่านั้น");
+//     target.value = "";
+//     return;
+//   }
+
+//   // สร้างชื่อไฟล์สุ่ม .jpg
+//   const randomName = `${Math.random().toString(36).substring(2, 9)}.jpg`;
+//   const renamedFile = new File([file], randomName, { type: "image/jpeg" });
+
+//   inf.value.image = renamedFile;
+//   imagePreview.value = URL.createObjectURL(renamedFile);
+// };
+const video = ref<HTMLVideoElement | null>(null);
+const isCameraOpen = ref(false);
+const stream = ref<MediaStream | null>(null);
+
+const startCamera = async () => {
+  try {
+    isCameraOpen.value = true;
+
+    stream.value = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "environment" },
+    });
+
+    if (video.value) {
+      video.value.srcObject = stream.value;
+    }
+  } catch (err) {
+    alert("เปิดกล้องไม่ได้");
   }
+};
 
-  // สร้างชื่อไฟล์สุ่ม .jpg
-  const randomName = `${Math.random().toString(36).substring(2, 9)}.jpg`;
-  const renamedFile = new File([file], randomName, { type: "image/jpeg" });
+const stopCamera = () => {
+  stream.value?.getTracks().forEach((t) => t.stop());
+  isCameraOpen.value = false;
+};
 
-  inf.value.image = renamedFile;
-  imagePreview.value = URL.createObjectURL(renamedFile);
+const takePhoto = () => {
+  if (!video.value) return;
+
+  const canvas = document.createElement("canvas");
+  canvas.width = video.value.videoWidth;
+  canvas.height = video.value.videoHeight;
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  ctx.drawImage(video.value, 0, 0);
+
+  canvas.toBlob((blob) => {
+    if (!blob) return;
+
+    const file = new File([blob], `${Date.now()}.jpg`, {
+      type: "image/jpeg",
+    });
+
+    inf.value.image = file;
+    imagePreview.value = URL.createObjectURL(blob);
+
+    stopCamera();
+  }, "image/jpeg");
+};
+
+const retake = () => {
+  imagePreview.value = null;
+  startCamera();
+};
+
+const confirmImage = () => {
+  console.log(inf.value.image);
 };
 
 /**

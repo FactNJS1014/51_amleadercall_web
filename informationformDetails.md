@@ -58,3 +58,68 @@ GET /vwork
 ```http
 GET /info/record
 ```
+
+Backup Code
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div class="flex flex-col gap-2">
+          <label
+            >Image:
+            <span class="text-red-500 mr-2"
+              >* (บังคับต้องถ่ายรูปหรือเลือกรูปภาพ)</span
+            ></label
+          >
+
+          <!-- กรณีแก้ไข: มีรูปเดิมอยู่แล้ว -->
+          <div
+            v-if="id_hrec && typeof inf.image === 'string' && inf.image"
+            class="flex flex-col gap-2"
+          >
+            <div
+              class="flex items-center gap-2 bg-sky-50 border border-sky-200 rounded-md px-3 py-2 text-sm text-sky-800"
+            >
+              <span>🖼️</span>
+              <span class="truncate max-w-[160px]" :title="String(inf.image)">{{
+                inf.image
+              }}</span>
+            </div>
+            <label
+              class="bg-sky-500 hover:bg-sky-600 text-white px-3 py-1.5 rounded-lg text-sm transition text-center cursor-pointer flex items-center gap-2 justify-center"
+            >
+              <Camera :size="16" />
+              ถ่ายรูป / เปลี่ยนรูป
+              <input
+                type="file"
+                class="hidden"
+                accept="image/*"
+                capture="environment"
+                @change="handleImageUpload"
+              />
+            </label>
+          </div>
+
+          <!-- กรณีเพิ่มใหม่ หรือเลือกรูปใหม่ตอนแก้ไข -->
+          <label
+            v-else
+            class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center"
+          >
+            <Camera :size="20" />
+            <span>ถ่ายรูป / เลือกรูปภาพ</span>
+            <input
+              type="file"
+              class="hidden"
+              accept="image/*"
+              capture="environment"
+              @change="handleImageUpload"
+            />
+          </label>
+        </div>
+        <div class="flex flex-col gap-1 col-span-2 items-center">
+          <img
+            v-if="imagePreview"
+            :src="imagePreview"
+            alt="image"
+            class="max-w-full max-h-[300px] object-contain"
+          />
+        </div>
+      </div>
