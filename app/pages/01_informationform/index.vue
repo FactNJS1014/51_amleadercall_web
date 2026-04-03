@@ -717,29 +717,36 @@
             <span>เปิดกล้องถ่ายรูป</span>
           </button>
 
-          <!-- กล้อง -->
-          <div v-if="isCameraOpen" class="flex flex-col gap-2">
+          <!-- FULLSCREEN CAMERA -->
+          <div
+            v-if="isCameraOpen"
+            class="fixed inset-0 bg-black z-50 flex flex-col justify-between"
+          >
+            <!-- กล้อง -->
             <video
               ref="video"
               autoplay
               playsinline
-              class="w-full rounded-md border"
+              class="w-full h-full object-cover"
             ></video>
 
-            <div class="flex gap-2 justify-center">
+            <!-- ปุ่มควบคุม -->
+            <div
+              class="absolute bottom-0 left-0 w-full flex justify-center items-center gap-6 pb-6"
+            >
+              <!-- ยกเลิก -->
               <button
                 @click="stopCamera"
-                class="bg-gray-500 text-white px-4 py-2 rounded"
+                class="bg-white/20 backdrop-blur text-white px-5 py-2 rounded-full"
               >
                 ยกเลิก
               </button>
 
+              <!-- ปุ่มถ่ายรูป -->
               <button
                 @click="takePhoto"
-                class="bg-blue-600 text-white px-4 py-2 rounded"
-              >
-                ถ่ายรูป
-              </button>
+                class="w-16 h-16 rounded-full bg-white border-4 border-gray-300"
+              ></button>
             </div>
           </div>
         </div>
