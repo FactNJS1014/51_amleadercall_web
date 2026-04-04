@@ -1199,6 +1199,7 @@ const clearForm = () => {
     editType: "",
     image: null,
     empno: userSession.value?.empno || "",
+    bysection: "",
   };
   imagePreview.value = null;
 
@@ -1269,6 +1270,7 @@ const editItems = (item: any) => {
   act.value.editType = item.AMLDRACT_HREC_EDITTYPE;
   act.value.empno = item.AMLDRACT_HREC_ACTIONEMP;
   act.value.image = item.AMLDRACT_HREC_IMAGE;
+  act.value.bysection = item.AMLDRACT_HREC_BYSEC;
 
   imagePreview.value = item.AMLDRACT_HREC_IMAGE
     ? `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`

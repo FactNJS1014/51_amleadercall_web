@@ -1353,6 +1353,7 @@ const editForm = async (item: any) => {
   inf.value.machine = item.AMLDRINF_HREC_MACHINE;
   inf.value.qty_ng = item.AMLDRINF_HREC_QTYNG;
   inf.value.customer = item.AMLDRINF_HREC_CUS;
+  inf.value.bysection = item.AMLDRINF_HREC_BYSEC;
 
   id_hrec.value = item.AMLDRINF_HREC_ID;
 
