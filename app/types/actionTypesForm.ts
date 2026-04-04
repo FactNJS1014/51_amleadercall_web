@@ -3,5 +3,6 @@ export interface ActionTypesForm {
     action: string,
     empno: string,
     editType: string,
-    image: File | null
+    image: File | null,
+    bysection: string,
 }

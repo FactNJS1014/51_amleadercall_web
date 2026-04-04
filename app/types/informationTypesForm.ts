@@ -14,5 +14,5 @@ export interface InformationTypesForm {
     machine: string,
     qty_ng: number,
     start_time: string,
-    
+    bysection: string,
 }

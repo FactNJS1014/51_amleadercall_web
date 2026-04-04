@@ -394,6 +394,27 @@
             readonly
           />
         </div>
+        <div class="flex flex-col gap-2">
+          <label for="employee"
+            >บันทึกโดย: <span class="text-red-500 mr-2">*</span>
+            <span v-if="errors.bysection" class="text-red-500">{{
+              errors.bysection
+            }}</span></label
+          >
+          <select
+            v-model="inf.bysection"
+            class="border border-gray-200 focus:outline-none px-2 py-2 rounded-sm"
+          >
+            <option value="" disabled selected>-- กรุณาเลือก --</option>
+            <option
+              v-for="item in List_section"
+              :key="item.id"
+              :value="item.value"
+            >
+              {{ item.name }}
+            </option>
+          </select>
+        </div>
       </div>
       <div class="grid md:grid-cols-3 grid-cols-2 gap-3">
         <div class="flex flex-col gap-1">
@@ -707,15 +728,30 @@
             </span>
           </label>
 
-          <!-- ปุ่มเปิดกล้อง -->
+          <!-- MOBILE / TABLET → เปิดกล้อง -->
           <button
-            v-if="!isCameraOpen"
+            v-if="isMobileOrTablet && !isCameraOpen"
             @click="startCamera"
             class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center"
           >
             <Camera :size="20" />
-            <span>เปิดกล้องถ่ายรูป</span>
+            <span>ถ่ายรูป</span>
           </button>
+
+          <!-- DESKTOP → เลือกไฟล์ -->
+          <label
+            v-else-if="!isMobileOrTablet"
+            class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center"
+          >
+            <Camera :size="20" />
+            <span>เลือกรูปภาพ</span>
+            <input
+              type="file"
+              class="hidden"
+              accept="image/*"
+              @change="handleImageUpload"
+            />
+          </label>
 
           <!-- FULLSCREEN CAMERA -->
           <div
@@ -813,6 +849,17 @@ import dayjs from "dayjs";
 import Modal from "~/components/UI/Modal.vue";
 
 /**
+ * TODO: Check Device
+ */
+const isMobileOrTablet = ref(false);
+
+onMounted(() => {
+  const ua = navigator.userAgent.toLowerCase();
+
+  isMobileOrTablet.value = /android|iphone|ipad|ipod|tablet|mobile/.test(ua);
+});
+
+/**
  * TODO: กำหนดหรือสร้างตัวแปร
  */
 
@@ -832,7 +879,13 @@ const inf = ref<InformationTypesForm>({
   machine: "",
   qty_ng: 0,
   start_time: dayjs(new Date()).format("HH:mm"),
+  bysection: "",
 });
+
+const List_section = ref<any>([
+  { id: 1, name: "AM Prodcution", value: "AM-Prod" },
+  { id: 2, name: "AM Engineer", value: "AME" },
+]);
 
 /**
  * TODO: กำหนด varidations form
@@ -849,6 +902,7 @@ const errors = reactive({
   machine: "",
   qty_ng: "",
   start_time: "",
+  bysection: "",
 });
 
 const customers_list = ref<any[]>([]);
@@ -1054,6 +1108,11 @@ const validateForm = () => {
     isValid = false;
   }
 
+  if (!inf.value.bysection) {
+    errors.bysection = "By Section is required";
+    isValid = false;
+  }
+
   return isValid;
 };
 
@@ -1161,6 +1220,7 @@ const resetForm = () => {
     machine: "",
     qty_ng: 0,
     start_time: dayjs(new Date()).format("HH:mm"),
+    bysection: "",
   };
 
   imagePreview.value = null;
@@ -1351,34 +1411,34 @@ const clearError = (field: keyof typeof errors) => {
 /**
  * TODO: ฟังก์ชันสำหรับจัดการรูปภาพ
  */
-// const handleImageUpload = (event: Event) => {
-//   const target = event.target as HTMLInputElement;
-//   const file = target.files?.[0];
+const handleImageUpload = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  const file = target.files?.[0];
 
-//   if (!file) return;
+  if (!file) return;
 
-//   // เช็คประเภทไฟล์
-//   const validImageTypes = [
-//     "image/jpeg",
-//     "image/png",
-//     "image/jpg",
-//     "image/gif",
-//     "image/webp",
-//   ];
+  // เช็คประเภทไฟล์
+  const validImageTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/jpg",
+    "image/gif",
+    "image/webp",
+  ];
 
-//   if (!validImageTypes.includes(file.type)) {
-//     alert("กรุณาเลือกไฟล์รูปภาพเท่านั้น");
-//     target.value = "";
-//     return;
-//   }
+  if (!validImageTypes.includes(file.type)) {
+    alert("กรุณาเลือกไฟล์รูปภาพเท่านั้น");
+    target.value = "";
+    return;
+  }
 
-//   // สร้างชื่อไฟล์สุ่ม .jpg
-//   const randomName = `${Math.random().toString(36).substring(2, 9)}.jpg`;
-//   const renamedFile = new File([file], randomName, { type: "image/jpeg" });
+  // สร้างชื่อไฟล์สุ่ม .jpg
+  const randomName = `${Math.random().toString(36).substring(2, 9)}.jpg`;
+  const renamedFile = new File([file], randomName, { type: "image/jpeg" });
 
-//   inf.value.image = renamedFile;
-//   imagePreview.value = URL.createObjectURL(renamedFile);
-// };
+  inf.value.image = renamedFile;
+  imagePreview.value = URL.createObjectURL(renamedFile);
+};
 const video = ref<HTMLVideoElement | null>(null);
 const isCameraOpen = ref(false);
 const stream = ref<MediaStream | null>(null);

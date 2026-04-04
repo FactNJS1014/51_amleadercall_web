@@ -235,13 +235,13 @@
                   หมายเลขเอกสาร
                 </th>
                 <th
-                  colspan="16"
+                  colspan="17"
                   class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
                 >
                   Information
                 </th>
                 <th
-                  colspan="6"
+                  colspan="7"
                   class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
                 >
                   Action
@@ -258,6 +258,11 @@
                   class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
                 >
                   ผู้บันทึก
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
+                  Section
                 </th>
                 <th
                   class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
@@ -357,6 +362,11 @@
                 <th
                   class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
                 >
+                  Section
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
+                >
                   รูปภาพ
                 </th>
                 <th
@@ -432,6 +442,15 @@
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   {{ findUser(item.AMLDRINF_EMPHREC) }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap"
+                  v-if="item.AMLDRINF_HREC_BYSEC === null"
+                >
+                  -
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap" v-else>
+                  {{ item.AMLDRINF_HREC_BYSEC }}
                 </td>
                 <td
                   class="px-6 py-4 whitespace-nowrap"
@@ -522,6 +541,15 @@
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   {{ findUser(item.AMLDRACT_HREC_ACTIONEMP) }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap"
+                  v-if="item.AMLDRACT_HREC_BYSECTION === null"
+                >
+                  -
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap" v-else>
+                  {{ item.AMLDRACT_HREC_BYSECTION }}
                 </td>
                 <td
                   class="px-6 py-4 whitespace-nowrap flex items-center justify-center"
@@ -727,6 +755,11 @@
                       ผู้บันทึก
                     </th>
                     <th
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                    >
+                      Section
+                    </th>
+                    <th
                       class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
                     >
                       เวลาบันทึกล่าสุด
@@ -811,6 +844,15 @@
                     </td>
                     <td class="px-6 py-4">
                       {{ findUser(item.AMLDRINF_EMPHREC) }}
+                    </td>
+                    <td
+                      class="px-6 py-4"
+                      v-if="item.AMLDRINF_HREC_BYSEC === null"
+                    >
+                      -
+                    </td>
+                    <td class="px-6 py-4" v-else>
+                      {{ item.AMLDRINF_HREC_BYSEC }}
                     </td>
                     <td
                       class="px-6 py-4"
