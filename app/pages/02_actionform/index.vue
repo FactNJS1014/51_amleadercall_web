@@ -614,6 +614,7 @@
           >
             <!-- ปุ่มเปิดกล้อง -->
             <button
+              type="button"
               @click="startCamera"
               class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center w-full"
             >
@@ -623,9 +624,11 @@
 
             <!-- ปุ่มเลือกไฟล์ -->
             <button
+              type="button"
               @click="fileInput?.click()"
-              class="text-sm text-blue-500 underline"
+              class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center w-full"
             >
+              <Image :size="20" />
               หรือเลือกรูปจากเครื่อง
             </button>
 
@@ -673,6 +676,7 @@
             >
               <!-- ยกเลิก -->
               <button
+                type="button"
                 @click="stopCamera"
                 class="bg-white/20 backdrop-blur text-white px-5 py-2 rounded-full"
               >
@@ -681,6 +685,7 @@
 
               <!-- ปุ่มถ่ายรูป -->
               <button
+                type="button"
                 @click="takePhoto"
                 class="w-16 h-16 rounded-full bg-white border-4 border-gray-300"
               ></button>
@@ -700,17 +705,11 @@
           <!-- ปุ่มหลังถ่าย -->
           <div v-if="imagePreview" class="flex gap-2 mt-2">
             <button
+              type="button"
               @click="retake"
               class="bg-red-500 text-white px-4 py-2 rounded"
             >
               ถ่ายใหม่
-            </button>
-
-            <button
-              @click="confirmImage"
-              class="bg-green-600 text-white px-4 py-2 rounded"
-            >
-              ใช้รูปนี้
             </button>
           </div>
         </div>
