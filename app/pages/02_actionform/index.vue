@@ -607,15 +607,37 @@
             </span>
           </label>
 
-          <!-- MOBILE / TABLET → เปิดกล้อง -->
-          <button
+          <!-- MOBILE / TABLET -->
+          <div
             v-if="isMobileOrTablet && !isCameraOpen"
-            @click="startCamera"
-            class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center"
+            class="flex flex-col items-center gap-2"
           >
-            <Camera :size="20" />
-            <span>ถ่ายรูป</span>
-          </button>
+            <!-- ปุ่มเปิดกล้อง -->
+            <button
+              @click="startCamera"
+              class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center w-full"
+            >
+              <Camera :size="20" />
+              <span>ถ่ายรูป</span>
+            </button>
+
+            <!-- ปุ่มเลือกไฟล์ -->
+            <button
+              @click="fileInput?.click()"
+              class="text-sm text-blue-500 underline"
+            >
+              หรือเลือกรูปจากเครื่อง
+            </button>
+
+            <!-- input ซ่อน -->
+            <input
+              ref="fileInput"
+              type="file"
+              class="hidden"
+              accept="image/*"
+              @change="handleImageUpload"
+            />
+          </div>
 
           <!-- DESKTOP → เลือกไฟล์ -->
           <label
@@ -831,6 +853,8 @@ onMounted(() => {
 
   isMobileOrTablet.value = /android|iphone|ipad|ipod|tablet|mobile/.test(ua);
 });
+
+const fileInput = ref<HTMLInputElement | null>(null);
 
 /**
  * TODO: สร้างฟังก์ชันที่ใช้ในการเรียก API
