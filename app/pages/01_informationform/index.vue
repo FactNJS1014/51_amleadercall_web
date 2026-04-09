@@ -1066,6 +1066,17 @@ const lines_prod = ref([
   { value: "RH-2", label: "RH-2" },
   { value: "RH-3", label: "RH-3" },
   { value: "RH-4", label: "RH-4" },
+  { value: "IC-ROM-1", label: "IC-ROM-1" },
+  { value: "IC-ROM-2", label: "IC-ROM-2" },
+  { value: "IC-ROM-3", label: "IC-ROM-3" },
+  { value: "IC-ROM-Manual", label: "IC-ROM-Manual" },
+  { value: "LASER-1", label: "LASER-1" },
+  { value: "LASER-2", label: "LASER-2" },
+  { value: "LABEL-1", label: "LABEL-1" },
+  { value: "LABEL-2", label: "LABEL-2" },
+  { value: "LABEL-3", label: "LABEL-3" },
+  { value: "LABEL-Manual", label: "LABEL-Manual" },
+  { value: "LABEL-PRINTER", label: "LABEL-PRINTER" },
 ]);
 
 const processes = ref([
@@ -1176,6 +1187,7 @@ const submitForm = async (e?: Event) => {
     formData.append("machine", inf.value.machine);
     formData.append("qty_ng", String(inf.value.qty_ng));
     formData.append("start_time", inf.value.start_time);
+    formData.append("bysection", inf.value.bysection);
 
     // append image file
     if (inf.value.image instanceof File) {

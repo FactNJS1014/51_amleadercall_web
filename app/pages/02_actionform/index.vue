@@ -1026,6 +1026,7 @@ const submitForm = async () => {
     formData.append("editType", act.value.editType);
     formData.append("empno", act.value.empno);
     formData.append("inf_hrec_id", inf_hrec_id.value);
+    formData.append("bysection", act.value.bysection);
 
     if (act.value.image instanceof File) {
       // กรณีเปลี่ยนรูปใหม่ → ส่งเป็น File object
