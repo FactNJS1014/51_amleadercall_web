@@ -13,32 +13,6 @@
     </div>
     <!-- Stats Cards Wrapper -->
     <div class="w-full flex flex-col sm:flex-row gap-6">
-      <!-- Record Complete Card -->
-      <div
-        class="sm:w-1/2 w-full h-1/2 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl shadow-xl shadow-emerald-500/20 text-white relative overflow-hidden flex flex-col justify-between p-6 hover:-translate-y-1 transition-transform duration-300"
-        @click="scrollToTable()"
-      >
-        <div
-          class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4"
-        >
-          <CircleCheck :size="120" stroke-width="1.5" />
-        </div>
-        <div class="relative z-10 flex items-center gap-3 mb-6">
-          <div class="bg-white/20 p-2.5 rounded-xl backdrop-blur-sm">
-            <CircleCheck :size="24" class="text-white" />
-          </div>
-          <div>
-            <h3 class="font-bold text-emerald-50 leading-tight">Completed</h3>
-            <p class="text-emerald-100 text-xs font-medium">Total Records</p>
-          </div>
-        </div>
-        <div class="relative z-10 flex items-end gap-2">
-          <h3 class="text-5xl font-black tracking-tight">
-            {{ fetch_rec_all.length }}
-          </h3>
-        </div>
-      </div>
-
       <!-- Pending Action Card -->
       <div
         class="sm:w-1/2 w-full h-1/2 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl shadow-xl shadow-amber-500/20 text-white relative overflow-hidden flex flex-col justify-between p-6 hover:-translate-y-1 transition-transform duration-300"
@@ -92,6 +66,31 @@
         <div class="relative z-10 flex items-end gap-2">
           <h3 class="text-5xl font-black tracking-tight">
             {{ fetch_no_confirm.length }}
+          </h3>
+        </div>
+      </div>
+      <!-- Record Complete Card -->
+      <div
+        class="sm:w-1/2 w-full h-1/2 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl shadow-xl shadow-emerald-500/20 text-white relative overflow-hidden flex flex-col justify-between p-6 hover:-translate-y-1 transition-transform duration-300"
+        @click="scrollToTable()"
+      >
+        <div
+          class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4"
+        >
+          <CircleCheck :size="120" stroke-width="1.5" />
+        </div>
+        <div class="relative z-10 flex items-center gap-3 mb-6">
+          <div class="bg-white/20 p-2.5 rounded-xl backdrop-blur-sm">
+            <CircleCheck :size="24" class="text-white" />
+          </div>
+          <div>
+            <h3 class="font-bold text-emerald-50 leading-tight">Completed</h3>
+            <p class="text-emerald-100 text-xs font-medium">Total Records</p>
+          </div>
+        </div>
+        <div class="relative z-10 flex items-end gap-2">
+          <h3 class="text-5xl font-black tracking-tight">
+            {{ fetch_rec_all.length }}
           </h3>
         </div>
       </div>
@@ -223,7 +222,7 @@
       </div>
       <div class="table-container shadow-sm border">
         <div
-          class="overflow-x-auto max-h-[calc(100vh-28rem)] overflow-y-auto w-full"
+          class="overflow-x-auto max-h-[calc(100vh-10rem)] overflow-y-auto w-full"
         >
           <table class="w-full" ref="tableRef">
             <thead class="sticky top-0 z-10">
