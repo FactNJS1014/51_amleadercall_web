@@ -13,7 +13,12 @@ export default defineNuxtConfig({
   routeRules: {
     "/": {
       appLayout: "01-leadercall-default",
-      isr: 100
+      
+    },
+    "/**": {
+      headers: {
+        "cache-control": "no-cache"
+      }
     },
     "/01_informationform": {
       appLayout: "01-leadercall-default",
