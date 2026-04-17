@@ -734,6 +734,13 @@
     <template #footer>
       <div class="flex justify-end gap-3">
         <button
+          class="bg-amber-200 hover:bg-amber-300 px-4 py-2 rounded-lg flex items-center gap-2"
+          @click="ReturnStatusEdit(aml_hrec_id)"
+        >
+          <Reply :size="17" />
+          ย้อนกลับไปแก้ไข
+        </button>
+        <button
           class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg flex items-center gap-2"
           @click="showModal = false"
         >
@@ -796,6 +803,7 @@ import {
   AlertTriangle,
   XCircle,
   CircleX,
+  Reply,
 } from "lucide-vue-next";
 import Modal from "~/components/UI/Modal.vue";
 import type { ActionTypesForm } from "~/types/actionTypesForm";
@@ -812,6 +820,7 @@ const inf_hrec_id = ref<string>("");
 const data_action = shallowRef<any>([]);
 const previewImage = ref<string | null>(null);
 const edit_id = ref<string>("");
+const aml_hrec_id = ref<string>("");
 
 const List_section = ref<any>([
   { id: 1, name: "AM Prodcution", value: "AM-Prod" },
@@ -856,6 +865,7 @@ function chooseShowForm(id: string) {
   clearForm();
   showModal.value = true;
   inf_hrec_id.value = id;
+  aml_hrec_id.value = id;
 }
 
 /**
@@ -881,7 +891,6 @@ const getData = async () => {
       "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/info/record",
     );
     data_rec.value = response;
-    // console.log(data_rec.value);
   } catch (error) {
     console.error(error);
   }
@@ -1354,6 +1363,26 @@ const findUser = (empno: string) => {
     (user: any) => user.VEMPLOYEE_ID === empno,
   );
   return user ? user.VEMPLOYEE_ENFNAME + " " + user.VEMPLOYEE_ENLNAME : "";
+};
+
+/**
+ * TODO: Return Status Edit
+ */
+const ReturnStatusEdit = async (id: string) => {
+  try {
+    const response = await axios.put(
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/return/status-edit/" +
+        id,
+    );
+    if (response.data.status === "success") {
+      showModal.value = false;
+      window.location.href =
+        "/51_amleadercall/51_amleadercall_F/01_informationform";
+    }
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 onMounted(() => {
