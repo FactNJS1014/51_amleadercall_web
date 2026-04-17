@@ -656,6 +656,12 @@
               @change="handleImageUpload"
             />
           </label>
+          <div
+            v-else
+            class="w-full h-[200px] flex items-center justify-center border border-dashed border-gray-300 rounded-md text-gray-400"
+          >
+            ยังไม่มีรูปภาพ
+          </div>
 
           <!-- FULLSCREEN CAMERA -->
           <div
@@ -693,14 +699,24 @@
           </div>
         </div>
 
-        <!-- Preview -->
         <div class="flex flex-col gap-1 col-span-2 items-center">
+          <!-- มีรูป -->
           <img
             v-if="imagePreview"
             :src="imagePreview"
-            alt="image"
             class="max-w-full max-h-[300px] object-contain"
           />
+
+          <!-- ไม่มีรูป -->
+          <div
+            v-else
+            class="w-full h-[300px] flex items-center justify-center border border-dashed border-gray-300 rounded-md text-gray-400"
+          >
+            <div class="flex flex-col items-center gap-2">
+              <Camera :size="30" />
+              <span>ยังไม่มีรูปภาพ</span>
+            </div>
+          </div>
 
           <!-- ปุ่มหลังถ่าย -->
           <div v-if="imagePreview" class="flex gap-2 mt-2">
@@ -1029,11 +1045,9 @@ const submitForm = async () => {
     formData.append("bysection", act.value.bysection);
 
     if (act.value.image instanceof File) {
-      // กรณีเปลี่ยนรูปใหม่ → ส่งเป็น File object
       formData.append("image", act.value.image);
-    } else if (typeof act.value.image === "string" && act.value.image) {
-      // กรณีไม่เปลี่ยนรูป → ส่งชื่อไฟล์เดิม (string) ไปให้ API รู้ว่าใช้รูปเดิม
-      formData.append("existing_image", act.value.image);
+    } else {
+      formData.append("image_text", "NO_IMAGE"); // ✅ ส่งข้อความไปเลย
     }
 
     // for (const [key, value] of formData.entries()) {
