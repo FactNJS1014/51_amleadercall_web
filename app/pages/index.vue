@@ -1253,7 +1253,7 @@ import Multiselect from "@vueform/multiselect";
 import axios from "axios";
 import Swal from "sweetalert2";
 import dayjs from "dayjs";
-import ExcelJS from "exceljs";
+import ExcelJS, { type Fill, type Borders } from "exceljs";
 import { saveAs } from "file-saver";
 import * as XLSX from "xlsx";
 
@@ -1387,26 +1387,310 @@ const getBase64ImageFromUrl = async (url: string) => {
   }
 };
 
+// const exportData = async () => {
+//   const workbook = new ExcelJS.Workbook();
+//   const worksheet = workbook.addWorksheet("Report Leader Call");
+
+//   // Row 1 Header Layout - Setup precise cell headers
+//   worksheet.getCell("A1").value = "หมายเลขเอกสาร";
+//   worksheet.getCell("B1").value = "Information";
+//   worksheet.getCell("R1").value = "Action";
+//   worksheet.getCell("W1").value = "Confirm";
+
+//   // Merge Headers
+//   worksheet.mergeCells("A1:A2");
+//   worksheet.mergeCells("B1:Q1");
+//   worksheet.mergeCells("R1:V1");
+//   worksheet.mergeCells("W1:AA1");
+
+//   // Row 2 Sub-headers
+//   const row2 = worksheet.getRow(2);
+//   const subHeaders = [
+//     "หมายเลขเอกสาร", // A2 (Merged)
+//     "ผู้บันทึก",
+//     "เวลาบันทึก",
+//     "Line",
+//     "Customer",
+//     "Work Order",
+//     "Model Code",
+//     "Model Name",
+//     "Lot Size",
+//     "Process",
+//     "Cause Type",
+//     "Problem",
+//     "Location",
+//     "Machine",
+//     "จำนวนงานเสีย",
+//     "Start Time",
+//     "รูปภาพ",
+//     "Root Cause",
+//     "Action",
+//     "Action By",
+//     "รูปภาพ",
+//     "เวลาบันทึกล่าสุด",
+//     "Result",
+//     "End Time",
+//     "Total Time",
+//     "Confirm By",
+//     "เวลาบันทึกล่าสุด",
+//   ];
+//   subHeaders.forEach((text, index) => {
+//     row2.getCell(index + 1).value = text;
+//   });
+
+//   // Styling Headers
+//   for (let i = 1; i <= 2; i++) {
+//     worksheet.getRow(i).eachCell({ includeEmpty: true }, (cell) => {
+//       cell.fill = {
+//         type: "pattern",
+//         pattern: "solid",
+//         fgColor: { argb: "FFF1F5F9" },
+//       };
+//       cell.font = { bold: true, color: { argb: "FF475569" } };
+//       cell.alignment = { vertical: "middle", horizontal: "center" };
+//       cell.border = {
+//         top: { style: "thin" },
+//         left: { style: "thin" },
+//         bottom: { style: "thin" },
+//         right: { style: "thin" },
+//       };
+//     });
+//   }
+
+//   // Adjust widths
+//   const widths = [
+//     20, 20, 20, 10, 15, 20, 20, 25, 10, 15, 15, 40, 20, 20, 15, 15, 20, 30, 30,
+//     20, 20, 20, 15, 15, 15, 20, 20,
+//   ];
+//   widths.forEach((width, i) => {
+//     worksheet.getColumn(i + 1).width = width;
+//   });
+
+//   // Start from row 3
+//   let rowIndex = 3;
+
+//   // Map Data Rows
+//   for (let i = 0; i < fetch_rec_all.value.length; i++) {
+//     const item = fetch_rec_all.value[i];
+
+//     const timeRec = item.AMLDRINF_HREC_UPDATELSTDT
+//       ? dayjs(item.AMLDRINF_HREC_UPDATELSTDT).format("DD/MM/YYYY HH:mm")
+//       : item.AMLDRINF_HREC_LSTDT
+//         ? dayjs(item.AMLDRINF_HREC_LSTDT).format("DD/MM/YYYY HH:mm")
+//         : "-";
+
+//     const actionTime = item.AMLDRACT_HREC_UPDATELSTDT
+//       ? dayjs(item.AMLDRACT_HREC_UPDATELSTDT).format("DD/MM/YYYY HH:mm")
+//       : item.AMLDRACT_HREC_LSTDT
+//         ? dayjs(item.AMLDRACT_HREC_LSTDT).format("DD/MM/YYYY HH:mm")
+//         : "-";
+
+//     const confirmTime = item.AMLDRCONF_HREC_LSTDT
+//       ? dayjs(item.AMLDRCONF_HREC_LSTDT).format("DD/MM/YYYY HH:mm")
+//       : "-";
+
+//     const rowData = [
+//       item.AMLDRINF_DOC_NUM || "-",
+//       findUser(item.AMLDRINF_EMPHREC) || "-",
+//       timeRec,
+//       item.AMLDRINF_HREC_LINE || "-",
+//       item.AMLDRINF_HREC_CUS || "-",
+//       item.AMLDRINF_HREC_WON || "-",
+//       item.AMLDRINF_HREC_MDLCD || "-",
+//       item.AMLDRINF_HREC_MDLNM || "-",
+//       item.AMLDRINF_HREC_LOTS || "-", // 9
+//       item.AMLDRINF_HREC_PROCS || "-",
+//       item.AMLDRINF_HREC_CSTYPE || "-", // 11
+//       item.AMLDRINF_HREC_PROB || "-", // 12
+//       item.AMLDRINF_HREC_LOCATE || "-",
+//       item.AMLDRINF_HREC_MACHINE || "-",
+//       item.AMLDRINF_HREC_QTYNG || "-", // 15
+//       item.AMLDRINF_HREC_STARTTIME || "-", // 16
+//       "", // Q (17) - Information Image Placeholder
+//       item.AMLDRACT_HREC_RTCAUSE || "-", // 18
+//       item.AMLDRACT_HREC_ACTION || "-", // 19
+//       findUser(item.AMLDRACT_HREC_ACTIONEMP) || "-", // 20
+//       "", // U (21) - Action Image Placeholder
+//       actionTime, // 22
+//       item.AMLDRCONF_HREC_RESULT || "-", // 23
+//       item.AMLDRCONF_HREC_ENDTIME || "-", // 24
+//       item.AMLDRCONF_HREC_TOTALTIME || "-", // 25
+//       findUser(item.AMLDRCONF_HREC_EMPNO) || "-", // 26
+//       confirmTime, // 27
+//     ];
+
+//     const row = worksheet.getRow(rowIndex);
+//     rowData.forEach((val, colIndex) => {
+//       row.getCell(colIndex + 1).value = val;
+//     });
+
+//     let hasImage = false;
+
+//     // Handle Image 1 (Information) - Column Q (17)
+//     if (item.AMLDRINF_HREC_IMAGE) {
+//       const url = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`;
+//       const base64Str = await getBase64ImageFromUrl(url);
+//       if (base64Str) {
+//         const ext =
+//           item.AMLDRINF_HREC_IMAGE.split(".").pop().toLowerCase() === "png"
+//             ? "png"
+//             : "jpeg";
+//         const imageId = workbook.addImage({
+//           base64: base64Str,
+//           extension: ext as "jpeg" | "png",
+//         });
+//         worksheet.addImage(imageId, {
+//           tl: { col: 16, row: rowIndex - 1 }, // Column Q (0-indexed is 16)
+//           ext: { width: 80, height: 80 },
+//         });
+//         hasImage = true;
+//       }
+//     }
+
+//     // Handle Image 2 (Action) - Column U (21)
+//     if (item.AMLDRACT_HREC_IMAGE) {
+//       const url = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`;
+//       const base64Str = await getBase64ImageFromUrl(url);
+//       if (base64Str) {
+//         const ext =
+//           item.AMLDRACT_HREC_IMAGE.split(".").pop().toLowerCase() === "png"
+//             ? "png"
+//             : "jpeg";
+//         const imageId = workbook.addImage({
+//           base64: base64Str,
+//           extension: ext as "jpeg" | "png",
+//         });
+//         worksheet.addImage(imageId, {
+//           tl: { col: 20, row: rowIndex - 1 }, // Column U (0-indexed is 20)
+//           ext: { width: 80, height: 80 },
+//         });
+//         hasImage = true;
+//       }
+//     }
+
+//     // Expand row height if either image exists
+//     row.height = hasImage ? 65 : 30;
+
+//     // Center and wrap cells
+//     for (let c = 1; c <= 27; c++) {
+//       const cell = row.getCell(c);
+//       cell.alignment = { vertical: "middle", horizontal: "center" };
+//       if (c === 12 || c === 18 || c === 19) {
+//         cell.alignment = {
+//           vertical: "middle",
+//           horizontal: "left",
+//           wrapText: true,
+//         };
+//       }
+//       cell.border = {
+//         top: { style: "thin" },
+//         left: { style: "thin" },
+//         bottom: { style: "thin" },
+//         right: { style: "thin" },
+//       };
+//     }
+
+//     rowIndex++;
+//   }
+
+//   const buffer = await workbook.xlsx.writeBuffer();
+
+//   // Set FileName
+//   const currentDate = dayjs().format("YYYY-MM-DD");
+//   const lineText = filter_line.value ? `_${filter_line.value}` : "";
+//   const fileName = `Report_Leader_Call_${currentDate}${lineText}.xlsx`;
+
+//   saveAs(new Blob([buffer]), fileName);
+// };
+
+// filter
 const exportData = async () => {
   const workbook = new ExcelJS.Workbook();
   const worksheet = workbook.addWorksheet("Report Leader Call");
 
-  // Row 1 Header Layout - Setup precise cell headers
+  // ===============================
+  // Reuse Style Object
+  // ===============================
+  const thinBorder: Partial<Borders> = {
+    top: { style: "thin" },
+    left: { style: "thin" },
+    bottom: { style: "thin" },
+    right: { style: "thin" },
+  };
+
+  const headerFill: Fill = {
+    type: "pattern",
+    pattern: "solid",
+    fgColor: { argb: "FFF1F5F9" },
+  };
+
+  // ===============================
+  // Resize + Compress Image
+  // ===============================
+  const getCompressedBase64FromUrl = async (
+    url: string,
+    maxWidth = 300,
+    maxHeight = 300,
+    quality = 0.6,
+  ): Promise<string | null> => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+
+      return await new Promise<string | null>((resolve) => {
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+
+          let width = img.width;
+          let height = img.height;
+
+          // scale ratio
+          const ratio = Math.min(maxWidth / width, maxHeight / height, 1);
+
+          width *= ratio;
+          height *= ratio;
+
+          canvas.width = width;
+          canvas.height = height;
+
+          if (ctx) {
+            ctx.drawImage(img, 0, 0, width, height);
+          }
+
+          const compressed = canvas.toDataURL("image/jpeg", quality);
+
+          resolve(compressed);
+        };
+
+        img.onerror = () => resolve(null);
+        img.src = URL.createObjectURL(blob);
+      });
+    } catch (error) {
+      return null;
+    }
+  };
+
+  // ===============================
+  // HEADER
+  // ===============================
   worksheet.getCell("A1").value = "หมายเลขเอกสาร";
   worksheet.getCell("B1").value = "Information";
   worksheet.getCell("R1").value = "Action";
   worksheet.getCell("W1").value = "Confirm";
 
-  // Merge Headers
   worksheet.mergeCells("A1:A2");
   worksheet.mergeCells("B1:Q1");
   worksheet.mergeCells("R1:V1");
   worksheet.mergeCells("W1:AA1");
 
-  // Row 2 Sub-headers
   const row2 = worksheet.getRow(2);
+
   const subHeaders = [
-    "หมายเลขเอกสาร", // A2 (Merged)
+    "หมายเลขเอกสาร",
     "ผู้บันทึก",
     "เวลาบันทึก",
     "Line",
@@ -1434,45 +1718,43 @@ const exportData = async () => {
     "Confirm By",
     "เวลาบันทึกล่าสุด",
   ];
-  subHeaders.forEach((text, index) => {
-    row2.getCell(index + 1).value = text;
+
+  subHeaders.forEach((text, i) => {
+    row2.getCell(i + 1).value = text;
   });
 
-  // Styling Headers
-  for (let i = 1; i <= 2; i++) {
-    worksheet.getRow(i).eachCell({ includeEmpty: true }, (cell) => {
-      cell.fill = {
-        type: "pattern",
-        pattern: "solid",
-        fgColor: { argb: "FFF1F5F9" },
+  // Header Style
+  for (let r = 1; r <= 2; r++) {
+    worksheet.getRow(r).eachCell({ includeEmpty: true }, (cell) => {
+      cell.fill = headerFill;
+      cell.font = {
+        bold: true,
+        color: { argb: "FF475569" },
       };
-      cell.font = { bold: true, color: { argb: "FF475569" } };
-      cell.alignment = { vertical: "middle", horizontal: "center" };
-      cell.border = {
-        top: { style: "thin" },
-        left: { style: "thin" },
-        bottom: { style: "thin" },
-        right: { style: "thin" },
+      cell.alignment = {
+        vertical: "middle",
+        horizontal: "center",
       };
+      cell.border = thinBorder;
     });
   }
 
-  // Adjust widths
+  // Width
   const widths = [
     20, 20, 20, 10, 15, 20, 20, 25, 10, 15, 15, 40, 20, 20, 15, 15, 20, 30, 30,
     20, 20, 20, 15, 15, 15, 20, 20,
   ];
-  widths.forEach((width, i) => {
-    worksheet.getColumn(i + 1).width = width;
+
+  widths.forEach((w, i) => {
+    worksheet.getColumn(i + 1).width = w;
   });
 
-  // Start from row 3
+  // ===============================
+  // DATA
+  // ===============================
   let rowIndex = 3;
 
-  // Map Data Rows
-  for (let i = 0; i < fetch_rec_all.value.length; i++) {
-    const item = fetch_rec_all.value[i];
-
+  for (const item of fetch_rec_all.value) {
     const timeRec = item.AMLDRINF_HREC_UPDATELSTDT
       ? dayjs(item.AMLDRINF_HREC_UPDATELSTDT).format("DD/MM/YYYY HH:mm")
       : item.AMLDRINF_HREC_LSTDT
@@ -1498,113 +1780,117 @@ const exportData = async () => {
       item.AMLDRINF_HREC_WON || "-",
       item.AMLDRINF_HREC_MDLCD || "-",
       item.AMLDRINF_HREC_MDLNM || "-",
-      item.AMLDRINF_HREC_LOTS || "-", // 9
+      item.AMLDRINF_HREC_LOTS || "-",
       item.AMLDRINF_HREC_PROCS || "-",
-      item.AMLDRINF_HREC_CSTYPE || "-", // 11
-      item.AMLDRINF_HREC_PROB || "-", // 12
+      item.AMLDRINF_HREC_CSTYPE || "-",
+      item.AMLDRINF_HREC_PROB || "-",
       item.AMLDRINF_HREC_LOCATE || "-",
       item.AMLDRINF_HREC_MACHINE || "-",
-      item.AMLDRINF_HREC_QTYNG || "-", // 15
-      item.AMLDRINF_HREC_STARTTIME || "-", // 16
-      "", // Q (17) - Information Image Placeholder
-      item.AMLDRACT_HREC_RTCAUSE || "-", // 18
-      item.AMLDRACT_HREC_ACTION || "-", // 19
-      findUser(item.AMLDRACT_HREC_ACTIONEMP) || "-", // 20
-      "", // U (21) - Action Image Placeholder
-      actionTime, // 22
-      item.AMLDRCONF_HREC_RESULT || "-", // 23
-      item.AMLDRCONF_HREC_ENDTIME || "-", // 24
-      item.AMLDRCONF_HREC_TOTALTIME || "-", // 25
-      findUser(item.AMLDRCONF_HREC_EMPNO) || "-", // 26
-      confirmTime, // 27
+      item.AMLDRINF_HREC_QTYNG || "-",
+      item.AMLDRINF_HREC_STARTTIME || "-",
+      "",
+      item.AMLDRACT_HREC_RTCAUSE || "-",
+      item.AMLDRACT_HREC_ACTION || "-",
+      findUser(item.AMLDRACT_HREC_ACTIONEMP) || "-",
+      "",
+      actionTime,
+      item.AMLDRCONF_HREC_RESULT || "-",
+      item.AMLDRCONF_HREC_ENDTIME || "-",
+      item.AMLDRCONF_HREC_TOTALTIME || "-",
+      findUser(item.AMLDRCONF_HREC_EMPNO) || "-",
+      confirmTime,
     ];
 
     const row = worksheet.getRow(rowIndex);
-    rowData.forEach((val, colIndex) => {
-      row.getCell(colIndex + 1).value = val;
+
+    rowData.forEach((val, i) => {
+      row.getCell(i + 1).value = val;
     });
 
     let hasImage = false;
 
-    // Handle Image 1 (Information) - Column Q (17)
+    // ===============================
+    // Image Information
+    // ===============================
     if (item.AMLDRINF_HREC_IMAGE) {
       const url = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`;
-      const base64Str = await getBase64ImageFromUrl(url);
-      if (base64Str) {
-        const ext =
-          item.AMLDRINF_HREC_IMAGE.split(".").pop().toLowerCase() === "png"
-            ? "png"
-            : "jpeg";
+
+      const base64 = await getCompressedBase64FromUrl(url, 250, 250, 0.6);
+
+      if (base64) {
         const imageId = workbook.addImage({
-          base64: base64Str,
-          extension: ext as "jpeg" | "png",
+          base64,
+          extension: "jpeg",
         });
+
         worksheet.addImage(imageId, {
-          tl: { col: 16, row: rowIndex - 1 }, // Column Q (0-indexed is 16)
+          tl: { col: 16, row: rowIndex - 1 },
           ext: { width: 80, height: 80 },
         });
+
         hasImage = true;
       }
     }
 
-    // Handle Image 2 (Action) - Column U (21)
+    // ===============================
+    // Image Action
+    // ===============================
     if (item.AMLDRACT_HREC_IMAGE) {
       const url = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`;
-      const base64Str = await getBase64ImageFromUrl(url);
-      if (base64Str) {
-        const ext =
-          item.AMLDRACT_HREC_IMAGE.split(".").pop().toLowerCase() === "png"
-            ? "png"
-            : "jpeg";
+
+      const base64 = await getCompressedBase64FromUrl(url, 250, 250, 0.6);
+
+      if (base64) {
         const imageId = workbook.addImage({
-          base64: base64Str,
-          extension: ext as "jpeg" | "png",
+          base64,
+          extension: "jpeg",
         });
+
         worksheet.addImage(imageId, {
-          tl: { col: 20, row: rowIndex - 1 }, // Column U (0-indexed is 20)
+          tl: { col: 20, row: rowIndex - 1 },
           ext: { width: 80, height: 80 },
         });
+
         hasImage = true;
       }
     }
 
-    // Expand row height if either image exists
     row.height = hasImage ? 65 : 30;
 
-    // Center and wrap cells
     for (let c = 1; c <= 27; c++) {
       const cell = row.getCell(c);
-      cell.alignment = { vertical: "middle", horizontal: "center" };
-      if (c === 12 || c === 18 || c === 19) {
-        cell.alignment = {
-          vertical: "middle",
-          horizontal: "left",
-          wrapText: true,
-        };
-      }
-      cell.border = {
-        top: { style: "thin" },
-        left: { style: "thin" },
-        bottom: { style: "thin" },
-        right: { style: "thin" },
-      };
+
+      cell.border = thinBorder;
+
+      cell.alignment =
+        c === 12 || c === 18 || c === 19
+          ? {
+              vertical: "middle",
+              horizontal: "left",
+              wrapText: true,
+            }
+          : {
+              vertical: "middle",
+              horizontal: "center",
+            };
     }
 
     rowIndex++;
   }
 
+  // ===============================
+  // EXPORT
+  // ===============================
   const buffer = await workbook.xlsx.writeBuffer();
 
-  // Set FileName
   const currentDate = dayjs().format("YYYY-MM-DD");
   const lineText = filter_line.value ? `_${filter_line.value}` : "";
-  const fileName = `Report_Leader_Call_${currentDate}${lineText}.xlsx`;
 
-  saveAs(new Blob([buffer]), fileName);
+  saveAs(
+    new Blob([buffer]),
+    `Report_Leader_Call_${currentDate}${lineText}.xlsx`,
+  );
 };
-
-// filter
-
 const filter_startdate = ref<string>("");
 const filter_enddate = ref<string>("");
 const filter_line = ref<string>("");

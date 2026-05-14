@@ -835,6 +835,47 @@
           </div>
         </div>
       </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="flex flex-col gap-1">
+          <label for=""
+            >AMP Production (ผู้รับเรื่อง):
+            <span class="text-red-500 mr-2">*</span>
+          </label>
+          <Multiselect
+            v-model="inf.emp_prod"
+            :options="data_production"
+            :searchable="true"
+            :clearable="true"
+            :close-on-select="true"
+            :create-option="false"
+            :preserve-search="false"
+            :hide-selected="false"
+            :placeholder="'Select Name Production'"
+            :class="{ 'border-red-500': errors.procs }"
+            @change="clearError('procs')"
+          />
+        </div>
+        <div class="flex flex-col gap-1">
+          <label for=""
+            >AM Engineer (ผู้รับผิดชอบ):
+            <span class="text-red-500 mr-2">*</span>
+          </label>
+          <Multiselect
+            v-model="inf.emp_eng"
+            :options="data_engineering"
+            :searchable="true"
+            :clearable="true"
+            :close-on-select="true"
+            :create-option="false"
+            :preserve-search="false"
+            :hide-selected="false"
+            :placeholder="'Select Name Engineer'"
+            :class="{ 'border-red-500': errors.procs }"
+            @change="clearError('procs')"
+          />
+        </div>
+      </div>
     </form>
     <!-- เนื้อหาในส่วน Footer (Optional Slot) -->
     <template #footer>
@@ -904,6 +945,8 @@ const inf = ref<InformationTypesForm>({
   qty_ng: 0,
   start_time: dayjs(new Date()).format("HH:mm"),
   bysection: "",
+  emp_prod: "",
+  emp_eng: "",
 });
 
 const List_section = ref<any>([
@@ -927,6 +970,8 @@ const errors = reactive({
   qty_ng: "",
   start_time: "",
   bysection: "",
+  emp_prod: "",
+  emp_eng: "",
 });
 
 const customers_list = ref<any[]>([]);
@@ -1188,6 +1233,8 @@ const submitForm = async (e?: Event) => {
     formData.append("qty_ng", String(inf.value.qty_ng));
     formData.append("start_time", inf.value.start_time);
     formData.append("bysection", inf.value.bysection);
+    formData.append("emp_prod", inf.value.emp_prod);
+    formData.append("emp_eng", inf.value.emp_eng);
 
     // append image file
     if (inf.value.image instanceof File) {
@@ -1257,6 +1304,8 @@ const resetForm = () => {
     qty_ng: 0,
     start_time: dayjs(new Date()).format("HH:mm"),
     bysection: "",
+    emp_prod: "",
+    emp_eng: "",
   };
 
   imagePreview.value = null;
@@ -1280,6 +1329,39 @@ const getCustomer = async () => {
       };
     });
     // console.log(options_cus.value);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const data_production = ref<any[]>([]);
+const data_engineering = ref<any[]>([]);
+
+const getVEmployees = async () => {
+  try {
+    const response = await axios.get(
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/vuser",
+    );
+    const data_user = response.data;
+    const data_prod = data_user.production;
+    const data_eng = data_user.engineering;
+    console.log(data_prod);
+    console.log(data_eng);
+
+    data_production.value = data_prod.map((item: any) => ({
+      value: item?.EmpID?.trim() ?? "",
+      label:
+        `${item?.FNameEng?.trim() ?? ""} ${item?.LNameEng?.trim() ?? ""}`.trim(),
+    }));
+
+    data_engineering.value = data_eng.map((item: any) => ({
+      value: item?.EmpID?.trim() ?? "",
+      label:
+        `${item?.FNameEng?.trim() ?? ""} ${item?.LNameEng?.trim() ?? ""}`.trim(),
+    }));
+
+    console.log(data_production.value);
+    console.log(data_engineering.value);
   } catch (error) {
     console.error(error);
   }
@@ -1390,6 +1472,8 @@ const editForm = async (item: any) => {
   inf.value.qty_ng = item.AMLDRINF_HREC_QTYNG;
   inf.value.customer = item.AMLDRINF_HREC_CUS;
   inf.value.bysection = item.AMLDRINF_HREC_BYSEC;
+  inf.value.emp_prod = item.AMLDRINF_HREC_PRODEMP;
+  inf.value.emp_eng = item.AMLDRINF_HREC_ENGEMP;
 
   id_hrec.value = item.AMLDRINF_HREC_ID;
 
@@ -1577,6 +1661,7 @@ watch(
 
 onMounted(() => {
   getUsers();
+  getVEmployees();
   getCustomer();
   getRecordInfo();
   getReject();

@@ -15,4 +15,6 @@ export interface InformationTypesForm {
     qty_ng: number,
     start_time: string,
     bysection: string,
+    emp_prod: string,
+    emp_eng: string,
 }
