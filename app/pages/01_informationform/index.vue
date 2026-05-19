@@ -46,6 +46,16 @@
                 <th
                   class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
                 >
+                  ผู้รับผิดชอบ
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
+                  ผู้รับเรื่อง
+                </th>
+                <th
+                  class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
+                >
                   ผู้บันทึก
                 </th>
                 <th
@@ -163,6 +173,14 @@
                 <td class="px-6 py-4 font-bold text-slate-900 leading-none">
                   {{ item.AMLDRINF_DOC_NUM }}
                 </td>
+                <td class="px-6 py-4" v-if="item.AMLDRINF_ENGEMP != null">
+                  {{ findUser(item.AMLDRINF_ENGEMP) }}
+                </td>
+                <td class="px-6 py-4" v-else>ไม่มีชื่อ</td>
+                <td class="px-6 py-4" v-if="item.AMLDRINF_PRODEMP != null">
+                  {{ findUser(item.AMLDRINF_PRODEMP) }}
+                </td>
+                <td class="px-6 py-4" v-else>ไม่มีชื่อ</td>
                 <td class="px-6 py-4">{{ findUser(item.AMLDRINF_EMPHREC) }}</td>
                 <td
                   class="px-6 py-4"
