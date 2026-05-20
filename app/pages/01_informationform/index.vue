@@ -1,10 +1,7 @@
 <template>
   <div class="mb-8 animate-fade-in">
-    <button
-      @click="openModal()"
-      type="button"
-      class="btn-primary shadow-2xl shadow-indigo-200/50 scale-105 hover:scale-110 active:scale-95"
-    >
+    <button @click="openModal()" type="button"
+      class="btn-primary shadow-2xl shadow-indigo-200/50 scale-105 hover:scale-110 active:scale-95">
       <div class="flex items-center gap-3">
         <div class="bg-white/20 p-1.5 rounded-lg backdrop-blur-md">
           <Plus :size="20" />
@@ -18,13 +15,8 @@
       <div class="flex gap-4 items-center space-x-4">
         <span>📃</span>
 
-        <span class="text-xl font-extrabold tracking-tight"
-          >รายการ Information Checking</span
-        >
-        <span
-          class="text-xs text-white/60 font-medium uppercase tracking-widest"
-          >Information Checking</span
-        >
+        <span class="text-xl font-extrabold tracking-tight">รายการ Information Checking</span>
+        <span class="text-xs text-white/60 font-medium uppercase tracking-widest">Information Checking</span>
       </div>
     </div>
     <div class="card-body bg-slate-50/30">
@@ -34,98 +26,79 @@
             <thead>
               <tr>
                 <th
-                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   Action
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   หมายเลขเอกสาร
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   ผู้รับผิดชอบ
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   ผู้รับเรื่อง
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   ผู้บันทึก
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   เวลาบันทึกล่าสุด
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   Line
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   Customer
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   Work Order
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   Model Code
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   Model Name
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[160px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[160px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Lot Size
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[90px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[90px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Process
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[130px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[130px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Cause Type
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[280px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[280px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Problem
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Location
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Machine
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[170px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[170px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   จำนวนงานเสีย
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   รูปภาพ
                 </th>
               </tr>
@@ -133,37 +106,28 @@
 
             <!-- BODY -->
             <tbody class="divide-y divide-slate-100">
-              <tr
-                v-for="item in data_rec"
-                :key="item.AMLDRINF_HREC_ID"
-                class="hover:bg-indigo-50/30 transition-colors text-center"
-              >
+              <tr v-for="item in data_rec" :key="item.AMLDRINF_HREC_ID"
+                class="hover:bg-indigo-50/30 transition-colors text-center">
                 <!-- ACTION -->
                 <td class="px-6 py-4">
                   <div class="flex gap-2 justify-center">
                     <button
                       class="w-20 h-10 flex items-center justify-center bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl transition-all hover:shadow-lg hover:shadow-emerald-200 active:scale-90"
-                      @click="UpdateCheck(item.AMLDRINF_HREC_ID)"
-                      title="ยืนยัน"
-                    >
+                      @click="UpdateCheck(item.AMLDRINF_HREC_ID)" title="ยืนยัน">
                       <Send class="w-4 h-4" />
                       <span class="ml-2">ยืนยัน</span>
                     </button>
 
                     <button
                       class="w-20 h-10 flex items-center justify-center bg-amber-400 hover:bg-amber-500 text-black rounded-xl transition-all hover:shadow-lg hover:shadow-amber-200 active:scale-90"
-                      @click="editForm(item)"
-                      title="แก้ไข"
-                    >
+                      @click="editForm(item)" title="แก้ไข">
                       <Pencil class="w-4 h-4" />
                       <span class="ml-2">แก้ไข</span>
                     </button>
 
                     <button
                       class="w-20 h-10 flex items-center justify-center bg-rose-500 hover:bg-rose-600 text-white rounded-xl transition-all hover:shadow-lg hover:shadow-rose-100 active:scale-90"
-                      @click="deleteForm(item.AMLDRINF_HREC_ID)"
-                      title="ลบ"
-                    >
+                      @click="deleteForm(item.AMLDRINF_HREC_ID)" title="ลบ">
                       <Trash class="w-4 h-4" />
                       <span class="ml-2">ลบ</span>
                     </button>
@@ -182,10 +146,7 @@
                 </td>
                 <td class="px-6 py-4" v-else>ไม่มีชื่อ</td>
                 <td class="px-6 py-4">{{ findUser(item.AMLDRINF_EMPHREC) }}</td>
-                <td
-                  class="px-6 py-4"
-                  v-if="item.AMLDRINF_HREC_UPDATELSTDT === null"
-                >
+                <td class="px-6 py-4" v-if="item.AMLDRINF_HREC_UPDATELSTDT === null">
                   {{
                     dayjs(item.AMLDRINF_HREC_LSTDT).format("DD/MM/YYYY HH:mm")
                   }}
@@ -200,7 +161,7 @@
                 <td class="px-6 py-4">
                   <span class="badge badge-blue">{{
                     item.AMLDRINF_HREC_LINE
-                  }}</span>
+                    }}</span>
                 </td>
                 <td class="px-6 py-4 font-semibold text-slate-700">
                   {{ item.AMLDRINF_HREC_CUS }}
@@ -218,12 +179,12 @@
                 <td class="px-6 py-4">
                   <span class="badge badge-emerald">{{
                     item.AMLDRINF_HREC_PROCS
-                  }}</span>
+                    }}</span>
                 </td>
                 <td class="px-6 py-4">
                   <span class="font-bold text-indigo-600 uppercase text-sm">{{
                     item.AMLDRINF_HREC_CSTYPE
-                  }}</span>
+                    }}</span>
                 </td>
                 <td class="px-6 py-4 min-w-[200px] text-sm">
                   {{ item.AMLDRINF_HREC_PROB }}
@@ -244,8 +205,7 @@
                       class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-slate-200"
                       @click="
                         previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`
-                      "
-                    />
+                        " />
                   </template>
                   <span v-else class="text-slate-300 font-bold">-</span>
                 </td>
@@ -253,52 +213,36 @@
             </tbody>
 
             <!-- BODY REJECT (STD = 4) -->
-            <tbody
-              v-if="data_reject.length > 0"
-              class="divide-y divide-rose-100 relative"
-            >
+            <tbody v-if="data_reject.length > 0" class="divide-y divide-rose-100 relative">
               <!-- Section label row -->
               <tr class="bg-rose-50/80 backdrop-blur-sm sticky left-0 z-10">
-                <td
-                  colspan="17"
-                  class="px-8 py-4 text-rose-700 font-extrabold text-sm uppercase tracking-tight text-left flex items-center gap-2"
-                >
-                  <span
-                    class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"
-                  ></span>
+                <td colspan="17"
+                  class="px-8 py-4 text-rose-700 font-extrabold text-sm uppercase tracking-tight text-left flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></span>
                   รายการที่ถูก Reject (ส่งกลับมาแก้ไข)
                 </td>
               </tr>
-              <tr
-                v-for="item in data_reject"
-                :key="item.AMLDRINF_HREC_ID"
-                class="bg-rose-50/30 hover:bg-rose-50 transition-colors text-center"
-              >
+              <tr v-for="item in data_reject" :key="item.AMLDRINF_HREC_ID"
+                class="bg-rose-50/30 hover:bg-rose-50 transition-colors text-center">
                 <!-- ACTION -->
                 <td class="px-6 py-4">
                   <div class="flex gap-2 justify-center">
                     <button
                       class="w-10 h-10 flex items-center justify-center bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl transition-all hover:shadow-lg hover:shadow-emerald-200 active:scale-90"
-                      @click="UpdateRejectInfo(item.AMLDRINF_HREC_ID)"
-                      title="ยืนยัน"
-                    >
+                      @click="UpdateRejectInfo(item.AMLDRINF_HREC_ID)" title="ยืนยัน">
                       <Send class="w-4 h-4" />
                       <span class="ml-2">ยืนยัน</span>
                     </button>
                     <button
                       class="w-10 h-10 flex items-center justify-center bg-amber-400 hover:bg-amber-500 text-black rounded-xl transition-all hover:shadow-lg hover:shadow-amber-200 active:scale-90"
-                      @click="editForm(item)"
-                      title="แก้ไข"
-                    >
+                      @click="editForm(item)" title="แก้ไข">
                       <Pencil class="w-4 h-4" />
                       <span class="ml-2">แก้ไข</span>
                     </button>
 
                     <button
                       class="w-10 h-10 flex items-center justify-center bg-rose-500 hover:bg-rose-600 text-white rounded-xl transition-all hover:shadow-lg hover:shadow-rose-100 active:scale-90"
-                      @click="deleteForm(item.AMLDRINF_HREC_ID)"
-                      title="ลบ"
-                    >
+                      @click="deleteForm(item.AMLDRINF_HREC_ID)" title="ลบ">
                       <Trash class="w-4 h-4" />
                       <span class="ml-2">ลบ</span>
                     </button>
@@ -315,7 +259,7 @@
                 <td class="px-6 py-4">
                   <span class="badge badge-rose">{{
                     item.AMLDRINF_HREC_LINE
-                  }}</span>
+                    }}</span>
                 </td>
                 <td class="px-6 py-4 text-rose-900 font-semibold">
                   {{ item.AMLDRINF_HREC_CUS }}
@@ -331,16 +275,14 @@
                 <td class="px-6 py-4">
                   <span class="badge badge-rose">{{
                     item.AMLDRINF_HREC_PROCS
-                  }}</span>
+                    }}</span>
                 </td>
                 <td class="px-6 py-4">
                   <span class="font-bold text-rose-600 uppercase text-xs">{{
                     item.AMLDRINF_HREC_CSTYPE
-                  }}</span>
+                    }}</span>
                 </td>
-                <td
-                  class="px-6 py-4 italic text-rose-800/60 text-xs leading-relaxed text-left"
-                >
+                <td class="px-6 py-4 italic text-rose-800/60 text-xs leading-relaxed text-left">
                   {{ item.AMLDRINF_HREC_PROB }}
                 </td>
                 <td class="px-6 py-4">{{ item.AMLDRINF_HREC_LOCATE }}</td>
@@ -355,8 +297,7 @@
                       class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-rose-200"
                       @click="
                         previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`
-                      "
-                    />
+                        " />
                   </template>
                   <span v-else class="text-rose-200 font-bold">-</span>
                 </td>
@@ -371,64 +312,38 @@
   <!-- Image Lightbox Popup -->
   <Teleport to="body">
     <Transition name="lightbox">
-      <div
-        v-if="previewImage"
+      <div v-if="previewImage"
         class="fixed inset-0 z-[999] flex items-center justify-center bg-black/70 backdrop-blur-sm"
-        @click.self="previewImage = null"
-      >
+        @click.self="previewImage = null">
         <div class="relative max-w-[90vw] max-h-[90vh]">
           <!-- Close Button -->
-          <button
-            @click="previewImage = null"
-            class="absolute -top-4 -right-4 w-9 h-9 flex items-center justify-center bg-white text-gray-700 rounded-full shadow-lg hover:bg-rose-500 hover:text-white transition z-10"
-          >
+          <button @click="previewImage = null"
+            class="absolute -top-4 -right-4 w-9 h-9 flex items-center justify-center bg-white text-gray-700 rounded-full shadow-lg hover:bg-rose-500 hover:text-white transition z-10">
             <X :size="18" />
           </button>
           <!-- Image -->
-          <img
-            :src="previewImage"
-            class="max-w-[90vw] max-h-[85vh] object-contain rounded-xl shadow-2xl"
-          />
+          <img :src="previewImage" class="max-w-[90vw] max-h-[85vh] object-contain rounded-xl shadow-2xl" />
         </div>
       </div>
     </Transition>
   </Teleport>
 
-  <Modal
-    :is-open="isModalOpen"
-    title="Information Form "
-    size="full"
-    color="blue"
-    @close="isModalOpen = false"
-  >
+  <Modal :is-open="isModalOpen" title="Information Form " size="full" color="blue" @close="isModalOpen = false">
     <form class="space-y-3" @submit.prevent="submitForm">
       <div class="grid md:grid-cols-3 grid-cols-2 gap-3">
         <div class="flex items-center gap-1">
           <label for="" class="text-sm w-[200px]">Employee ID:</label>
-          <input
-            type="text"
-            v-model="inf.employee_id"
-            class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none w-full"
-            readonly
-          />
+          <input type="text" v-model="inf.employee_id"
+            class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none w-full" readonly />
         </div>
         <div class="flex flex-col gap-2">
-          <label for="employee"
-            >บันทึกโดย: <span class="text-red-500 mr-2">*</span>
+          <label for="employee">บันทึกโดย: <span class="text-red-500 mr-2">*</span>
             <span v-if="errors.bysection" class="text-red-500">{{
               errors.bysection
-            }}</span></label
-          >
-          <select
-            v-model="inf.bysection"
-            class="border border-gray-200 focus:outline-none px-2 py-2 rounded-sm"
-          >
+              }}</span></label>
+          <select v-model="inf.bysection" class="border border-gray-200 focus:outline-none px-2 py-2 rounded-sm">
             <option value="" disabled selected>-- กรุณาเลือก --</option>
-            <option
-              v-for="item in List_section"
-              :key="item.id"
-              :value="item.value"
-            >
+            <option v-for="item in List_section" :key="item.id" :value="item.value">
               {{ item.name }}
             </option>
           </select>
@@ -436,203 +351,112 @@
       </div>
       <div class="grid md:grid-cols-3 grid-cols-2 gap-3">
         <div class="flex flex-col gap-1">
-          <label for=""
-            >Line: <span class="text-red-500 mr-2">*</span>
+          <label for="">Line: <span class="text-red-500 mr-2">*</span>
             <span v-if="errors.line" class="text-red-500">{{
               errors.line
-            }}</span>
+              }}</span>
           </label>
-          <select
-            v-model="inf.line"
-            class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none w-full"
-            :class="{ 'border-red-500': errors.line }"
-            @change="clearError('line')"
-          >
+          <select v-model="inf.line" class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none w-full"
+            :class="{ 'border-red-500': errors.line }" @change="clearError('line')">
             <option value="" disabled selected>Select Line</option>
-            <option
-              v-for="line in lines_prod"
-              :key="line.value"
-              :value="line.value"
-            >
+            <option v-for="line in lines_prod" :key="line.value" :value="line.value">
               {{ line.label }}
             </option>
           </select>
         </div>
         <div class="flex flex-col gap-1">
-          <label for=""
-            >Customer: <span class="text-red-500 mr-2">*</span
-            ><span v-if="errors.customer" class="text-red-500">{{
-              errors.customer
-            }}</span></label
-          >
-          <Multiselect
-            v-model="inf.customer"
-            :options="options_cus"
-            :searchable="true"
-            :clearable="true"
-            :close-on-select="true"
-            :create-option="false"
-            :preserve-search="false"
-            :hide-selected="false"
-            :placeholder="'Select Customer'"
-            :class="{ 'border-red-500': errors.customer }"
-            @change="clearError('customer')"
-          />
+          <label for="">Customer: <span class="text-red-500 mr-2">*</span><span v-if="errors.customer"
+              class="text-red-500">{{
+                errors.customer
+              }}</span></label>
+          <Multiselect v-model="inf.customer" :options="options_cus" :searchable="true" :clearable="true"
+            :close-on-select="true" :create-option="false" :preserve-search="false" :hide-selected="false"
+            :placeholder="'Select Customer'" :class="{ 'border-red-500': errors.customer }"
+            @change="clearError('customer')" />
         </div>
         <div class="flex flex-col gap-1">
-          <label for=""
-            >Work Order: <span class="text-red-500 mr-2">*</span
-            ><span v-if="errors.won" class="text-red-500">{{
-              errors.won
-            }}</span></label
-          >
-          <Multiselect
-            ref="wonSelect"
-            v-model="inf.won"
-            :options="options_won"
-            :searchable="true"
-            :clearable="true"
-            :close-on-select="true"
-            :create-option="false"
-            :preserve-search="false"
-            :hide-selected="false"
-            :placeholder="'Select Work Order'"
-            :class="{ 'border-red-500': errors.won }"
-            @change="clearError('customer')"
-          />
+          <label for="">Work Order: <span class="text-red-500 mr-2">*</span><span v-if="errors.won"
+              class="text-red-500">{{
+                errors.won
+              }}</span></label>
+          <Multiselect ref="wonSelect" v-model="inf.won" :options="options_won" :searchable="true" :clearable="true"
+            :close-on-select="true" :create-option="false" :preserve-search="false" :hide-selected="false"
+            :placeholder="'Select Work Order'" :class="{ 'border-red-500': errors.won }"
+            @change="clearError('customer')" />
         </div>
       </div>
       <div class="grid md:grid-cols-3 grid-cols-2 gap-3">
         <div class="flex flex-col gap-1">
           <label for="">Model Code: </label>
-          <input
-            type="text"
-            v-model="inf.model_code"
-            class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
-            readonly
-          />
+          <input type="text" v-model="inf.model_code"
+            class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none" readonly />
         </div>
         <div class="flex flex-col gap-1">
           <label for="">Model Name: </label>
-          <input
-            type="text"
-            v-model="inf.model_name"
-            class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
-            readonly
-          />
+          <input type="text" v-model="inf.model_name"
+            class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none" readonly />
         </div>
         <div class="flex flex-col gap-1">
           <label for="">Lot Size: </label>
-          <input
-            type="number"
-            v-model="inf.lots"
-            class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
-            readonly
-          />
+          <input type="number" v-model="inf.lots" class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
+            readonly />
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
         <div class="flex flex-col gap-1">
-          <label for=""
-            >Process: <span class="text-red-500 mr-2">*</span>
+          <label for="">Process: <span class="text-red-500 mr-2">*</span>
             <span v-if="errors.procs" class="text-red-500">{{
               errors.procs
-            }}</span>
+              }}</span>
           </label>
-          <Multiselect
-            v-model="inf.procs"
-            :options="processes"
-            :searchable="true"
-            :clearable="true"
-            :close-on-select="true"
-            :create-option="false"
-            :preserve-search="false"
-            :hide-selected="false"
-            :placeholder="'Select Process'"
-            :class="{ 'border-red-500': errors.procs }"
-            @change="clearError('procs')"
-          />
+          <Multiselect v-model="inf.procs" :options="processes" :searchable="true" :clearable="true"
+            :close-on-select="true" :create-option="false" :preserve-search="false" :hide-selected="false"
+            :placeholder="'Select Process'" :class="{ 'border-red-500': errors.procs }" @change="clearError('procs')" />
         </div>
         <div class="flex flex-col col-span-2 gap-3">
-          <label for=""
-            >Cause: <span class="text-red-500 mr-2">*</span>
+          <label for="">Cause: <span class="text-red-500 mr-2">*</span>
             <span v-if="errors.cause" class="text-red-500">{{
               errors.cause
-            }}</span>
+              }}</span>
           </label>
           <div class="flex items-center gap-3">
             <label class="cursor-pointer">
-              <input
-                type="radio"
-                name="processType"
-                class="peer hidden"
-                value="Man"
-                v-model="inf.cause"
-                @input="clearError('cause')"
-              />
+              <input type="radio" name="processType" class="peer hidden" value="Man" v-model="inf.cause"
+                @input="clearError('cause')" />
               <span
-                class="font-medium text-gray-400 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:scale-110 transition-all duration-200 ease-in-out px-2 py-1 rounded-md text-lg border border-gray-300 peer-checked:border-none"
-              >
+                class="font-medium text-gray-400 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:scale-110 transition-all duration-200 ease-in-out px-2 py-1 rounded-md text-lg border border-gray-300 peer-checked:border-none">
                 Man
               </span>
             </label>
             <label class="cursor-pointer">
-              <input
-                type="radio"
-                name="processType"
-                class="peer hidden"
-                value="Machine"
-                v-model="inf.cause"
-                @input="clearError('cause')"
-              />
+              <input type="radio" name="processType" class="peer hidden" value="Machine" v-model="inf.cause"
+                @input="clearError('cause')" />
               <span
-                class="font-medium text-gray-400 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:scale-110 transition-all duration-200 ease-in-out px-2 py-1 rounded-md text-lg border border-gray-300 peer-checked:border-none"
-              >
+                class="font-medium text-gray-400 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:scale-110 transition-all duration-200 ease-in-out px-2 py-1 rounded-md text-lg border border-gray-300 peer-checked:border-none">
                 Machine
               </span>
             </label>
             <label class="cursor-pointer">
-              <input
-                type="radio"
-                name="processType"
-                class="peer hidden"
-                value="Method"
-                v-model="inf.cause"
-                @input="clearError('cause')"
-              />
+              <input type="radio" name="processType" class="peer hidden" value="Method" v-model="inf.cause"
+                @input="clearError('cause')" />
               <span
-                class="font-medium text-gray-400 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:scale-110 transition-all duration-200 ease-in-out px-2 py-1 rounded-md text-lg border border-gray-300 peer-checked:border-none"
-              >
+                class="font-medium text-gray-400 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:scale-110 transition-all duration-200 ease-in-out px-2 py-1 rounded-md text-lg border border-gray-300 peer-checked:border-none">
                 Method
               </span>
             </label>
             <label class="cursor-pointer">
-              <input
-                type="radio"
-                name="processType"
-                class="peer hidden"
-                value="Mat."
-                v-model="inf.cause"
-                @input="clearError('cause')"
-              />
+              <input type="radio" name="processType" class="peer hidden" value="Mat." v-model="inf.cause"
+                @input="clearError('cause')" />
               <span
-                class="font-medium text-gray-400 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:scale-110 transition-all duration-200 ease-in-out px-2 py-1 rounded-md text-lg border border-gray-300 peer-checked:border-none"
-              >
+                class="font-medium text-gray-400 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:scale-110 transition-all duration-200 ease-in-out px-2 py-1 rounded-md text-lg border border-gray-300 peer-checked:border-none">
                 Mat.
               </span>
             </label>
             <label class="cursor-pointer">
-              <input
-                type="radio"
-                name="processType"
-                class="peer hidden"
-                value="Etc."
-                v-model="inf.cause"
-                @input="clearError('cause')"
-              />
+              <input type="radio" name="processType" class="peer hidden" value="Etc." v-model="inf.cause"
+                @input="clearError('cause')" />
               <span
-                class="font-medium text-gray-400 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:scale-110 transition-all duration-200 ease-in-out px-2 py-1 rounded-md text-lg border border-gray-300 peer-checked:border-none"
-              >
+                class="font-medium text-gray-400 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:scale-110 transition-all duration-200 ease-in-out px-2 py-1 rounded-md text-lg border border-gray-300 peer-checked:border-none">
                 Etc.
               </span>
             </label>
@@ -642,98 +466,65 @@
       <div class="grid grid-cols-1">
         <div class="flex flex-col gap-1">
           <div class="flex items-center justify-between">
-            <label for=""
-              >Problem: <span class="text-red-500 mr-2">*</span>
+            <label for="">Problem: <span class="text-red-500 mr-2">*</span>
               <span v-if="errors.prob" class="text-red-500">{{
                 errors.prob
-              }}</span>
+                }}</span>
             </label>
-            <button
-              type="button"
-              @click="toggleVoiceInput"
-              :class="[
-                'flex items-center gap-1 px-2 py-1 rounded-md text-sm font-medium transition-all duration-200',
-                isListening
-                  ? 'bg-red-500 text-white animate-pulse'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
-              ]"
-              :title="
-                isListening ? 'กำลังฟัง... (คลิกเพื่อหยุด)' : 'พิมด้วยเสียง'
-              "
-            >
+            <button type="button" @click="toggleVoiceInput" :class="[
+              'flex items-center gap-1 px-2 py-1 rounded-md text-sm font-medium transition-all duration-200',
+              isListening
+                ? 'bg-red-500 text-white animate-pulse'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
+            ]" :title="isListening ? 'กำลังฟัง... (คลิกเพื่อหยุด)' : 'พิมด้วยเสียง'
+              ">
               <Mic2 :size="16" />
               <span>{{ isListening ? "กำลังฟัง..." : "พิมด้วยเสียง" }}</span>
             </button>
           </div>
-          <textarea
-            v-model="inf.prob"
-            class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
-            :class="{ 'border-red-500': errors.prob }"
-            @input="clearError('prob')"
-            rows="3"
-          ></textarea>
+          <textarea v-model="inf.prob" class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
+            :class="{ 'border-red-500': errors.prob }" @input="clearError('prob')" rows="3"></textarea>
         </div>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
         <div class="flex flex-col gap-1">
-          <label for=""
-            >Location: <span class="text-red-500 mr-2">*</span>
+          <label for="">Location: <span class="text-red-500 mr-2">*</span>
             <span v-if="errors.locate" class="text-red-500">{{
               errors.locate
-            }}</span>
+              }}</span>
           </label>
-          <input
-            type="text"
-            v-model="inf.locate"
-            class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
-            :class="{ 'border-red-500': errors.locate }"
-            @input="clearError('locate')"
-          />
+          <input type="text" v-model="inf.locate" class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
+            :class="{ 'border-red-500': errors.locate }" @input="clearError('locate')" />
         </div>
         <div class="flex flex-col gap-1">
-          <label for=""
-            >Machine: <span class="text-red-500 mr-2">*</span>
+          <label for="">Machine: <span class="text-red-500 mr-2">*</span>
             <span v-if="errors.machine" class="text-red-500">{{
               errors.machine
-            }}</span>
+              }}</span>
           </label>
-          <input
-            type="text"
-            v-model="inf.machine"
+          <input type="text" v-model="inf.machine"
             class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
-            :class="{ 'border-red-500': errors.machine }"
-            @input="clearError('machine')"
-          />
+            :class="{ 'border-red-500': errors.machine }" @input="clearError('machine')" />
         </div>
         <div class="flex flex-col gap-1">
-          <label for=""
-            >Qty (NG): <span class="text-red-500 mr-2">*</span>
+          <label for="">Qty (NG): <span class="text-red-500 mr-2">*</span>
             <span v-if="errors.qty_ng" class="text-red-500">{{
               errors.qty_ng
-            }}</span>
+              }}</span>
           </label>
-          <input
-            type="number"
-            v-model="inf.qty_ng"
+          <input type="number" v-model="inf.qty_ng"
             class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
-            :class="{ 'border-red-500': errors.qty_ng }"
-            @input="clearError('qty_ng')"
-          />
+            :class="{ 'border-red-500': errors.qty_ng }" @input="clearError('qty_ng')" />
         </div>
         <div class="flex flex-col gap-1">
-          <label for=""
-            >Start Time: <span class="text-red-500 mr-2">*</span>
+          <label for="">Start Time: <span class="text-red-500 mr-2">*</span>
             <span v-if="errors.start_time" class="text-red-500">{{
               errors.start_time
-            }}</span>
+              }}</span>
           </label>
-          <input
-            type="time"
-            v-model="inf.start_time"
+          <input type="time" v-model="inf.start_time"
             class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
-            :class="{ 'border-red-500': errors.start_time }"
-            @input="clearError('start_time')"
-          />
+            :class="{ 'border-red-500': errors.start_time }" @input="clearError('start_time')" />
         </div>
       </div>
 
@@ -747,107 +538,60 @@
           </label>
 
           <!-- MOBILE / TABLET -->
-          <div
-            v-if="isMobileOrTablet && !isCameraOpen"
-            class="flex flex-col items-center gap-2"
-          >
+          <div v-if="isMobileOrTablet && !isCameraOpen" class="flex flex-col items-center gap-2">
             <!-- ปุ่มเปิดกล้อง -->
-            <button
-              type="button"
-              @click="startCamera"
-              class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center w-full"
-            >
+            <button type="button" @click="startCamera"
+              class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center w-full">
               <Camera :size="20" />
               <span>ถ่ายรูป</span>
             </button>
 
             <!-- ปุ่มเลือกไฟล์ -->
-            <button
-              type="button"
-              @click="fileInput?.click()"
-              class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center w-full"
-            >
+            <button type="button" @click="fileInput?.click()"
+              class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center w-full">
               <Image :size="20" />
               หรือเลือกรูปจากเครื่อง
             </button>
 
             <!-- input ซ่อน -->
-            <input
-              ref="fileInput"
-              type="file"
-              class="hidden"
-              accept="image/*"
-              @change="handleImageUpload"
-            />
+            <input ref="fileInput" type="file" class="hidden" accept="image/*" @change="handleImageUpload" />
           </div>
 
           <!-- DESKTOP → เลือกไฟล์ -->
-          <label
-            v-else-if="!isMobileOrTablet"
-            class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center"
-          >
+          <label v-else-if="!isMobileOrTablet"
+            class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center">
             <Camera :size="20" />
             <span>เลือกรูปภาพ</span>
-            <input
-              type="file"
-              class="hidden"
-              accept="image/*"
-              @change="handleImageUpload"
-            />
+            <input type="file" class="hidden" accept="image/*" @change="handleImageUpload" />
           </label>
 
           <!-- FULLSCREEN CAMERA -->
-          <div
-            v-if="isCameraOpen"
-            class="fixed inset-0 bg-black z-50 flex flex-col justify-between"
-          >
+          <div v-if="isCameraOpen" class="fixed inset-0 bg-black z-50 flex flex-col justify-between">
             <!-- กล้อง -->
-            <video
-              ref="video"
-              autoplay
-              playsinline
-              class="w-full h-full object-cover"
-            ></video>
+            <video ref="video" autoplay playsinline class="w-full h-full object-cover"></video>
 
             <!-- ปุ่มควบคุม -->
-            <div
-              class="absolute bottom-0 left-0 w-full flex justify-center items-center gap-6 pb-6"
-            >
+            <div class="absolute bottom-0 left-0 w-full flex justify-center items-center gap-6 pb-6">
               <!-- ยกเลิก -->
-              <button
-                type="button"
-                @click="stopCamera"
-                class="bg-white/20 backdrop-blur text-white px-5 py-2 rounded-full"
-              >
+              <button type="button" @click="stopCamera"
+                class="bg-white/20 backdrop-blur text-white px-5 py-2 rounded-full">
                 ยกเลิก
               </button>
 
               <!-- ปุ่มถ่ายรูป -->
-              <button
-                type="button"
-                @click="takePhoto"
-                class="w-16 h-16 rounded-full bg-white border-4 border-gray-300"
-              ></button>
+              <button type="button" @click="takePhoto"
+                class="w-16 h-16 rounded-full bg-white border-4 border-gray-300"></button>
             </div>
           </div>
         </div>
 
         <!-- Preview -->
         <div class="flex flex-col gap-1 col-span-2 items-center">
-          <img
-            v-if="imagePreview"
-            :src="imagePreview"
-            alt="image"
-            class="max-w-full max-h-[300px] object-contain"
-          />
+          <img v-if="imagePreview" :src="imagePreview" alt="image" class="max-w-full max-h-[300px] object-contain" />
 
           <!-- ปุ่มหลังถ่าย -->
           <div v-if="imagePreview" class="flex gap-2 mt-2">
-            <button
-              type="button"
-              @click="retake"
-              class="bg-red-500 text-white px-4 py-2 rounded"
-            >
+            <button type="button" @click="retake" class="bg-red-500 text-white px-4 py-2 rounded">
               ถ่ายใหม่
             </button>
           </div>
@@ -856,42 +600,28 @@
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="flex flex-col gap-1">
-          <label for=""
-            >AMP Production (ผู้รับเรื่อง):
+          <label for="">AMP Production (ผู้รับเรื่อง):
             <span class="text-red-500 mr-2">*</span>
+            <span v-if="errors.emp_prod" class="text-red-500">{{
+              errors.emp_prod
+              }}</span>
           </label>
-          <Multiselect
-            v-model="inf.emp_prod"
-            :options="data_production"
-            :searchable="true"
-            :clearable="true"
-            :close-on-select="true"
-            :create-option="false"
-            :preserve-search="false"
-            :hide-selected="false"
-            :placeholder="'Select Name Production'"
-            :class="{ 'border-red-500': errors.procs }"
-            @change="clearError('procs')"
-          />
+          <Multiselect v-model="inf.emp_prod" :options="data_production" :searchable="true" :clearable="true"
+            :close-on-select="true" :create-option="false" :preserve-search="false" :hide-selected="false"
+            :placeholder="'Select Name Production'" :class="{ 'border-red-500': errors.emp_prod }"
+            @change="clearError('emp_prod')" />
         </div>
         <div class="flex flex-col gap-1">
-          <label for=""
-            >AM Engineer (ผู้รับผิดชอบ):
+          <label for="">AM Engineer (ผู้รับผิดชอบ):
             <span class="text-red-500 mr-2">*</span>
+            <span v-if="errors.emp_eng" class="text-red-500">{{
+              errors.emp_eng
+              }}</span>
           </label>
-          <Multiselect
-            v-model="inf.emp_eng"
-            :options="data_engineering"
-            :searchable="true"
-            :clearable="true"
-            :close-on-select="true"
-            :create-option="false"
-            :preserve-search="false"
-            :hide-selected="false"
-            :placeholder="'Select Name Engineer'"
-            :class="{ 'border-red-500': errors.procs }"
-            @change="clearError('procs')"
-          />
+          <Multiselect v-model="inf.emp_eng" :options="data_engineering" :searchable="true" :clearable="true"
+            :close-on-select="true" :create-option="false" :preserve-search="false" :hide-selected="false"
+            :placeholder="'Select Name Engineer'" :class="{ 'border-red-500': errors.emp_eng }"
+            @change="clearError('emp_eng')" />
         </div>
       </div>
     </form>
@@ -1210,6 +940,18 @@ const validateForm = () => {
     isValid = false;
   }
 
+  if (!inf.value.emp_prod) {
+    errors.emp_prod = "AMP Production is required";
+    isValid = false;
+  }
+
+  if (!inf.value.emp_eng) {
+    errors.emp_eng = "AM Engineer is required";
+    isValid = false;
+  }
+
+
+
   return isValid;
 };
 
@@ -1433,7 +1175,7 @@ const UpdateCheck = async (id: string) => {
   try {
     const response = await axios.put(
       "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/update/check/" +
-        id,
+      id,
     );
     if (response.data.status === "success") {
       getRecordInfo();
@@ -1448,7 +1190,7 @@ const UpdateRejectInfo = async (id: string) => {
     console.log(id);
     const response = await axios.put(
       "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/update/reject-info/" +
-        id,
+      id,
     );
     if (response.data.status === "success") {
       getReject();
@@ -1522,7 +1264,7 @@ const deleteForm = async (id: string) => {
     if (button.isConfirmed) {
       const response = await axios.delete(
         "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/info/delete/" +
-          id,
+        id,
       );
       if (response.data.status === "success") {
         getRecordInfo();
