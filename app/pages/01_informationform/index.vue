@@ -137,12 +137,12 @@
                 <td class="px-6 py-4 font-bold text-slate-900 leading-none">
                   {{ item.AMLDRINF_DOC_NUM }}
                 </td>
-                <td class="px-6 py-4" v-if="item.AMLDRINF_ENGEMP != null">
-                  {{ findUser(item.AMLDRINF_ENGEMP) }}
+                <td class="px-6 py-4" v-if="item.AMLDRINF_HREC_ENGEMP !== null">
+                  {{ findUser(item.AMLDRINF_HREC_ENGEMP) }}
                 </td>
                 <td class="px-6 py-4" v-else>ไม่มีชื่อ</td>
-                <td class="px-6 py-4" v-if="item.AMLDRINF_PRODEMP != null">
-                  {{ findUser(item.AMLDRINF_PRODEMP) }}
+                <td class="px-6 py-4" v-if="item.AMLDRINF_HREC_PRODEMP !== null">
+                  {{ findUser(item.AMLDRINF_HREC_PRODEMP) }}
                 </td>
                 <td class="px-6 py-4" v-else>ไม่มีชื่อ</td>
                 <td class="px-6 py-4">{{ findUser(item.AMLDRINF_EMPHREC) }}</td>

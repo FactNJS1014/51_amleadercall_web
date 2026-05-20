@@ -3,8 +3,7 @@
     <!-- Header -->
     <div class="flex items-center gap-3 mb-2">
       <div
-        class="bg-gradient-to-r from-blue-500 to-indigo-600 p-2.5 text-white rounded-xl shadow-lg shadow-blue-500/30"
-      >
+        class="bg-gradient-to-r from-blue-500 to-indigo-600 p-2.5 text-white rounded-xl shadow-lg shadow-blue-500/30">
         <Boxes :size="28" />
       </div>
       <h2 class="text-2xl font-bold text-slate-800 tracking-tight">
@@ -16,12 +15,8 @@
       <!-- Pending Action Card -->
       <div
         class="sm:w-1/2 w-full h-1/2 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl shadow-xl shadow-amber-500/20 text-white relative overflow-hidden flex flex-col justify-between p-6 hover:-translate-y-1 transition-transform duration-300"
-        @click="showPending = !showPending"
-        :class="showPending ? 'border-4 border-amber-500' : ''"
-      >
-        <div
-          class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4"
-        >
+        @click="showPending = !showPending" :class="showPending ? 'border-4 border-amber-500' : ''">
+        <div class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4">
           <ClipboardClock :size="120" stroke-width="1.5" />
         </div>
         <div class="relative z-10 flex items-center gap-3 mb-6">
@@ -44,12 +39,8 @@
       <!-- Pending Confirm Card -->
       <div
         class="sm:w-1/2 w-full h-1/2 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-2xl shadow-xl shadow-blue-500/20 text-white relative overflow-hidden flex flex-col justify-between p-6 hover:-translate-y-1 transition-transform duration-300"
-        @click="showPendingConfirm = !showPendingConfirm"
-        :class="showPendingConfirm ? 'border-4 border-blue-500' : ''"
-      >
-        <div
-          class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4"
-        >
+        @click="showPendingConfirm = !showPendingConfirm" :class="showPendingConfirm ? 'border-4 border-blue-500' : ''">
+        <div class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4">
           <AlarmClockCheck :size="120" stroke-width="1.5" />
         </div>
         <div class="relative z-10 flex items-center gap-3 mb-6">
@@ -72,11 +63,8 @@
       <!-- Record Complete Card -->
       <div
         class="sm:w-1/2 w-full h-1/2 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl shadow-xl shadow-emerald-500/20 text-white relative overflow-hidden flex flex-col justify-between p-6 hover:-translate-y-1 transition-transform duration-300"
-        @click="scrollToTable()"
-      >
-        <div
-          class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4"
-        >
+        @click="scrollToTable()">
+        <div class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4">
           <CircleCheck :size="120" stroke-width="1.5" />
         </div>
         <div class="relative z-10 flex items-center gap-3 mb-6">
@@ -96,89 +84,49 @@
       </div>
     </div>
 
-    <div
-      class="w-full bg-white rounded-2xl shadow-sm border border-slate-200 flex flex-col overflow-hidden p-4"
-    >
+    <div class="w-full bg-white rounded-2xl shadow-sm border border-slate-200 flex flex-col overflow-hidden p-4">
       <!-- Top Cards Panel -->
       <div class="flex gap-6 lg:flex-row flex-col">
         <!-- Filter Card -->
         <div class="w-full">
-          <div
-            class="px-5 py-4 border-b border-slate-100 bg-gray-500 flex items-center justify-between rounded-t-lg"
-          >
+          <div class="px-5 py-4 border-b border-slate-100 bg-gray-500 flex items-center justify-between rounded-t-lg">
             <h3 class="font-bold text-white flex items-center gap-2">
               <Search :size="18" class="text-indigo-200" /> Filter Options
             </h3>
           </div>
           <div class="p-5 flex-1 flex flex-col justify-between">
-            <div
-              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4"
-            >
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
               <!-- Start Date -->
               <div class="w-full">
-                <label
-                  for="filter_startdate"
-                  class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block"
-                  >Start Date</label
-                >
-                <input
-                  type="date"
-                  id="filter_startdate"
-                  v-model="filter_startdate"
-                  class="w-full rounded-lg border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3 py-2.5 bg-slate-50 hover:bg-white transition-colors"
-                />
+                <label for="filter_startdate"
+                  class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block">Start Date</label>
+                <input type="date" id="filter_startdate" v-model="filter_startdate"
+                  class="w-full rounded-lg border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3 py-2.5 bg-slate-50 hover:bg-white transition-colors" />
               </div>
               <!-- End Date -->
               <div>
-                <label
-                  for="filter_enddate"
-                  class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block"
-                  >End Date</label
-                >
-                <input
-                  type="date"
-                  id="filter_enddate"
-                  v-model="filter_enddate"
-                  class="w-full rounded-lg border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3 py-2.5 bg-slate-50 hover:bg-white transition-colors"
-                />
+                <label for="filter_enddate"
+                  class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block">End Date</label>
+                <input type="date" id="filter_enddate" v-model="filter_enddate"
+                  class="w-full rounded-lg border-slate-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm px-3 py-2.5 bg-slate-50 hover:bg-white transition-colors" />
               </div>
               <!-- Line -->
               <div>
-                <label
-                  for="filter_line"
-                  class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block"
-                  >Line</label
-                >
-                <Multiselect
-                  id="filter_line"
-                  v-model="filter_line"
-                  :options="fetch_line"
-                  :searchable="false"
-                  :clearable="true"
-                  class="mt-1 text-sm border-slate-200"
-                />
+                <label for="filter_line"
+                  class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block">Line</label>
+                <Multiselect id="filter_line" v-model="filter_line" :options="fetch_line" :searchable="false"
+                  :clearable="true" class="mt-1 text-sm border-slate-200" />
               </div>
               <!-- Customer -->
               <div>
-                <label
-                  for="filter_cus"
-                  class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block"
-                  >Customer</label
-                >
-                <Multiselect
-                  id="filter_cus"
-                  v-model="filter_cus"
-                  :options="options_cus"
-                  :searchable="true"
-                  :clearable="true"
-                  class="mt-1 text-sm border-slate-200"
-                />
+                <label for="filter_cus"
+                  class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5 block">Customer</label>
+                <Multiselect id="filter_cus" v-model="filter_cus" :options="options_cus" :searchable="true"
+                  :clearable="true" class="mt-1 text-sm border-slate-200" />
               </div>
             </div>
 
-            <div
-              class="flex justify-between border-t border-slate-100 mt-4 pt-4"
-            >
+            <div class="flex justify-between border-t border-slate-100 mt-4 pt-4">
               <div class="flex gap-2 items-center">
                 <div class="flex gap-2">
                   <p class="text-rose-500 text-sm font-bold">สีแดง (open) =</p>
@@ -201,16 +149,12 @@
               </div>
 
               <div class="flex gap-3">
-                <button
-                  @click="exportData()"
-                  class="px-4 py-2.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 rounded-xl font-semibold text-sm transition-colors flex items-center gap-2"
-                >
+                <button @click="exportData()"
+                  class="px-4 py-2.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 rounded-xl font-semibold text-sm transition-colors flex items-center gap-2">
                   <Download :size="18" /> Export
                 </button>
-                <button
-                  @click="searchData()"
-                  class="px-6 py-2.5 bg-indigo-600 text-white hover:bg-indigo-700 rounded-xl shadow-lg shadow-indigo-200 font-semibold text-sm transition-colors flex items-center gap-2"
-                >
+                <button @click="searchData()"
+                  class="px-6 py-2.5 bg-indigo-600 text-white hover:bg-indigo-700 rounded-xl shadow-lg shadow-indigo-200 font-semibold text-sm transition-colors flex items-center gap-2">
                   <Search :size="18" /> ค้นหา
                 </button>
               </div>
@@ -221,258 +165,200 @@
         </div>
       </div>
       <div class="table-container shadow-sm border">
-        <div
-          class="overflow-x-auto max-h-[calc(100vh-10rem)] overflow-y-auto w-full"
-        >
+        <div class="overflow-x-auto max-h-[calc(100vh-10rem)] overflow-y-auto w-full">
           <table class="w-full" ref="tableRef">
             <thead class="sticky top-0 z-10">
               <tr>
                 <th
                   class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
-                  rowspan="2"
-                >
+                  rowspan="2">
                   หมายเลขเอกสาร
                 </th>
-                <th
-                  colspan="17"
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
-                >
+                <th colspan="17"
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200">
                   Information
                 </th>
-                <th
-                  colspan="7"
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
-                >
+                <th colspan="7"
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200">
                   Action
                 </th>
-                <th
-                  colspan="5"
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                <th colspan="5"
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   Confirm
                 </th>
               </tr>
               <tr>
                 <th
-                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   ผู้รับผิดชอบ
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   ผู้รับเรื่อง
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   ผู้บันทึก
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   Section
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   เวลาบันทึก
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   Line
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   Customer
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   Work Order
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   Model Code
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                   Model Name
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Lot Size
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Process
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[190px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[190px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Cause Type
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Problem
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Location
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Machine
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   จำนวนงานเสีย
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Start Time
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200">
                   รูปภาพ
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Root Cause
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Action
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Action Type
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Action By
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Section
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   รูปภาพ
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200">
                   เวลาบันทึกล่าสุด
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Result
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   End Time
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Total Time
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Confirm By
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200">
                   เวลาบันทึกล่าสุด
                 </th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100">
               <tr v-if="paginatedData.length === 0">
-                <td
-                  colspan="15"
-                  class="px-6 py-12 text-center text-slate-500 font-medium bg-white"
-                >
+                <td colspan="15" class="px-6 py-12 text-center text-slate-500 font-medium bg-white">
                   <div class="flex flex-col items-center justify-center gap-3">
                     <DatabaseSearch :size="48" class="text-slate-300" />
                     <span class="text-lg">ไม่พบข้อมูล</span>
                   </div>
                 </td>
               </tr>
-              <tr
-                v-for="item in paginatedData"
-                :key="item.AMLDRINF_HREC_ID"
-                class="hover:bg-indigo-50/30 transition-colors text-center bg-white"
-              >
-                <td
-                  class="px-6 py-4 font-bold text-slate-900 whitespace-nowrap"
-                  v-if="item.AMLDRACT_HREC_EDITTYPE === 'close'"
-                >
+              <tr v-for="item in paginatedData" :key="item.AMLDRINF_HREC_ID"
+                class="hover:bg-indigo-50/30 transition-colors text-center bg-white">
+                <td class="px-6 py-4 font-bold text-slate-900 whitespace-nowrap"
+                  v-if="item.AMLDRACT_HREC_EDITTYPE === 'close'">
                   <span class="text-green-500">{{
                     item.AMLDRINF_DOC_NUM
                   }}</span>
                 </td>
-                <td
-                  class="px-6 py-4 font-bold text-slate-900 whitespace-nowrap"
-                  v-if="item.AMLDRACT_HREC_EDITTYPE === 'temporary'"
-                >
+                <td class="px-6 py-4 font-bold text-slate-900 whitespace-nowrap"
+                  v-if="item.AMLDRACT_HREC_EDITTYPE === 'temporary'">
                   <span class="text-amber-500">{{
                     item.AMLDRINF_DOC_NUM
                   }}</span>
                 </td>
-                <td
-                  class="px-6 py-4 font-bold text-slate-900 whitespace-nowrap"
-                  v-if="item.AMLDRACT_HREC_EDITTYPE === 'open'"
-                >
+                <td class="px-6 py-4 font-bold text-slate-900 whitespace-nowrap"
+                  v-if="item.AMLDRACT_HREC_EDITTYPE === 'open'">
                   <span class="text-red-500">{{ item.AMLDRINF_DOC_NUM }}</span>
                 </td>
-                <td class="px-6 py-4" v-if="item.AMLDRINF_ENGEMP != null">
-                  {{ findUser(item.AMLDRINF_ENGEMP) }}
+                <td class="px-6 py-4" v-if="item.AMLDRINF_HREC_ENGEMP !== null">
+                  {{ findUser(item.AMLDRINF_HREC_ENGEMP) }}
                 </td>
                 <td class="px-6 py-4" v-else>ไม่มีชื่อ</td>
-                <td class="px-6 py-4" v-if="item.AMLDRINF_PRODEMP != null">
-                  {{ findUser(item.AMLDRINF_PRODEMP) }}
+                <td class="px-6 py-4" v-if="item.AMLDRINF_HREC_PRODEMP !== null">
+                  {{ findUser(item.AMLDRINF_HREC_PRODEMP) }}
                 </td>
                 <td class="px-6 py-4" v-else>ไม่มีชื่อ</td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   {{ findUser(item.AMLDRINF_EMPHREC) }}
                 </td>
-                <td
-                  class="px-6 py-4 whitespace-nowrap"
-                  v-if="item.AMLDRINF_HREC_BYSEC === null"
-                >
+                <td class="px-6 py-4 whitespace-nowrap" v-if="item.AMLDRINF_HREC_BYSEC === null">
                   -
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap" v-else>
                   {{ item.AMLDRINF_HREC_BYSEC }}
                 </td>
-                <td
-                  class="px-6 py-4 whitespace-nowrap"
-                  v-if="item.AMLDRINF_HREC_UPDATELSTDT === null"
-                >
+                <td class="px-6 py-4 whitespace-nowrap" v-if="item.AMLDRINF_HREC_UPDATELSTDT === null">
                   {{
                     dayjs(item.AMLDRINF_HREC_LSTDT).format("DD/MM/YYYY HH:mm")
                   }}
@@ -489,9 +375,7 @@
                     item.AMLDRINF_HREC_LINE
                   }}</span>
                 </td>
-                <td
-                  class="px-6 py-4 font-semibold text-slate-700 whitespace-nowrap"
-                >
+                <td class="px-6 py-4 font-semibold text-slate-700 whitespace-nowrap">
                   {{ item.AMLDRINF_HREC_CUS }}
                 </td>
                 <td class="px-6 py-4 font-mono text-[15px] whitespace-nowrap">
@@ -525,25 +409,20 @@
                 <td class="px-6 py-4 whitespace-nowrap">
                   {{ item.AMLDRINF_HREC_MACHINE }}
                 </td>
-                <td
-                  class="px-6 py-4 font-black text-rose-600 text-base whitespace-nowrap"
-                >
+                <td class="px-6 py-4 font-black text-rose-600 text-base whitespace-nowrap">
                   {{ item.AMLDRINF_HREC_QTYNG }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   {{ item.AMLDRINF_HREC_STARTTIME }}
                 </td>
-                <td
-                  class="px-6 py-4 whitespace-nowrap flex items-center justify-center border-r border-slate-200"
-                >
+                <td class="px-6 py-4 whitespace-nowrap flex items-center justify-center border-r border-slate-200">
                   <template v-if="item.AMLDRINF_HREC_IMAGE">
                     <img
                       :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`"
                       class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-rose-200"
                       @click="
                         previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`
-                      "
-                    />
+                        " />
                   </template>
                   <span v-else class="text-rose-200 font-bold">-</span>
                 </td>
@@ -559,41 +438,30 @@
                 <td class="px-6 py-4 whitespace-nowrap">
                   {{ findUser(item.AMLDRACT_HREC_ACTIONEMP) }}
                 </td>
-                <td
-                  class="px-6 py-4 whitespace-nowrap"
-                  v-if="item.AMLDRACT_HREC_BYSECTION === null"
-                >
+                <td class="px-6 py-4 whitespace-nowrap" v-if="item.AMLDRACT_HREC_BYSECTION === null">
                   -
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap" v-else>
                   {{ item.AMLDRACT_HREC_BYSECTION }}
                 </td>
-                <td
-                  class="px-6 py-4 whitespace-nowrap flex items-center justify-center"
-                >
+                <td class="px-6 py-4 whitespace-nowrap flex items-center justify-center">
                   <template v-if="item.AMLDRACT_HREC_IMAGE">
                     <img
                       :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`"
                       class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-rose-200"
                       @click="
                         previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`
-                      "
-                    />
+                        " />
                   </template>
                   <span v-else class="text-rose-200 font-bold">-</span>
                 </td>
-                <td
-                  class="px-6 py-4 whitespace-nowrap border-r border-slate-200"
-                  v-if="item.AMLDRACT_HREC_UPDATELSTDT === null"
-                >
+                <td class="px-6 py-4 whitespace-nowrap border-r border-slate-200"
+                  v-if="item.AMLDRACT_HREC_UPDATELSTDT === null">
                   {{
                     dayjs(item.AMLDRACT_HREC_LSTDT).format("DD/MM/YYYY HH:mm")
                   }}
                 </td>
-                <td
-                  class="px-6 py-4 whitespace-nowrap border-r border-slate-200"
-                  v-else
-                >
+                <td class="px-6 py-4 whitespace-nowrap border-r border-slate-200" v-else>
                   {{
                     dayjs(item.AMLDRACT_HREC_UPDATELSTDT).format(
                       "DD/MM/YYYY HH:mm",
@@ -624,8 +492,7 @@
 
         <!-- Pagination Control -->
         <div
-          class="flex flex-col sm:flex-row items-center justify-between px-6 py-4 bg-slate-50 border-t border-slate-200"
-        >
+          class="flex flex-col sm:flex-row items-center justify-between px-6 py-4 bg-slate-50 border-t border-slate-200">
           <div class="text-sm text-slate-500 mb-4 sm:mb-0">
             Showing
             <span class="font-medium text-slate-900">{{
@@ -642,53 +509,35 @@
             entries
           </div>
           <div class="flex items-center space-x-2">
-            <button
-              @click="prevPage"
-              :disabled="currentPage === 1"
-              class="px-3 py-1.5 border border-slate-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white text-sm font-medium text-slate-700 transition-colors bg-white shadow-sm"
-            >
+            <button @click="prevPage" :disabled="currentPage === 1"
+              class="px-3 py-1.5 border border-slate-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white text-sm font-medium text-slate-700 transition-colors bg-white shadow-sm">
               Previous
             </button>
 
             <div class="hidden sm:flex space-x-1">
               <template v-for="page in displayedPages" :key="page">
-                <span v-if="page === '...'" class="px-3 py-1.5 text-slate-500"
-                  >...</span
-                >
-                <button
-                  v-else
-                  @click="goToPage(page as number)"
-                  :class="[
-                    'px-3 py-1.5 border rounded-md text-sm font-medium transition-colors shadow-sm',
-                    currentPage === page
-                      ? 'bg-indigo-600 border-indigo-600 text-white hover:bg-indigo-700'
-                      : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-50',
-                  ]"
-                >
+                <span v-if="page === '...'" class="px-3 py-1.5 text-slate-500">...</span>
+                <button v-else @click="goToPage(page as number)" :class="[
+                  'px-3 py-1.5 border rounded-md text-sm font-medium transition-colors shadow-sm',
+                  currentPage === page
+                    ? 'bg-indigo-600 border-indigo-600 text-white hover:bg-indigo-700'
+                    : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-50',
+                ]">
                   {{ page }}
                 </button>
               </template>
             </div>
 
-            <button
-              @click="nextPage"
-              :disabled="currentPage === totalPages"
-              class="px-3 py-1.5 border border-slate-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white text-sm font-medium text-slate-700 transition-colors bg-white shadow-sm"
-            >
+            <button @click="nextPage" :disabled="currentPage === totalPages"
+              class="px-3 py-1.5 border border-slate-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white text-sm font-medium text-slate-700 transition-colors bg-white shadow-sm">
               Next
             </button>
 
-            <div
-              class="ml-2 flex items-center gap-2 border-l border-slate-300 pl-4"
-            >
-              <span class="text-sm text-slate-500 hidden md:inline"
-                >Per page:</span
-              >
-              <select
-                v-model="itemsPerPage"
+            <div class="ml-2 flex items-center gap-2 border-l border-slate-300 pl-4">
+              <span class="text-sm text-slate-500 hidden md:inline">Per page:</span>
+              <select v-model="itemsPerPage"
                 class="border border-slate-300 rounded-md text-sm px-2 py-1.5 focus:ring-indigo-500 focus:border-indigo-500 bg-white shadow-sm"
-                @change="currentPage = 1"
-              >
+                @change="currentPage = 1">
                 <option :value="10">10</option>
                 <option :value="20">20</option>
                 <option :value="50">50</option>
@@ -703,44 +552,31 @@
 
   <Teleport to="body">
     <Transition name="lightbox">
-      <div
-        v-if="previewImage"
+      <div v-if="previewImage"
         class="fixed inset-0 z-[1200] flex items-center justify-center bg-black/70 backdrop-blur-sm"
-        @click.self="previewImage = ''"
-      >
+        @click.self="previewImage = ''">
         <div class="relative max-w-[90vw] max-h-[90vh]">
           <!-- Close Button -->
-          <button
-            @click="previewImage = ''"
-            class="absolute -top-4 -right-4 w-9 h-9 flex items-center justify-center bg-white text-gray-700 rounded-full shadow-lg hover:bg-rose-500 hover:text-white transition z-10"
-          >
+          <button @click="previewImage = ''"
+            class="absolute -top-4 -right-4 w-9 h-9 flex items-center justify-center bg-white text-gray-700 rounded-full shadow-lg hover:bg-rose-500 hover:text-white transition z-10">
             <X :size="18" />
           </button>
           <!-- Image -->
-          <img
-            :src="previewImage"
-            class="max-w-[90vw] max-h-[85vh] object-contain rounded-xl shadow-2xl"
-          />
+          <img :src="previewImage" class="max-w-[90vw] max-h-[85vh] object-contain rounded-xl shadow-2xl" />
         </div>
       </div>
     </Transition>
   </Teleport>
   <Teleport to="body">
     <Transition name="lightbox">
-      <div
-        v-if="showPending"
+      <div v-if="showPending"
         class="fixed inset-0 z-[999] flex items-center justify-center bg-black/70 backdrop-blur-sm"
-        @click.self="showPending = false"
-      >
-        <div
-          class="bg-white w-[90vw] max-h-[90vh] rounded-xl p-6 overflow-auto relative animate-fade-in space-y-4"
-        >
+        @click.self="showPending = false">
+        <div class="bg-white w-[90vw] max-h-[90vh] rounded-xl p-6 overflow-auto relative animate-fade-in space-y-4">
           <div class="relative max-w-[90vw] max-h-[90vh]">
             <!-- Close Button -->
-            <button
-              @click="showPending = false"
-              class="absolute -top-4 -right-4 w-9 h-9 flex items-center justify-center bg-white text-gray-700 rounded-full shadow-lg hover:bg-rose-500 hover:text-white transition z-10"
-            >
+            <button @click="showPending = false"
+              class="absolute -top-4 -right-4 w-9 h-9 flex items-center justify-center bg-white text-gray-700 rounded-full shadow-lg hover:bg-rose-500 hover:text-white transition z-10">
               <X :size="18" />
             </button>
             <!-- Title -->
@@ -751,8 +587,7 @@
 
             <button
               class="flex items-center gap-2 mb-4 bg-green-500 px-4 py-2 rounded-md hover:bg-green-600 transition-colors cursor-pointer"
-              @click="exportDataNoAction"
-            >
+              @click="exportDataNoAction">
               <Download :size="24" class="text-white" />
               <h2 class="text-lg font-bold text-white">Export</h2>
             </button>
@@ -762,98 +597,79 @@
                 <thead>
                   <tr>
                     <th
-                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       หมายเลขเอกสาร
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       ผู้รับผิดชอบ
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       ผู้รับเรื่อง
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       ผู้บันทึก
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       Section
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       เวลาบันทึกล่าสุด
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       Line
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       Customer
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       Work Order
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       Model Code
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       Model Name
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[160px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[160px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       Lot Size
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       Process
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[130px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[130px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       Cause Type
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[280px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[280px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       Problem
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       Location
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       Machine
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[170px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[170px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       จำนวนงานเสีย
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       รูปภาพ
                     </th>
                   </tr>
@@ -861,38 +677,29 @@
 
                 <!-- BODY -->
                 <tbody class="divide-y divide-slate-100">
-                  <tr
-                    v-for="item in fetch_no_action"
-                    :key="item.AMLDRINF_HREC_ID"
-                    class="hover:bg-indigo-50/30 transition-colors text-center"
-                  >
+                  <tr v-for="item in fetch_no_action" :key="item.AMLDRINF_HREC_ID"
+                    class="hover:bg-indigo-50/30 transition-colors text-center">
                     <td class="px-6 py-4 font-bold text-slate-900 leading-none">
                       {{ item.AMLDRINF_DOC_NUM }}
                     </td>
-                    <td class="px-6 py-4" v-if="item.AMLDRINF_ENGEMP != null">
-                      {{ findUser(item.AMLDRINF_ENGEMP) }}
+                    <td class="px-6 py-4" v-if="item.AMLDRINF_HREC_ENGEMP !== null">
+                      {{ findUser(item.AMLDRINF_HREC_ENGEMP) }}
                     </td>
                     <td class="px-6 py-4" v-else>ไม่มีชื่อ</td>
-                    <td class="px-6 py-4" v-if="item.AMLDRINF_PRODEMP != null">
-                      {{ findUser(item.AMLDRINF_PRODEMP) }}
+                    <td class="px-6 py-4" v-if="item.AMLDRINF_HREC_PRODEMP !== null">
+                      {{ findUser(item.AMLDRINF_HREC_PRODEMP) }}
                     </td>
                     <td class="px-6 py-4" v-else>ไม่มีชื่อ</td>
                     <td class="px-6 py-4">
                       {{ findUser(item.AMLDRINF_EMPHREC) }}
                     </td>
-                    <td
-                      class="px-6 py-4"
-                      v-if="item.AMLDRINF_HREC_BYSEC === null"
-                    >
+                    <td class="px-6 py-4" v-if="item.AMLDRINF_HREC_BYSEC === null">
                       -
                     </td>
                     <td class="px-6 py-4" v-else>
                       {{ item.AMLDRINF_HREC_BYSEC }}
                     </td>
-                    <td
-                      class="px-6 py-4"
-                      v-if="item.AMLDRINF_HREC_UPDATELSTDT === null"
-                    >
+                    <td class="px-6 py-4" v-if="item.AMLDRINF_HREC_UPDATELSTDT === null">
                       {{
                         dayjs(item.AMLDRINF_HREC_LSTDT).format(
                           "DD/MM/YYYY HH:mm",
@@ -930,10 +737,7 @@
                       }}</span>
                     </td>
                     <td class="px-6 py-4">
-                      <span
-                        class="font-bold text-indigo-600 uppercase text-sm"
-                        >{{ item.AMLDRINF_HREC_CSTYPE }}</span
-                      >
+                      <span class="font-bold text-indigo-600 uppercase text-sm">{{ item.AMLDRINF_HREC_CSTYPE }}</span>
                     </td>
                     <td class="px-6 py-4 min-w-[200px] text-sm">
                       {{ item.AMLDRINF_HREC_PROB }}
@@ -954,8 +758,7 @@
                           class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-slate-200"
                           @click="
                             previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`
-                          "
-                        />
+                            " />
                       </template>
                       <span v-else class="text-slate-300 font-bold">-</span>
                     </td>
@@ -964,31 +767,25 @@
               </table>
             </div>
           </div>
-          <NuxtLink
-            to="/02_actionform"
-            class="bg-amber-500 px-3 py-2 rounded-lg text-white flex items-center gap-2 hover:bg-amber-600 transition-colors w-fit"
-            >Go to Action Form Page <ArrowBigRight class="w-5 h-5"
-          /></NuxtLink>
+          <NuxtLink to="/02_actionform"
+            class="bg-amber-500 px-3 py-2 rounded-lg text-white flex items-center gap-2 hover:bg-amber-600 transition-colors w-fit">
+            Go to Action Form Page
+            <ArrowBigRight class="w-5 h-5" />
+          </NuxtLink>
         </div>
       </div>
     </Transition>
   </Teleport>
   <Teleport to="body">
     <Transition name="lightbox">
-      <div
-        v-if="showPendingConfirm"
+      <div v-if="showPendingConfirm"
         class="fixed inset-0 z-[999] flex items-center justify-center bg-black/70 backdrop-blur-sm"
-        @click.self="showPendingConfirm = false"
-      >
-        <div
-          class="bg-white w-[90vw] max-h-[90vh] rounded-xl p-6 overflow-auto relative space-y-4 animate-fade-in"
-        >
+        @click.self="showPendingConfirm = false">
+        <div class="bg-white w-[90vw] max-h-[90vh] rounded-xl p-6 overflow-auto relative space-y-4 animate-fade-in">
           <div class="relative max-w-[90vw] max-h-[90vh]">
             <!-- Close Button -->
-            <button
-              @click="showPendingConfirm = false"
-              class="absolute -top-4 -right-4 w-9 h-9 flex items-center justify-center bg-white text-gray-700 rounded-full shadow-lg hover:bg-rose-500 hover:text-white transition z-10"
-            >
+            <button @click="showPendingConfirm = false"
+              class="absolute -top-4 -right-4 w-9 h-9 flex items-center justify-center bg-white text-gray-700 rounded-full shadow-lg hover:bg-rose-500 hover:text-white transition z-10">
               <X :size="18" />
             </button>
             <!-- Title -->
@@ -1003,137 +800,109 @@
                   <tr>
                     <th
                       class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
-                      rowspan="2"
-                    >
+                      rowspan="2">
                       หมายเลขเอกสาร
                     </th>
-                    <th
-                      colspan="15"
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
-                    >
+                    <th colspan="15"
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200">
                       Information
                     </th>
-                    <th
-                      colspan="6"
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
-                    >
+                    <th colspan="6"
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200">
                       Action
                     </th>
                   </tr>
                   <tr>
                     <th
-                      class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       ผู้รับผิดชอบ
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       ผู้รับเรื่อง
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[300px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       ผู้บันทึก
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       เวลาบันทึกล่าสุด
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       Line
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       Customer
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       Work Order
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       Model Code
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-b border-slate-200">
                       Model Name
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[160px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[160px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       Lot Size
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[120px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       Process
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[130px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[130px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       Cause Type
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[280px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[280px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       Problem
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       Location
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[250px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       Machine
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[170px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[170px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       จำนวนงานเสีย
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[100px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       รูปภาพ
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       Root Cause
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       Action
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       Action Type
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       Action By
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                       รูปภาพ
                     </th>
                     <th
-                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200"
-                    >
+                      class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-r border-slate-200">
                       เวลาบันทึกล่าสุด
                     </th>
                   </tr>
@@ -1141,29 +910,23 @@
 
                 <!-- BODY -->
                 <tbody class="divide-y divide-slate-100">
-                  <tr
-                    v-for="item in fetch_no_confirm"
-                    :key="item.AMLDRINF_HREC_ID"
-                    class="hover:bg-indigo-50/30 transition-colors text-center"
-                  >
+                  <tr v-for="item in fetch_no_confirm" :key="item.AMLDRINF_HREC_ID"
+                    class="hover:bg-indigo-50/30 transition-colors text-center">
                     <td class="px-6 py-4 font-bold text-slate-900 leading-none">
                       {{ item.AMLDRINF_DOC_NUM }}
                     </td>
-                    <td class="px-6 py-4" v-if="item.AMLDRINF_ENGEMP != null">
-                      {{ findUser(item.AMLDRINF_ENGEMP) }}
+                    <td class="px-6 py-4" v-if="item.AMLDRINF_HREC_ENGEMP !== null">
+                      {{ findUser(item.AMLDRINF_HREC_ENGEMP) }}
                     </td>
                     <td class="px-6 py-4" v-else>ไม่มีชื่อ</td>
-                    <td class="px-6 py-4" v-if="item.AMLDRINF_PRODEMP != null">
-                      {{ findUser(item.AMLDRINF_PRODEMP) }}
+                    <td class="px-6 py-4" v-if="item.AMLDRINF_HREC_PRODEMP !== null">
+                      {{ findUser(item.AMLDRINF_HREC_PRODEMP) }}
                     </td>
                     <td class="px-6 py-4" v-else>ไม่มีชื่อ</td>
                     <td class="px-6 py-4">
                       {{ findUser(item.AMLDRINF_EMPHREC) }}
                     </td>
-                    <td
-                      class="px-6 py-4"
-                      v-if="item.AMLDRINF_HREC_UPDATELSTDT === null"
-                    >
+                    <td class="px-6 py-4" v-if="item.AMLDRINF_HREC_UPDATELSTDT === null">
                       {{
                         dayjs(item.AMLDRINF_HREC_LSTDT).format(
                           "DD/MM/YYYY HH:mm",
@@ -1201,10 +964,7 @@
                       }}</span>
                     </td>
                     <td class="px-6 py-4">
-                      <span
-                        class="font-bold text-indigo-600 uppercase text-sm"
-                        >{{ item.AMLDRINF_HREC_CSTYPE }}</span
-                      >
+                      <span class="font-bold text-indigo-600 uppercase text-sm">{{ item.AMLDRINF_HREC_CSTYPE }}</span>
                     </td>
                     <td class="px-6 py-4 min-w-[200px] text-sm">
                       {{ item.AMLDRINF_HREC_PROB }}
@@ -1225,8 +985,7 @@
                           class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-slate-200"
                           @click="
                             previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`
-                          "
-                        />
+                            " />
                       </template>
                       <span v-else class="text-slate-300 font-bold">-</span>
                     </td>
@@ -1242,34 +1001,26 @@
                     <td class="px-6 py-4 whitespace-nowrap">
                       {{ findUser(item.AMLDRACT_HREC_ACTIONEMP) }}
                     </td>
-                    <td
-                      class="px-6 py-4 whitespace-nowrap flex items-center justify-center"
-                    >
+                    <td class="px-6 py-4 whitespace-nowrap flex items-center justify-center">
                       <template v-if="item.AMLDRACT_HREC_IMAGE">
                         <img
                           :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`"
                           class="w-14 h-14 object-cover rounded-2xl cursor-pointer hover:rotate-2 hover:scale-110 transition-all duration-300 ring-2 ring-white shadow-md shadow-rose-200"
                           @click="
                             previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`
-                          "
-                        />
+                            " />
                       </template>
                       <span v-else class="text-rose-200 font-bold">-</span>
                     </td>
-                    <td
-                      class="px-6 py-4 whitespace-nowrap border-r border-slate-200"
-                      v-if="item.AMLDRACT_HREC_UPDATELSTDT === null"
-                    >
+                    <td class="px-6 py-4 whitespace-nowrap border-r border-slate-200"
+                      v-if="item.AMLDRACT_HREC_UPDATELSTDT === null">
                       {{
                         dayjs(item.AMLDRACT_HREC_LSTDT).format(
                           "DD/MM/YYYY HH:mm",
                         )
                       }}
                     </td>
-                    <td
-                      class="px-6 py-4 whitespace-nowrap border-r border-slate-200"
-                      v-else
-                    >
+                    <td class="px-6 py-4 whitespace-nowrap border-r border-slate-200" v-else>
                       {{
                         dayjs(item.AMLDRACT_HREC_UPDATELSTDT).format(
                           "DD/MM/YYYY HH:mm",
@@ -1281,11 +1032,11 @@
               </table>
             </div>
           </div>
-          <NuxtLink
-            to="/03_confirmform"
-            class="bg-blue-500 px-3 py-2 rounded-lg text-white flex items-center gap-2 hover:bg-blue-600 transition-colors w-fit"
-            >Go to Confirm Lists Page <ArrowBigRight class="w-5 h-5"
-          /></NuxtLink>
+          <NuxtLink to="/03_confirmform"
+            class="bg-blue-500 px-3 py-2 rounded-lg text-white flex items-center gap-2 hover:bg-blue-600 transition-colors w-fit">
+            Go to Confirm Lists Page
+            <ArrowBigRight class="w-5 h-5" />
+          </NuxtLink>
         </div>
       </div>
     </Transition>
@@ -1919,14 +1670,14 @@ const exportData = async () => {
       cell.alignment =
         c === 12 || c === 18 || c === 19
           ? {
-              vertical: "middle",
-              horizontal: "left",
-              wrapText: true,
-            }
+            vertical: "middle",
+            horizontal: "left",
+            wrapText: true,
+          }
           : {
-              vertical: "middle",
-              horizontal: "center",
-            };
+            vertical: "middle",
+            horizontal: "center",
+          };
     }
 
     rowIndex++;

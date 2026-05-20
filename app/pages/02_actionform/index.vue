@@ -4,83 +4,64 @@
       <div class="flex gap-4 items-center">
         <span>⚡</span>
 
-        <span class="text-xl font-extrabold tracking-tight"
-          >รายการรอแจ้ง Action</span
-        >
-        <span
-          class="text-xs text-white/60 font-medium uppercase tracking-widest"
-          >Pending Action Records</span
-        >
+        <span class="text-xl font-extrabold tracking-tight">รายการรอแจ้ง Action</span>
+        <span class="text-xs text-white/60 font-medium uppercase tracking-widest">Pending Action Records</span>
       </div>
     </div>
     <div class="card-body bg-slate-50/30 p-4">
-      <div
-        class="table-container shadow-sm overflow-hidden rounded-2xl border border-slate-200/60"
-      >
+      <div class="table-container shadow-sm overflow-hidden rounded-2xl border border-slate-200/60">
         <div class="max-h-[calc(100vh-24rem)] overflow-y-auto">
           <table class="w-full">
             <!-- HEADER -->
             <thead class="sticky top-0 z-20">
               <tr class="text-center">
                 <th
-                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Action
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[350px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[350px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   ผู้รับผิดชอบ
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[350px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[350px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   ผู้รับเรื่อง
                 </th>
 
                 <th
-                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   ประเภทสาเหตุ
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[160px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[160px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   หมายเลขเอกสาร
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[500px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[500px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Problem
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[130px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[130px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Line
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[130px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[130px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Customer
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Work Order
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Model Code
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[200px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Model Name
                 </th>
                 <th
-                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200"
-                >
+                  class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200">
                   Lot Size
                 </th>
               </tr>
@@ -88,19 +69,12 @@
 
             <!-- BODY -->
             <tbody class="divide-y divide-slate-100">
-              <tr
-                v-for="item in data_rec"
-                :key="item.AMLDRINF_HREC_ID + '-' + item.AMLDRINF_HREC_LINE"
-                v-memo="[item]"
-                class="hover:bg-indigo-50/30 transition-colors text-center"
-              >
+              <tr v-for="item in data_rec" :key="item.AMLDRINF_HREC_ID + '-' + item.AMLDRINF_HREC_LINE" v-memo="[item]"
+                class="hover:bg-indigo-50/30 transition-colors text-center">
                 <!-- ACTION -->
                 <td class="px-6 py-4">
                   <div class="flex gap-2 justify-center">
-                    <button
-                      class="btn-primary py-1.5 px-4 text-xs"
-                      @click="chooseShowForm(item.AMLDRINF_HREC_ID)"
-                    >
+                    <button class="btn-primary py-1.5 px-4 text-xs" @click="chooseShowForm(item.AMLDRINF_HREC_ID)">
                       <div class="flex items-center gap-2">
                         <FileText class="w-4 h-4" />
                         <span>เปิดฟอร์ม</span>
@@ -108,24 +82,24 @@
                     </button>
                   </div>
                 </td>
-                <td class="px-6 py-4" v-if="item.AMLDRINF_ENGEMP != null">
-                  {{ findUser(item.AMLDRINF_ENGEMP) }}
+                <td class="px-6 py-4" v-if="item.AMLDRINF_HREC_ENGEMP !== null">
+                  {{ findUser(item.AMLDRINF_HREC_ENGEMP) }}
                 </td>
                 <td class="px-6 py-4" v-else>ไม่มีชื่อ</td>
-                <td class="px-6 py-4" v-if="item.AMLDRINF_PRODEMP != null">
-                  {{ findUser(item.AMLDRINF_PRODEMP) }}
+                <td class="px-6 py-4" v-if="item.AMLDRINF_HREC_PRODEMP !== null">
+                  {{ findUser(item.AMLDRINF_HREC_PRODEMP) }}
                 </td>
                 <td class="px-6 py-4" v-else>ไม่มีชื่อ</td>
                 <td class="px-6 py-4">
                   <span class="font-bold text-slate-900">{{
                     item.AMLDRINF_HREC_CSTYPE
-                  }}</span>
+                    }}</span>
                 </td>
 
                 <td class="px-6 py-4">
                   <span class="font-bold text-slate-900">{{
                     item.AMLDRINF_DOC_NUM
-                  }}</span>
+                    }}</span>
                 </td>
                 <td class="px-6 py-4 font-semibold">
                   {{ item.AMLDRINF_HREC_PROB }}
@@ -134,7 +108,7 @@
                 <td class="px-6 py-4">
                   <span class="badge badge-blue">{{
                     item.AMLDRINF_HREC_LINE
-                  }}</span>
+                    }}</span>
                 </td>
                 <td class="px-6 py-4 font-semibold">
                   {{ item.AMLDRINF_HREC_CUS }}
@@ -164,116 +138,70 @@
       <div class="flex gap-4 items-center">
         <span>✅</span>
 
-        <span class="text-xl font-extrabold tracking-tight"
-          >รายการที่แจ้ง Action แล้ว</span
-        >
-        <span
-          class="text-xs text-white/60 font-medium uppercase tracking-widest"
-          >Action Check List</span
-        >
+        <span class="text-xl font-extrabold tracking-tight">รายการที่แจ้ง Action แล้ว</span>
+        <span class="text-xs text-white/60 font-medium uppercase tracking-widest">Action Check List</span>
       </div>
     </div>
 
     <div class="card-body bg-slate-50/20 p-6 space-y-6">
-      <div
-        v-for="item in data_action"
-        :key="item.AMLDRACT_HREC_ID"
-        class="bg-white/70 backdrop-blur-sm border border-slate-200/60 rounded-[2rem] p-8 shadow-sm hover:shadow-xl transition-all duration-500 group"
-      >
+      <div v-for="item in data_action" :key="item.AMLDRACT_HREC_ID"
+        class="bg-white/70 backdrop-blur-sm border border-slate-200/60 rounded-[2rem] p-8 shadow-sm hover:shadow-xl transition-all duration-500 group">
         <div class="grid md:grid-cols-2 gap-8">
           <div class="space-y-4">
             <div class="flex flex-col gap-2">
-              <label
-                class="text-[10px] uppercase tracking-widest font-black text-indigo-400"
-                >Root Cause</label
-              >
+              <label class="text-[10px] uppercase tracking-widest font-black text-indigo-400">Root Cause</label>
               <p
-                class="text-slate-800 font-medium leading-relaxed bg-slate-50/80 p-4 rounded-3xl border border-slate-100"
-              >
+                class="text-slate-800 font-medium leading-relaxed bg-slate-50/80 p-4 rounded-3xl border border-slate-100">
                 {{ item.AMLDRACT_HREC_RTCAUSE }}
               </p>
             </div>
             <div class="flex flex-col gap-2">
-              <label
-                class="text-[10px] uppercase tracking-widest font-black text-indigo-400"
-                >Action Taken</label
-              >
+              <label class="text-[10px] uppercase tracking-widest font-black text-indigo-400">Action Taken</label>
               <p
-                class="text-slate-800 font-medium leading-relaxed bg-slate-50/80 p-4 rounded-3xl border border-slate-100"
-              >
+                class="text-slate-800 font-medium leading-relaxed bg-slate-50/80 p-4 rounded-3xl border border-slate-100">
                 {{ item.AMLDRACT_HREC_ACTION }}
               </p>
             </div>
             <div class="flex flex-col gap-2">
-              <label
-                class="text-[10px] uppercase tracking-widest font-black text-indigo-400"
-                >Action By</label
-              >
+              <label class="text-[10px] uppercase tracking-widest font-black text-indigo-400">Action By</label>
               <p
-                class="text-slate-800 font-medium leading-relaxed bg-slate-50/80 p-4 rounded-3xl border border-slate-100"
-              >
+                class="text-slate-800 font-medium leading-relaxed bg-slate-50/80 p-4 rounded-3xl border border-slate-100">
                 {{ findUser(item.AMLDRACT_HREC_ACTIONEMP) }}
               </p>
             </div>
           </div>
 
           <div class="space-y-6">
-            <div
-              class="flex items-center justify-between bg-indigo-50/50 p-4 rounded-3xl border border-indigo-100/50"
-            >
+            <div class="flex items-center justify-between bg-indigo-50/50 p-4 rounded-3xl border border-indigo-100/50">
               <div class="flex flex-col">
-                <label
-                  class="text-[10px] uppercase tracking-widest font-black text-indigo-400"
-                  >Type</label
-                >
-                <span
-                  v-if="item.AMLDRACT_HREC_EDITTYPE === 'close'"
-                  class="font-extrabold text-emerald-600 uppercase"
-                  >{{ item.AMLDRACT_HREC_EDITTYPE }}</span
-                >
-                <span
-                  v-else-if="item.AMLDRACT_HREC_EDITTYPE === 'open'"
-                  class="font-extrabold text-rose-600 uppercase"
-                  >{{ item.AMLDRACT_HREC_EDITTYPE }}</span
-                >
+                <label class="text-[10px] uppercase tracking-widest font-black text-indigo-400">Type</label>
+                <span v-if="item.AMLDRACT_HREC_EDITTYPE === 'close'"
+                  class="font-extrabold text-emerald-600 uppercase">{{ item.AMLDRACT_HREC_EDITTYPE }}</span>
+                <span v-else-if="item.AMLDRACT_HREC_EDITTYPE === 'open'"
+                  class="font-extrabold text-rose-600 uppercase">{{ item.AMLDRACT_HREC_EDITTYPE }}</span>
                 <span v-else class="font-extrabold text-amber-600 uppercase">{{
                   item.AMLDRACT_HREC_EDITTYPE
-                }}</span>
+                  }}</span>
               </div>
-              <div
-                class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm"
-              >
-                <CheckCircle2
-                  v-if="item.AMLDRACT_HREC_EDITTYPE === 'close'"
-                  class="text-emerald-500"
-                />
-                <CircleX
-                  v-else-if="item.AMLDRACT_HREC_EDITTYPE === 'open'"
-                  class="text-rose-500"
-                />
+              <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
+                <CheckCircle2 v-if="item.AMLDRACT_HREC_EDITTYPE === 'close'" class="text-emerald-500" />
+                <CircleX v-else-if="item.AMLDRACT_HREC_EDITTYPE === 'open'" class="text-rose-500" />
 
                 <AlertCircle v-else class="text-amber-500" />
               </div>
             </div>
 
             <div class="flex flex-col gap-2">
-              <label
-                class="text-[10px] uppercase tracking-widest font-black text-indigo-400"
-                >Evidence</label
-              >
-              <div
-                class="relative group/img overflow-hidden rounded-[2rem] ring-4 ring-slate-50 shadow-inner"
-              >
+              <label class="text-[10px] uppercase tracking-widest font-black text-indigo-400">Evidence</label>
+              <div class="relative group/img overflow-hidden rounded-[2rem] ring-4 ring-slate-50 shadow-inner">
                 <img
                   :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`"
                   class="w-full h-48 object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
                   @click="
                     previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`
-                  "
-                />
+                    " />
                 <div
-                  class="absolute inset-0 bg-black/20 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center pointer-events-none"
-                >
+                  class="absolute inset-0 bg-black/20 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                   <Maximize2 class="text-white" />
                 </div>
               </div>
@@ -284,15 +212,10 @@
         <div class="mt-8 pt-6 border-t border-slate-100 flex justify-end gap-3">
           <button
             class="w-12 h-12 flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl transition-all duration-300 active:scale-90"
-            @click="editItems(item)"
-            title="แก้ไข"
-          >
+            @click="editItems(item)" title="แก้ไข">
             <Pencil class="w-5 h-5" />
           </button>
-          <button
-            class="btn-save px-8"
-            @click="checksubmit(item.AMLDRACT_HREC_ID)"
-          >
+          <button class="btn-save px-8" @click="checksubmit(item.AMLDRACT_HREC_ID)">
             <Send class="w-5 h-5 mr-2" />
             <span>ส่งตรวจสอบ</span>
           </button>
@@ -302,129 +225,79 @@
       <!-- REJECTED SECTION -->
       <div v-if="action_reject.length > 0" class="mt-12 space-y-6">
         <div class="flex items-center gap-4 px-2">
-          <div
-            class="w-10 h-10 bg-rose-500 rounded-2xl flex items-center justify-center shadow-lg shadow-rose-200"
-          >
+          <div class="w-10 h-10 bg-rose-500 rounded-2xl flex items-center justify-center shadow-lg shadow-rose-200">
             <AlertTriangle class="text-white w-5 h-5" />
           </div>
           <div class="flex flex-col">
             <h3 class="text-xl font-black text-rose-600 tracking-tight">
               Rejected Actions
             </h3>
-            <p
-              class="text-xs text-rose-400 font-bold uppercase tracking-widest"
-            >
+            <p class="text-xs text-rose-400 font-bold uppercase tracking-widest">
               ข้อมูลที่ถูกส่งกลับมาให้แก้ไข
             </p>
           </div>
         </div>
 
-        <div
-          v-for="item in action_reject"
-          :key="item.AMLDRACT_HREC_ID"
-          class="bg-rose-50/50 backdrop-blur-sm border-2 border-rose-100 border-dashed rounded-[2.5rem] p-8 shadow-sm hover:shadow-xl hover:bg-rose-50 transition-all duration-500"
-        >
+        <div v-for="item in action_reject" :key="item.AMLDRACT_HREC_ID"
+          class="bg-rose-50/50 backdrop-blur-sm border-2 border-rose-100 border-dashed rounded-[2.5rem] p-8 shadow-sm hover:shadow-xl hover:bg-rose-50 transition-all duration-500">
           <div class="grid md:grid-cols-2 gap-8">
             <div class="space-y-4">
               <div class="flex flex-col gap-2">
-                <label
-                  class="text-[10px] uppercase tracking-widest font-black text-rose-400"
-                  >Root Cause (Rejected)</label
-                >
+                <label class="text-[10px] uppercase tracking-widest font-black text-rose-400">Root Cause
+                  (Rejected)</label>
                 <p
-                  class="text-rose-900 font-medium leading-relaxed bg-white/60 p-4 rounded-3xl border border-rose-100/50 italic"
-                >
+                  class="text-rose-900 font-medium leading-relaxed bg-white/60 p-4 rounded-3xl border border-rose-100/50 italic">
                   {{ item.AMLDRACT_HREC_RTCAUSE }}
                 </p>
               </div>
               <div class="flex flex-col gap-2">
-                <label
-                  class="text-[10px] uppercase tracking-widest font-black text-rose-400"
-                  >Action Taken</label
-                >
+                <label class="text-[10px] uppercase tracking-widest font-black text-rose-400">Action Taken</label>
                 <p
-                  class="text-rose-900 font-medium leading-relaxed bg-white/60 p-4 rounded-3xl border border-rose-100/50"
-                >
+                  class="text-rose-900 font-medium leading-relaxed bg-white/60 p-4 rounded-3xl border border-rose-100/50">
                   {{ item.AMLDRACT_HREC_ACTION }}
                 </p>
               </div>
             </div>
 
             <div class="space-y-6">
-              <div
-                class="flex items-center justify-between bg-rose-100/50 p-4 rounded-3xl border border-rose-200/30"
-              >
+              <div class="flex items-center justify-between bg-rose-100/50 p-4 rounded-3xl border border-rose-200/30">
                 <div class="flex flex-col">
-                  <label
-                    class="text-[10px] uppercase tracking-widest font-black text-rose-400"
-                    >Type</label
-                  >
-                  <span
-                    v-if="item.AMLDRACT_HREC_EDITTYPE === 'close'"
-                    class="font-extrabold text-emerald-700 uppercase"
-                    >{{ item.AMLDRACT_HREC_EDITTYPE }}</span
-                  >
-                  <span
-                    v-else-if="item.AMLDRACT_HREC_EDITTYPE === 'open'"
-                    class="font-extrabold text-rose-700 uppercase"
-                    >{{ item.AMLDRACT_HREC_EDITTYPE }}</span
-                  >
-                  <span
-                    v-else
-                    class="font-extrabold text-amber-700 uppercase"
-                    >{{ item.AMLDRACT_HREC_EDITTYPE }}</span
-                  >
+                  <label class="text-[10px] uppercase tracking-widest font-black text-rose-400">Type</label>
+                  <span v-if="item.AMLDRACT_HREC_EDITTYPE === 'close'"
+                    class="font-extrabold text-emerald-700 uppercase">{{ item.AMLDRACT_HREC_EDITTYPE }}</span>
+                  <span v-else-if="item.AMLDRACT_HREC_EDITTYPE === 'open'"
+                    class="font-extrabold text-rose-700 uppercase">{{ item.AMLDRACT_HREC_EDITTYPE }}</span>
+                  <span v-else class="font-extrabold text-amber-700 uppercase">{{ item.AMLDRACT_HREC_EDITTYPE }}</span>
                 </div>
-                <div
-                  class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm"
-                >
-                  <CheckCircle2
-                    v-if="item.AMLDRACT_HREC_EDITTYPE === 'close'"
-                    class="text-emerald-500"
-                  />
-                  <CircleX
-                    v-else-if="item.AMLDRACT_HREC_EDITTYPE === 'open'"
-                    class="text-rose-500"
-                  />
+                <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
+                  <CheckCircle2 v-if="item.AMLDRACT_HREC_EDITTYPE === 'close'" class="text-emerald-500" />
+                  <CircleX v-else-if="item.AMLDRACT_HREC_EDITTYPE === 'open'" class="text-rose-500" />
 
                   <AlertCircle v-else class="text-amber-500" />
                 </div>
               </div>
 
               <div class="flex flex-col gap-2">
-                <label
-                  class="text-[10px] uppercase tracking-widest font-black text-rose-400"
-                  >Evidence</label
-                >
-                <div
-                  class="relative group/img overflow-hidden rounded-[2rem] ring-4 ring-white shadow-md"
-                >
+                <label class="text-[10px] uppercase tracking-widest font-black text-rose-400">Evidence</label>
+                <div class="relative group/img overflow-hidden rounded-[2rem] ring-4 ring-white shadow-md">
                   <img
                     :src="`http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`"
                     class="w-full h-48 object-cover cursor-pointer saturate-50 hover:saturate-100 transition-all duration-700"
                     @click="
                       previewImage = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`
-                    "
-                  />
+                      " />
                 </div>
               </div>
             </div>
           </div>
 
-          <div
-            class="mt-8 pt-6 border-t border-rose-100 flex justify-end gap-3"
-          >
+          <div class="mt-8 pt-6 border-t border-rose-100 flex justify-end gap-3">
             <button
               class="w-12 h-12 flex items-center justify-center bg-rose-500 hover:bg-rose-600 text-white rounded-2xl shadow-lg shadow-rose-200 transition-all duration-300 active:scale-90"
-              @click="editItems(item)"
-              title="แก้ไข"
-            >
+              @click="editItems(item)" title="แก้ไข">
               <Pencil class="w-5 h-5" />
             </button>
-            <button
-              class="btn-save bg-rose-600 hover:bg-rose-700 px-8"
-              @click="sendToUpdate(item.AMLDRACT_HREC_ID)"
-            >
+            <button class="btn-save bg-rose-600 hover:bg-rose-700 px-8" @click="sendToUpdate(item.AMLDRACT_HREC_ID)">
               <Send class="w-5 h-5 mr-2" />
               <span>ส่งข้อมูลอีกครั้ง</span>
             </button>
@@ -434,13 +307,7 @@
     </div>
   </div>
   <!-- Modal Form -->
-  <Modal
-    :is-open="showModal"
-    @close="showModal = false"
-    size="full"
-    color="violet"
-    title="Action Form"
-  >
+  <Modal :is-open="showModal" @close="showModal = false" size="full" color="violet" title="Action Form">
     <form class="space-y-4" @submit.prevent="submitForm">
       <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
         <!-- <div class="flex flex-col gap-2">
@@ -459,159 +326,100 @@
         </div> -->
         <div class="flex flex-col gap-1">
           <div class="flex items-center justify-between">
-            <label for=""
-              >Root Cause: <span class="text-red-500 mr-2">*</span>
+            <label for="">Root Cause: <span class="text-red-500 mr-2">*</span>
               <span v-if="errors.root_cause" class="text-red-500">{{
                 errors.root_cause
-              }}</span>
+                }}</span>
             </label>
-            <button
-              type="button"
-              @click="toggleVoiceInput_root_cause"
-              :class="[
-                'flex items-center gap-1 px-2 py-1 rounded-md text-sm font-medium transition-all duration-200',
-                isListening_root_cause
-                  ? 'bg-red-500 text-white animate-pulse'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
-              ]"
-              :title="
-                isListening_root_cause
+            <button type="button" @click="toggleVoiceInput_root_cause" :class="[
+              'flex items-center gap-1 px-2 py-1 rounded-md text-sm font-medium transition-all duration-200',
+              isListening_root_cause
+                ? 'bg-red-500 text-white animate-pulse'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
+            ]" :title="isListening_root_cause
                   ? 'กำลังฟัง... (คลิกเพื่อหยุด)'
                   : 'พิมด้วยเสียง'
-              "
-            >
+                ">
               <Mic2 :size="16" />
               <span>{{
                 isListening_root_cause ? "กำลังฟัง..." : "พิมด้วยเสียง"
-              }}</span>
+                }}</span>
             </button>
           </div>
-          <textarea
-            v-model="act.root_cause"
-            class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
-            :class="{ 'border-red-500': errors.root_cause }"
-            @input="clearError('root_cause')"
-            rows="3"
-          ></textarea>
+          <textarea v-model="act.root_cause" class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
+            :class="{ 'border-red-500': errors.root_cause }" @input="clearError('root_cause')" rows="3"></textarea>
         </div>
         <div class="flex flex-col gap-1">
           <div class="flex items-center justify-between">
-            <label for=""
-              >Action: <span class="text-red-500 mr-2">*</span>
+            <label for="">Action: <span class="text-red-500 mr-2">*</span>
               <span v-if="errors.action" class="text-red-500">{{
                 errors.action
-              }}</span>
+                }}</span>
             </label>
-            <button
-              type="button"
-              @click="toggleVoiceInput_action"
-              :class="[
-                'flex items-center gap-1 px-2 py-1 rounded-md text-sm font-medium transition-all duration-200',
-                isListening_action
-                  ? 'bg-red-500 text-white animate-pulse'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
-              ]"
-              :title="
-                isListening_action
+            <button type="button" @click="toggleVoiceInput_action" :class="[
+              'flex items-center gap-1 px-2 py-1 rounded-md text-sm font-medium transition-all duration-200',
+              isListening_action
+                ? 'bg-red-500 text-white animate-pulse'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
+            ]" :title="isListening_action
                   ? 'กำลังฟัง... (คลิกเพื่อหยุด)'
                   : 'พิมด้วยเสียง'
-              "
-            >
+                ">
               <Mic2 :size="16" />
               <span>{{
                 isListening_action ? "กำลังฟัง..." : "พิมด้วยเสียง"
-              }}</span>
+                }}</span>
             </button>
           </div>
-          <textarea
-            v-model="act.action"
-            class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
-            :class="{ 'border-red-500': errors.action }"
-            @input="clearError('action')"
-            rows="3"
-          ></textarea>
+          <textarea v-model="act.action" class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
+            :class="{ 'border-red-500': errors.action }" @input="clearError('action')" rows="3"></textarea>
         </div>
         <div class="flex flex-col gap-2">
           <label for="employee">Action By: </label>
-          <input
-            type="text"
-            v-model="act.empno"
-            class="border border-gray-200 focus:outline-none px-2 py-2 rounded-sm"
-            readonly
-          />
+          <input type="text" v-model="act.empno" class="border border-gray-200 focus:outline-none px-2 py-2 rounded-sm"
+            readonly />
         </div>
         <div class="flex flex-col gap-3">
-          <label for=""
-            >ประเภทการ Action: <span class="text-red-500 mr-2">*</span>
+          <label for="">ประเภทการ Action: <span class="text-red-500 mr-2">*</span>
             <span v-if="errors.editType" class="text-red-500">{{
               errors.editType
-            }}</span>
+              }}</span>
           </label>
           <div class="flex items-center gap-3">
             <label class="cursor-pointer">
-              <input
-                type="radio"
-                name="processType"
-                class="peer hidden"
-                value="close"
-                v-model="act.editType"
-                @input="clearError('editType')"
-              />
+              <input type="radio" name="processType" class="peer hidden" value="close" v-model="act.editType"
+                @input="clearError('editType')" />
               <span
-                class="font-medium text-gray-400 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:scale-110 transition-all duration-200 ease-in-out px-2 py-1 rounded-md text-lg border border-gray-300 peer-checked:border-none"
-              >
+                class="font-medium text-gray-400 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:scale-110 transition-all duration-200 ease-in-out px-2 py-1 rounded-md text-lg border border-gray-300 peer-checked:border-none">
                 Close
               </span>
             </label>
             <label class="cursor-pointer">
-              <input
-                type="radio"
-                name="processType"
-                class="peer hidden"
-                value="temporary"
-                v-model="act.editType"
-                @input="clearError('editType')"
-              />
+              <input type="radio" name="processType" class="peer hidden" value="temporary" v-model="act.editType"
+                @input="clearError('editType')" />
               <span
-                class="font-medium text-gray-400 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:scale-110 transition-all duration-200 ease-in-out px-2 py-1 rounded-md text-lg border border-gray-300 peer-checked:border-none"
-              >
+                class="font-medium text-gray-400 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:scale-110 transition-all duration-200 ease-in-out px-2 py-1 rounded-md text-lg border border-gray-300 peer-checked:border-none">
                 Temporary
               </span>
             </label>
             <label class="cursor-pointer">
-              <input
-                type="radio"
-                name="processType"
-                class="peer hidden"
-                value="open"
-                v-model="act.editType"
-                @input="clearError('editType')"
-              />
+              <input type="radio" name="processType" class="peer hidden" value="open" v-model="act.editType"
+                @input="clearError('editType')" />
               <span
-                class="font-medium text-gray-400 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:scale-110 transition-all duration-200 ease-in-out px-2 py-1 rounded-md text-lg border border-gray-300 peer-checked:border-none"
-              >
+                class="font-medium text-gray-400 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:scale-110 transition-all duration-200 ease-in-out px-2 py-1 rounded-md text-lg border border-gray-300 peer-checked:border-none">
                 Open
               </span>
             </label>
           </div>
         </div>
         <div class="flex flex-col gap-2">
-          <label for="employee"
-            >บันทึกโดย: <span class="text-red-500 mr-2">*</span>
+          <label for="employee">บันทึกโดย: <span class="text-red-500 mr-2">*</span>
             <span v-if="errors.bysection" class="text-red-500">{{
               errors.bysection
-            }}</span></label
-          >
-          <select
-            v-model="act.bysection"
-            class="border border-gray-200 focus:outline-none px-2 py-2 rounded-sm"
-          >
+              }}</span></label>
+          <select v-model="act.bysection" class="border border-gray-200 focus:outline-none px-2 py-2 rounded-sm">
             <option value="" disabled selected>-- กรุณาเลือก --</option>
-            <option
-              v-for="item in List_section"
-              :key="item.id"
-              :value="item.value"
-            >
+            <option v-for="item in List_section" :key="item.id" :value="item.value">
               {{ item.name }}
             </option>
           </select>
@@ -627,110 +435,64 @@
           </label>
 
           <!-- MOBILE / TABLET -->
-          <div
-            v-if="isMobileOrTablet && !isCameraOpen"
-            class="flex flex-col items-center gap-2"
-          >
+          <div v-if="isMobileOrTablet && !isCameraOpen" class="flex flex-col items-center gap-2">
             <!-- ปุ่มเปิดกล้อง -->
-            <button
-              type="button"
-              @click="startCamera"
-              class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center w-full"
-            >
+            <button type="button" @click="startCamera"
+              class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center w-full">
               <Camera :size="20" />
               <span>ถ่ายรูป</span>
             </button>
 
             <!-- ปุ่มเลือกไฟล์ -->
-            <button
-              type="button"
-              @click="fileInput?.click()"
-              class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center w-full"
-            >
+            <button type="button" @click="fileInput?.click()"
+              class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center w-full">
               <Image :size="20" />
               หรือเลือกรูปจากเครื่อง
             </button>
 
             <!-- input ซ่อน -->
-            <input
-              ref="fileInput"
-              type="file"
-              class="hidden"
-              accept="image/*"
-              @change="handleImageUpload"
-            />
+            <input ref="fileInput" type="file" class="hidden" accept="image/*" @change="handleImageUpload" />
           </div>
 
           <!-- DESKTOP → เลือกไฟล์ -->
-          <label
-            v-else-if="!isMobileOrTablet"
-            class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center"
-          >
+          <label v-else-if="!isMobileOrTablet"
+            class="flex items-center gap-2 cursor-pointer border border-dashed border-gray-400 rounded-md px-3 py-4 text-gray-500 hover:bg-gray-50 justify-center">
             <Camera :size="20" />
             <span>เลือกรูปภาพ</span>
-            <input
-              type="file"
-              class="hidden"
-              accept="image/*"
-              @change="handleImageUpload"
-            />
+            <input type="file" class="hidden" accept="image/*" @change="handleImageUpload" />
           </label>
-          <div
-            v-else
-            class="w-full h-[200px] flex items-center justify-center border border-dashed border-gray-300 rounded-md text-gray-400"
-          >
+          <div v-else
+            class="w-full h-[200px] flex items-center justify-center border border-dashed border-gray-300 rounded-md text-gray-400">
             ยังไม่มีรูปภาพ
           </div>
 
           <!-- FULLSCREEN CAMERA -->
-          <div
-            v-if="isCameraOpen"
-            class="fixed inset-0 bg-black z-50 flex flex-col justify-between"
-          >
+          <div v-if="isCameraOpen" class="fixed inset-0 bg-black z-50 flex flex-col justify-between">
             <!-- กล้อง -->
-            <video
-              ref="video"
-              autoplay
-              playsinline
-              class="w-full h-full object-cover"
-            ></video>
+            <video ref="video" autoplay playsinline class="w-full h-full object-cover"></video>
 
             <!-- ปุ่มควบคุม -->
-            <div
-              class="absolute bottom-0 left-0 w-full flex justify-center items-center gap-6 pb-6"
-            >
+            <div class="absolute bottom-0 left-0 w-full flex justify-center items-center gap-6 pb-6">
               <!-- ยกเลิก -->
-              <button
-                type="button"
-                @click="stopCamera"
-                class="bg-white/20 backdrop-blur text-white px-5 py-2 rounded-full"
-              >
+              <button type="button" @click="stopCamera"
+                class="bg-white/20 backdrop-blur text-white px-5 py-2 rounded-full">
                 ยกเลิก
               </button>
 
               <!-- ปุ่มถ่ายรูป -->
-              <button
-                type="button"
-                @click="takePhoto"
-                class="w-16 h-16 rounded-full bg-white border-4 border-gray-300"
-              ></button>
+              <button type="button" @click="takePhoto"
+                class="w-16 h-16 rounded-full bg-white border-4 border-gray-300"></button>
             </div>
           </div>
         </div>
 
         <div class="flex flex-col gap-1 col-span-2 items-center">
           <!-- มีรูป -->
-          <img
-            v-if="imagePreview"
-            :src="imagePreview"
-            class="max-w-full max-h-[300px] object-contain"
-          />
+          <img v-if="imagePreview" :src="imagePreview" class="max-w-full max-h-[300px] object-contain" />
 
           <!-- ไม่มีรูป -->
-          <div
-            v-else
-            class="w-full h-[300px] flex items-center justify-center border border-dashed border-gray-300 rounded-md text-gray-400"
-          >
+          <div v-else
+            class="w-full h-[300px] flex items-center justify-center border border-dashed border-gray-300 rounded-md text-gray-400">
             <div class="flex flex-col items-center gap-2">
               <Camera :size="30" />
               <span>ยังไม่มีรูปภาพ</span>
@@ -739,11 +501,7 @@
 
           <!-- ปุ่มหลังถ่าย -->
           <div v-if="imagePreview" class="flex gap-2 mt-2">
-            <button
-              type="button"
-              @click="retake"
-              class="bg-red-500 text-white px-4 py-2 rounded"
-            >
+            <button type="button" @click="retake" class="bg-red-500 text-white px-4 py-2 rounded">
               ถ่ายใหม่
             </button>
           </div>
@@ -752,25 +510,18 @@
     </form>
     <template #footer>
       <div class="flex justify-end gap-3">
-        <button
-          class="bg-amber-200 hover:bg-amber-300 px-4 py-2 rounded-lg flex items-center gap-2"
-          @click="ReturnStatusEdit(aml_hrec_id)"
-        >
+        <button class="bg-amber-200 hover:bg-amber-300 px-4 py-2 rounded-lg flex items-center gap-2"
+          @click="ReturnStatusEdit(aml_hrec_id)">
           <Reply :size="17" />
           ย้อนกลับไปแก้ไข
         </button>
-        <button
-          class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg flex items-center gap-2"
-          @click="showModal = false"
-        >
+        <button class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg flex items-center gap-2"
+          @click="showModal = false">
           <X :size="17" />
           ปิด
         </button>
-        <button
-          class="bg-emerald-500 hover:bg-emerald-600 px-4 py-2 rounded-lg flex items-center gap-2 text-white"
-          @click="submitForm"
-          :disabled="isSubmit"
-        >
+        <button class="bg-emerald-500 hover:bg-emerald-600 px-4 py-2 rounded-lg flex items-center gap-2 text-white"
+          @click="submitForm" :disabled="isSubmit">
           <Save :size="17" />
           บันทึก
         </button>
@@ -780,24 +531,17 @@
 
   <Teleport to="body">
     <Transition name="lightbox">
-      <div
-        v-if="previewImage"
+      <div v-if="previewImage"
         class="fixed inset-0 z-[999] flex items-center justify-center bg-black/70 backdrop-blur-sm"
-        @click.self="previewImage = null"
-      >
+        @click.self="previewImage = null">
         <div class="relative max-w-[90vw] max-h-[90vh]">
           <!-- Close Button -->
-          <button
-            @click="previewImage = null"
-            class="absolute -top-4 -right-4 w-9 h-9 flex items-center justify-center bg-white text-gray-700 rounded-full shadow-lg hover:bg-rose-500 hover:text-white transition z-10"
-          >
+          <button @click="previewImage = null"
+            class="absolute -top-4 -right-4 w-9 h-9 flex items-center justify-center bg-white text-gray-700 rounded-full shadow-lg hover:bg-rose-500 hover:text-white transition z-10">
             <X :size="18" />
           </button>
           <!-- Image -->
-          <img
-            :src="previewImage"
-            class="max-w-[90vw] max-h-[85vh] object-contain rounded-xl shadow-2xl"
-          />
+          <img :src="previewImage" class="max-w-[90vw] max-h-[85vh] object-contain rounded-xl shadow-2xl" />
         </div>
       </div>
     </Transition>
@@ -1315,7 +1059,7 @@ const checksubmit = async (id: string) => {
     // console.log(id);
     const response = await axios.put(
       "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/update/action-check/" +
-        id,
+      id,
     );
     if (response.data.status === "success") {
       getActionData();
@@ -1351,7 +1095,7 @@ const sendToUpdate = async (id: string) => {
   try {
     const response = await axios.put(
       "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/update/reject-action/" +
-        id,
+      id,
     );
     if (response.data.status === "success") {
       showActionReject();
@@ -1391,7 +1135,7 @@ const ReturnStatusEdit = async (id: string) => {
   try {
     const response = await axios.put(
       "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/return/status-edit/" +
-        id,
+      id,
     );
     if (response.data.status === "success") {
       showModal.value = false;
