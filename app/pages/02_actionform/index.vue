@@ -83,23 +83,23 @@
                   </div>
                 </td>
                 <td class="px-6 py-4" v-if="item.AMLDRINF_HREC_ENGEMP !== null">
-                  {{ findUser(item.AMLDRINF_HREC_ENGEMP) }}
+                  {{ findENGName(item.AMLDRINF_HREC_ENGEMP) }}
                 </td>
                 <td class="px-6 py-4" v-else>ไม่มีชื่อ</td>
                 <td class="px-6 py-4" v-if="item.AMLDRINF_HREC_PRODEMP !== null">
-                  {{ findUser(item.AMLDRINF_HREC_PRODEMP) }}
+                  {{ findPRODName(item.AMLDRINF_HREC_PRODEMP) }}
                 </td>
                 <td class="px-6 py-4" v-else>ไม่มีชื่อ</td>
                 <td class="px-6 py-4">
                   <span class="font-bold text-slate-900">{{
                     item.AMLDRINF_HREC_CSTYPE
-                    }}</span>
+                  }}</span>
                 </td>
 
                 <td class="px-6 py-4">
                   <span class="font-bold text-slate-900">{{
                     item.AMLDRINF_DOC_NUM
-                    }}</span>
+                  }}</span>
                 </td>
                 <td class="px-6 py-4 font-semibold">
                   {{ item.AMLDRINF_HREC_PROB }}
@@ -108,7 +108,7 @@
                 <td class="px-6 py-4">
                   <span class="badge badge-blue">{{
                     item.AMLDRINF_HREC_LINE
-                    }}</span>
+                  }}</span>
                 </td>
                 <td class="px-6 py-4 font-semibold">
                   {{ item.AMLDRINF_HREC_CUS }}
@@ -181,7 +181,7 @@
                   class="font-extrabold text-rose-600 uppercase">{{ item.AMLDRACT_HREC_EDITTYPE }}</span>
                 <span v-else class="font-extrabold text-amber-600 uppercase">{{
                   item.AMLDRACT_HREC_EDITTYPE
-                  }}</span>
+                }}</span>
               </div>
               <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
                 <CheckCircle2 v-if="item.AMLDRACT_HREC_EDITTYPE === 'close'" class="text-emerald-500" />
@@ -329,7 +329,7 @@
             <label for="">Root Cause: <span class="text-red-500 mr-2">*</span>
               <span v-if="errors.root_cause" class="text-red-500">{{
                 errors.root_cause
-                }}</span>
+              }}</span>
             </label>
             <button type="button" @click="toggleVoiceInput_root_cause" :class="[
               'flex items-center gap-1 px-2 py-1 rounded-md text-sm font-medium transition-all duration-200',
@@ -337,13 +337,13 @@
                 ? 'bg-red-500 text-white animate-pulse'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
             ]" :title="isListening_root_cause
-                  ? 'กำลังฟัง... (คลิกเพื่อหยุด)'
-                  : 'พิมด้วยเสียง'
-                ">
+              ? 'กำลังฟัง... (คลิกเพื่อหยุด)'
+              : 'พิมด้วยเสียง'
+              ">
               <Mic2 :size="16" />
               <span>{{
                 isListening_root_cause ? "กำลังฟัง..." : "พิมด้วยเสียง"
-                }}</span>
+              }}</span>
             </button>
           </div>
           <textarea v-model="act.root_cause" class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
@@ -354,7 +354,7 @@
             <label for="">Action: <span class="text-red-500 mr-2">*</span>
               <span v-if="errors.action" class="text-red-500">{{
                 errors.action
-                }}</span>
+              }}</span>
             </label>
             <button type="button" @click="toggleVoiceInput_action" :class="[
               'flex items-center gap-1 px-2 py-1 rounded-md text-sm font-medium transition-all duration-200',
@@ -362,13 +362,13 @@
                 ? 'bg-red-500 text-white animate-pulse'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
             ]" :title="isListening_action
-                  ? 'กำลังฟัง... (คลิกเพื่อหยุด)'
-                  : 'พิมด้วยเสียง'
-                ">
+              ? 'กำลังฟัง... (คลิกเพื่อหยุด)'
+              : 'พิมด้วยเสียง'
+              ">
               <Mic2 :size="16" />
               <span>{{
                 isListening_action ? "กำลังฟัง..." : "พิมด้วยเสียง"
-                }}</span>
+              }}</span>
             </button>
           </div>
           <textarea v-model="act.action" class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
@@ -383,7 +383,7 @@
           <label for="">ประเภทการ Action: <span class="text-red-500 mr-2">*</span>
             <span v-if="errors.editType" class="text-red-500">{{
               errors.editType
-              }}</span>
+            }}</span>
           </label>
           <div class="flex items-center gap-3">
             <label class="cursor-pointer">
@@ -394,14 +394,14 @@
                 Close
               </span>
             </label>
-            <label class="cursor-pointer">
+            <!-- <label class="cursor-pointer">
               <input type="radio" name="processType" class="peer hidden" value="temporary" v-model="act.editType"
                 @input="clearError('editType')" />
               <span
                 class="font-medium text-gray-400 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:scale-110 transition-all duration-200 ease-in-out px-2 py-1 rounded-md text-lg border border-gray-300 peer-checked:border-none">
                 Temporary
               </span>
-            </label>
+            </label> -->
             <label class="cursor-pointer">
               <input type="radio" name="processType" class="peer hidden" value="open" v-model="act.editType"
                 @input="clearError('editType')" />
@@ -416,7 +416,7 @@
           <label for="employee">บันทึกโดย: <span class="text-red-500 mr-2">*</span>
             <span v-if="errors.bysection" class="text-red-500">{{
               errors.bysection
-              }}</span></label>
+            }}</span></label>
           <select v-model="act.bysection" class="border border-gray-200 focus:outline-none px-2 py-2 rounded-sm">
             <option value="" disabled selected>-- กรุณาเลือก --</option>
             <option v-for="item in List_section" :key="item.id" :value="item.value">
@@ -1121,11 +1121,47 @@ const getUsers = async () => {
   }
 };
 
+
+/**
+ * TODO: Get Employee name
+ */
+const emp_lists = ref<any>([]);
+const getNameEmployees = async () => {
+  try {
+    const res = await axios.get(
+      "http://172.22.64.11/51_amleadercall/51_amleadercall_api/api/vuser",
+    );
+    emp_lists.value = res.data;
+    console.log(emp_lists.value);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const findUser = (empno: string) => {
+  console.log(empno);
   const user = options_user.value.find(
     (user: any) => user.VEMPLOYEE_ID === empno,
   );
   return user ? user.VEMPLOYEE_ENFNAME + " " + user.VEMPLOYEE_ENLNAME : "";
+};
+
+const findENGName = (empid: string) => {
+  const emp_user_name = emp_lists.value.engineering.find(
+    (emp: any) => emp.EmpID === empid,
+  );
+  return emp_user_name
+    ? emp_user_name.FNameEng + " " + emp_user_name.LNameEng
+    : "";
+};
+
+const findPRODName = (empid: string) => {
+  const emp_user_name = emp_lists.value.production.find(
+    (emp: any) => emp.EmpID === empid,
+  );
+  return emp_user_name
+    ? emp_user_name.FNameEng + " " + emp_user_name.LNameEng
+    : "";
 };
 
 /**
@@ -1150,6 +1186,7 @@ const ReturnStatusEdit = async (id: string) => {
 
 onMounted(() => {
   getUsers();
+  getNameEmployees();
   getData();
   getActionData();
   showActionReject();

@@ -132,13 +132,13 @@
                   <p class="text-rose-500 text-sm font-bold">สีแดง (open) =</p>
                   <p class="text-rose-500 text-sm">ไม่สามารถแก้ไขได้</p>
                 </div>
-                <span class="hidden lg:block">,</span>
+                <!-- <span class="hidden lg:block">,</span>
                 <div class="flex gap-2">
                   <p class="text-amber-500 text-sm font-bold">
                     สีเหลือง (temporary) =
                   </p>
                   <p class="text-amber-500 text-sm">แก้ไขได้ชั่วคราว</p>
-                </div>
+                </div> -->
                 <span class="hidden lg:block">,</span>
                 <div class="flex gap-2">
                   <p class="text-emerald-500 text-sm font-bold">
