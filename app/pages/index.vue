@@ -168,13 +168,13 @@
         <div class="overflow-x-auto max-h-[calc(100vh-10rem)] overflow-y-auto w-full">
           <table class="w-full" ref="tableRef">
             <thead class="sticky top-0 z-10">
-              <tr>
+              <tr class="border-b border-gray-200">
                 <th
                   class="px-6 py-4 min-w-[180px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200"
                   rowspan="2">
                   หมายเลขเอกสาร
                 </th>
-                <th colspan="17"
+                <th colspan="19"
                   class="px-6 py-4 min-w-[150px] bg-slate-100 text-slate-600 font-bold uppercase tracking-wider text-sm border-r border-slate-200">
                   Information
                 </th>
@@ -314,7 +314,7 @@
                 </th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100">
+            <tbody>
               <tr v-if="paginatedData.length === 0">
                 <td colspan="15" class="px-6 py-12 text-center text-slate-500 font-medium bg-white">
                   <div class="flex flex-col items-center justify-center gap-3">
