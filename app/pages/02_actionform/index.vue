@@ -93,13 +93,13 @@
                 <td class="px-6 py-4">
                   <span class="font-bold text-slate-900">{{
                     item.AMLDRINF_HREC_CSTYPE
-                  }}</span>
+                    }}</span>
                 </td>
 
                 <td class="px-6 py-4">
                   <span class="font-bold text-slate-900">{{
                     item.AMLDRINF_DOC_NUM
-                  }}</span>
+                    }}</span>
                 </td>
                 <td class="px-6 py-4 font-semibold">
                   {{ item.AMLDRINF_HREC_PROB }}
@@ -108,7 +108,7 @@
                 <td class="px-6 py-4">
                   <span class="badge badge-blue">{{
                     item.AMLDRINF_HREC_LINE
-                  }}</span>
+                    }}</span>
                 </td>
                 <td class="px-6 py-4 font-semibold">
                   {{ item.AMLDRINF_HREC_CUS }}
@@ -181,7 +181,7 @@
                   class="font-extrabold text-rose-600 uppercase">{{ item.AMLDRACT_HREC_EDITTYPE }}</span>
                 <span v-else class="font-extrabold text-amber-600 uppercase">{{
                   item.AMLDRACT_HREC_EDITTYPE
-                }}</span>
+                  }}</span>
               </div>
               <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
                 <CheckCircle2 v-if="item.AMLDRACT_HREC_EDITTYPE === 'close'" class="text-emerald-500" />
@@ -257,6 +257,13 @@
                   {{ item.AMLDRACT_HREC_ACTION }}
                 </p>
               </div>
+              <div class="flex flex-col gap-2">
+                <label class="text-[10px] uppercase tracking-widest font-black text-indigo-400">Action By</label>
+                <p
+                  class="text-rose-900 font-medium leading-relaxed bg-slate-50/80 p-4 rounded-3xl border border-slate-100">
+                  {{ findUser(item.AMLDRACT_HREC_ACTIONEMP) }}
+                </p>
+              </div>
             </div>
 
             <div class="space-y-6">
@@ -329,7 +336,7 @@
             <label for="">Root Cause: <span class="text-red-500 mr-2">*</span>
               <span v-if="errors.root_cause" class="text-red-500">{{
                 errors.root_cause
-              }}</span>
+                }}</span>
             </label>
             <button type="button" @click="toggleVoiceInput_root_cause" :class="[
               'flex items-center gap-1 px-2 py-1 rounded-md text-sm font-medium transition-all duration-200',
@@ -343,7 +350,7 @@
               <Mic2 :size="16" />
               <span>{{
                 isListening_root_cause ? "กำลังฟัง..." : "พิมด้วยเสียง"
-              }}</span>
+                }}</span>
             </button>
           </div>
           <textarea v-model="act.root_cause" class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
@@ -354,7 +361,7 @@
             <label for="">Action: <span class="text-red-500 mr-2">*</span>
               <span v-if="errors.action" class="text-red-500">{{
                 errors.action
-              }}</span>
+                }}</span>
             </label>
             <button type="button" @click="toggleVoiceInput_action" :class="[
               'flex items-center gap-1 px-2 py-1 rounded-md text-sm font-medium transition-all duration-200',
@@ -368,7 +375,7 @@
               <Mic2 :size="16" />
               <span>{{
                 isListening_action ? "กำลังฟัง..." : "พิมด้วยเสียง"
-              }}</span>
+                }}</span>
             </button>
           </div>
           <textarea v-model="act.action" class="border border-gray-300 rounded-sm px-2 py-2 focus:outline-none"
@@ -383,7 +390,7 @@
           <label for="">ประเภทการ Action: <span class="text-red-500 mr-2">*</span>
             <span v-if="errors.editType" class="text-red-500">{{
               errors.editType
-            }}</span>
+              }}</span>
           </label>
           <div class="flex items-center gap-3">
             <label class="cursor-pointer">
@@ -416,7 +423,7 @@
           <label for="employee">บันทึกโดย: <span class="text-red-500 mr-2">*</span>
             <span v-if="errors.bysection" class="text-red-500">{{
               errors.bysection
-            }}</span></label>
+              }}</span></label>
           <select v-model="act.bysection" class="border border-gray-200 focus:outline-none px-2 py-2 rounded-sm">
             <option value="" disabled selected>-- กรุณาเลือก --</option>
             <option v-for="item in List_section" :key="item.id" :value="item.value">
