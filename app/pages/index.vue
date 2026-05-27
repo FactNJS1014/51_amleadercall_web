@@ -1488,9 +1488,9 @@ const exportData = async () => {
   worksheet.getCell("W1").value = "Confirm";
 
   worksheet.mergeCells("A1:A2");
-  worksheet.mergeCells("B1:Q1");
-  worksheet.mergeCells("R1:V1");
-  worksheet.mergeCells("W1:AA1");
+  worksheet.mergeCells("B1:P1"); // Information
+  worksheet.mergeCells("Q1:T1"); // Action
+  worksheet.mergeCells("U1:Y1"); // Confirm
 
   const row2 = worksheet.getRow(2);
 
@@ -1511,11 +1511,11 @@ const exportData = async () => {
     "Machine",
     "จำนวนงานเสีย",
     "Start Time",
-    "รูปภาพ",
+
     "Root Cause",
     "Action",
     "Action By",
-    "รูปภาพ",
+
     "เวลาบันทึกล่าสุด",
     "Result",
     "End Time",
@@ -1546,8 +1546,31 @@ const exportData = async () => {
 
   // Width
   const widths = [
-    20, 20, 20, 10, 15, 20, 20, 25, 10, 15, 15, 40, 20, 20, 15, 15, 20, 30, 30,
-    20, 20, 20, 15, 15, 15, 20, 20,
+    20, // A
+    20,
+    20,
+    10,
+    15,
+    20,
+    20,
+    25,
+    10,
+    15,
+    15,
+    40,
+    20,
+    20,
+    15,
+    15,
+    30,
+    30,
+    20,
+    20,
+    20,
+    15,
+    15,
+    20,
+    20,
   ];
 
   widths.forEach((w, i) => {
@@ -1593,11 +1616,11 @@ const exportData = async () => {
       item.AMLDRINF_HREC_MACHINE || "-",
       item.AMLDRINF_HREC_QTYNG || "-",
       item.AMLDRINF_HREC_STARTTIME || "-",
-      "",
+
       item.AMLDRACT_HREC_RTCAUSE || "-",
       item.AMLDRACT_HREC_ACTION || "-",
       findUser(item.AMLDRACT_HREC_ACTIONEMP) || "-",
-      "",
+
       actionTime,
       item.AMLDRCONF_HREC_RESULT || "-",
       item.AMLDRCONF_HREC_ENDTIME || "-",
@@ -1612,63 +1635,15 @@ const exportData = async () => {
       row.getCell(i + 1).value = val;
     });
 
-    let hasImage = false;
 
-    // ===============================
-    // Image Information
-    // ===============================
-    if (item.AMLDRINF_HREC_IMAGE) {
-      const url = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_information/${item.AMLDRINF_HREC_IMAGE}`;
 
-      const base64 = await getCompressedBase64FromUrl(url, 250, 250, 0.6);
-
-      if (base64) {
-        const imageId = workbook.addImage({
-          base64,
-          extension: "jpeg",
-        });
-
-        worksheet.addImage(imageId, {
-          tl: { col: 16, row: rowIndex - 1 },
-          ext: { width: 80, height: 80 },
-        });
-
-        hasImage = true;
-      }
-    }
-
-    // ===============================
-    // Image Action
-    // ===============================
-    if (item.AMLDRACT_HREC_IMAGE) {
-      const url = `http://172.22.64.11/51_amleadercall/51_amleadercall_api/images_action/${item.AMLDRACT_HREC_IMAGE}`;
-
-      const base64 = await getCompressedBase64FromUrl(url, 250, 250, 0.6);
-
-      if (base64) {
-        const imageId = workbook.addImage({
-          base64,
-          extension: "jpeg",
-        });
-
-        worksheet.addImage(imageId, {
-          tl: { col: 20, row: rowIndex - 1 },
-          ext: { width: 80, height: 80 },
-        });
-
-        hasImage = true;
-      }
-    }
-
-    row.height = hasImage ? 65 : 30;
-
-    for (let c = 1; c <= 27; c++) {
+    for (let c = 1; c <= 25; c++) {
       const cell = row.getCell(c);
 
       cell.border = thinBorder;
 
       cell.alignment =
-        c === 12 || c === 18 || c === 19
+        c === 12 || c === 17 || c === 18
           ? {
             vertical: "middle",
             horizontal: "left",
